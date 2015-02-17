@@ -1,0 +1,99 @@
+.olMap {
+	color: black;
+}
+
+.olMap a {
+	background: transparent;
+	color: blue;
+	text-decoration: none;
+}
+
+.olControlAttribution {
+	bottom: 0.1em !important;
+	left: 0.1em;
+	background: transparent;
+}
+
+.olControlLoadStatus {
+	left: 50px;
+	top: 10px;
+	color: blue;
+	opacity: 0.8;
+}
+
+.olControlMousePosition {
+	bottom: 0.1em;
+	right: 0.1em;
+	font-family: monospace;
+	background: white;
+	opacity: 0.7;
+}
+
+/* 
+.olControlPermalink {
+	bottom: 1.5em;
+	right: 0.1em;
+}
+ */
+
+div.olPopupMarker div.tooltip {
+	display: none;
+	background: white;
+	border: 1px solid gray;
+	padding: 2px;
+	left: -10px;
+	top: 40px;
+	z-index: 10000;
+}
+
+body.on div.olPopupMarker div.tooltip,
+div.olPopupMarker:hover div.tooltip {
+	display: block;
+}
+
+#tooltipSwitch {
+	display: absolute;
+	left: 0.5em;
+	bottom: 3.5em;
+	cursor: move;
+	background: white;
+}
+
+#tooltipSwitch:hover {
+	background: yellow;
+}
+
+#tooltipSwitch button {
+	border: 3px outset gray;
+}
+
+#tagselector {
+	position: absolute;
+	z-index: 10000;
+	right: 220px;
+	top: 5px;
+	padding: 1ex;
+	border: 1px solid gray;
+	background: #fefdd5;
+}
+
+#tagselector div {
+	display: none;
+}
+
+#tagselector:hover div {
+	display: block;
+}
+
+.olControlSelectFeature {
+	background: #e0e0e0;
+	border: 1px solid gray;
+	padding: 0.5ex;
+	display: none;
+}
+
+#map {
+	width: 100%;
+	height: 100%;
+	background: gray;
+}

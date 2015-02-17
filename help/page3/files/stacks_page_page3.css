@@ -1,0 +1,36 @@
+
+#stacks_in_29_page3 {
+	border: solid #000000;
+	border-width: 0px 0px 1px 0px;
+	margin: 0px 0px 6px 0px;
+	padding: 0px 0px 10px 0px;
+}
+
+#stacks_in_32_page3 {
+	border: solid #000000;
+	border-width: 0px 0px 1px 0px;
+	padding: 6px 0px 10px 0px;
+}
+
+#stacks_in_35_page3 .stacks_left {
+	float:left;
+	width:42%;
+}
+
+#stacks_in_35_page3 .stacks_right {
+	float:right;
+	width:58%;
+}
+#stacks_in_35_page3 {
+	margin: 3px 0px 0px 0px;
+	padding: 14px 0px 0px 0px;
+}
+
+#stacks_out_38_page3 {
+	width: 95%;
+	margin-left:0;
+}
+
+#stacks_out_40_page3 {
+	margin-left:0;
+}

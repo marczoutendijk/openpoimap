@@ -1,0 +1,318 @@
+	html, body{
+		position:absolute;
+		width: 100%;
+		height: 100%;
+		margin: 0;
+}
+
+	img {
+		vertical-align: middle
+	}
+	
+	iframe.hidden
+	{
+	display:none
+	}
+	div.olControlLocalTracks {
+		left: 15px;
+		bottom: 60px;
+	}
+	
+/* 
+	Hieronder wordt de kleur van de baselayer box gedefinieerd
+ */
+	
+	div.olControlLayerSwitcher .layersDiv {
+		background-color: #fefdd5;
+		padding-left: 0px;
+		font-size: 1em;
+		color: #7a0c00;
+		border: 2px solid #7a0c00;
+}
+	div.olControlAttribution {
+		position: absolute;
+		padding-left: 10px;
+		font-family: Verdana;
+		font-size: 0.7em;
+		font-weight:normal;
+		width: 200px;
+		bottom: 10px;
+		left: 10px;
+		background-color:rgba(200,200,200,0.6);
+	}
+	div.olControlPermaLink {
+		font-family: Verdana;
+		font-size: 1em;
+		font-weight:bold;
+		bottom: 10px;	
+		right: 10px;
+		background-color:rgba(200,200,200,0.6);
+		padding: 5px;
+	}  
+	div.olControlScaleLine {
+		font-family: Verdana;
+		font-size: 0.7em;
+		bottom: 40px;
+		left: 10px;
+	}
+	.titel {
+		position: absolute;
+		font-family: Verdana;
+		font-size: 1em;
+		font-weight:bold;
+		background-color: #fefdd5;
+		top: 5px;
+		left: 60px;
+		width: 400px;
+		border-style: solid;
+		border-width: 2px;
+		border-color: black;
+	}
+	.zoom{
+		position: absolute;
+		font-family: Verdana;
+		font-size: 0.8em;
+		font-weight:bold;
+		background-color:#FFFFFF;
+		top: 320px;
+		left: 17px;
+		border-style: solid;
+		border-width: 1px;
+		border-color: black;
+	}
+	.kaartnaam {
+		font-family: Verdana;
+		font-size: 0.9em;
+		font-weight:bold;
+		
+	}
+	.choice{
+		font-family: Verdana;
+		font-size: 0.7em;
+		font-weight:bold;
+		background-color: #a9a741;
+		cursor: default;
+	color: white;
+}
+	.dorment{
+		font-family: Verdana;
+		font-size: 0.7em;
+		font-weight:bold;
+		background-color: #fefdd5;
+		cursor: default;
+	color: maroon;
+}
+	.action{
+        font-family: Verdana;
+        font-size: 0.7em;
+        font-weight:bold;
+        color: white;
+        background-color: #663399;
+        cursor: default;
+        }
+	div.statusline {
+		position: absolute;
+		font-family: Verdana;
+		font-size: 1em;
+		font-weight:bold;
+		color: white;
+		background-color:#FF0000;
+		top: 20px;
+		left: 500px;
+/* 
+		border-style: none;
+		border-width: 2px;
+		border-color: black;
+ */
+		visibility: hidden;
+	}
+		
+	div.info {
+		position: absolute;
+		font-family: Verdana;
+		font-size: 1.0em;
+		font-weight:bold;
+		background-color:#eeeeee;
+		width: 900px;
+		top: 180px;
+		border-style: solid;
+		border-width: 2px;
+		border-color: black;
+		cursor: default;
+	}
+
+
+/* Code to style the popup window */
+
+	.popupCode{
+		width: 400px;
+		border: no;
+		border-collapse: collapse;
+		font-size: 0.9em;
+	}
+	
+	table td.popupKey{
+		width: 25%;
+		padding: 5px;
+		color: black;
+		border: 1px black dotted;
+		font-family: Courier;
+		font-size: 1.2em;
+		text-align: right;
+		vertical-align: baseline;
+	}
+	
+	table td.popupMainKey{
+		width: 25%;
+		padding: 5px;
+		color: black;
+		border: 1px black dotted;
+		background: #ffffc1;
+		font-family: Courier;
+		font-weight: bold;
+		font-size: 1.3em;
+		text-align: right;
+		vertical-align: baseline;
+	}
+
+	table td.popupKeyFixme{
+		width: 25%;
+		padding: 5px;
+		color: white;
+		background: red;
+		border: 1px black dotted;
+		font-family: Courier;
+		font-size: 1.2em;
+		text-align: right;
+		vertical-align: baseline;
+	}
+
+	table td.popupValue{
+		font-weight: bold;
+		padding: 5px;
+		border: no;
+		border: 1px black dotted;
+		vertical-align: baseline;
+	}
+	table td.popupUserValue{
+		font-weight: bold;
+		padding: 5px;
+		border: no;
+		border: 1px black dotted;
+		vertical-align: baseline;
+		color: black;
+		background: #ffffc1;	}
+
+	table tr.popupRow{
+		padding: 5px;
+		border: no;
+		border: 1px black dotted;
+	}
+	
+	table tr.popupRowOSM{
+		padding: 5px;
+		border: no;
+		border: 1px black dotted;
+		background: #FFFFA1;
+	}
+	
+	table tr.popupRowFixme{
+		padding: 5px;
+		border: no;
+		border: 1px black dotted;
+		background: #FFFDC7;
+	}
+
+
+	.olPopupContent{
+	font-family: Verdana;
+	border-color: #663399;
+    font-size: 0.8em;
+	background-color: white;
+	padding: 4px;
+	}
+	
+	.popupLinksShow {
+		margin-top: 5px;
+		margin-left: 5px;
+		font-size: 0.9em;
+		visibility: visible;
+/* 
+		display: inline;
+ */
+
+	}
+	
+	.popupLinksHide {
+/* 
+		display: none;		
+ */
+		visibility: hidden;
+	}
+
+	.buttonclass {
+		margin-top: 2px;
+		margin-bottom: 2px;
+	}
+	div.olMapViewport {
+		z-index: 0;
+		}
+		
+	.unknownLicense {
+		font-weight: normal;
+		color: yellow;
+		background-color: red;
+	}	
+
+/************************************************
+*
+*	Searchbox Place search Netzwolf
+*
+*************************************************/
+
+	 .olControlSearchBox {
+		left: 60px;
+		top: 95px;
+		border-style: solid;
+		margin-top: 1px;
+		padding: 5px;
+		border-width: 2px;
+		border-color: #652ea0;
+		background-color: #fefdd5;
+		font-family: Verdana;
+		font-size: 0.8em;
+		font-weight:bold;
+		}
+
+	 .olControlSearchBox div.busy {
+		background: url(img/zuurstok.gif);
+		height: 10px;
+		width: 136px;
+		}
+
+	 .olControlSearchBox div.failure {
+		background: red;
+		color: black;
+		font-weight: bold;
+		}
+
+	 .olControlSearchBox div.success {
+		background: white;
+		padding: 4px;
+		border: 1px solid gray;
+		border-radius: 8px;
+		font-size: 90%;
+		font-weight:normal;
+		}
+
+	 .olControlSearchBox div.success.empty {
+		color: gray;
+		font-style: italic;
+		}
+
+	 .olControlSearchBox div.success div.entry:hover {
+		background: blue;
+		color: white;
+		cursor: pointer;
+		}
+				

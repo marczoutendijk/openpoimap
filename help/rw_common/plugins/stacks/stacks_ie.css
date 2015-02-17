@@ -1,0 +1,25 @@
+
+.stacks_top {
+	width:99%;
+}
+
+
+.stacks_in {
+	position:static;
+}
+
+
+.centered_image {
+	position: static;
+	display: block;
+	text-align:center;
+} 
+
+
+.centered_image .imageStyle {
+	position: static;
+	display: inline;
+	margin: 0;
+} 
+
+
