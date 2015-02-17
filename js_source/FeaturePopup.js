@@ -82,7 +82,7 @@ FeaturePopup = OpenLayers.Class({
     var popup =  new OpenLayers.Popup("location_info", xy, null, "", true ); 
     var lonlat = lonlat.clone().transform(this.map.projection, this.map.displayProjection); // WGS84 coordinaten (EPSG:4326)
     popup.setBackgroundColor("white"); // achtergrondkleur van het popup venster
-    popup.opacity = 0.9;
+    popup.opacity = 1;
     popup.setBorder("1px solid green");
    	popup.closeOnMove = false;
     popup.autoSize = true;
