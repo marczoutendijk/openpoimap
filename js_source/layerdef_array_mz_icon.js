@@ -15,6 +15,7 @@ var amenitydef = [
 	{url: "?data=(node[amenity=bicycle_rental](bbox);way[amenity=bicycle_rental](bbox);rel[amenity=bicycle_rental](bbox));(._;>;);out center;", naam: "Bicycle rental", zichtbaar: false},
 	{url: "?data=(node[amenity=cinema](bbox);way[amenity=cinema](bbox);rel[amenity=cinema](bbox));(._;>;);out center;", naam: "Cinema", zichtbaar: false},
 	{url: "?data=(node[amenity=fuel](bbox);way[amenity=fuel](bbox);rel[amenity=fuel](bbox));(._;>;);out center;", naam: "Fuel", zichtbaar: false},
+	{url: "?data=(node[amenity=library](bbox);way[amenity=library](bbox);rel[amenity=library](bbox));(._;>;);out center;", naam: "Library", zichtbaar: false},
 	{url: "?data=(node[amenity=parking](bbox);way[amenity=parking](bbox);rel[amenity=parking](bbox));(._;>;);out center;", naam: "Parking", zichtbaar: false},
 	{url: "?data=(node[amenity=pharmacy](bbox);way[amenity=pharmacy](bbox);rel[amenity=pharmacy](bbox));(._;>;);out center;", naam: "Pharmacy", zichtbaar: false},
 	{url: "?data=(node[amenity=police](bbox);way[amenity=police](bbox);rel[amenity=police](bbox));(._;>;);out center;", naam: "Police", zichtbaar: false},
@@ -127,7 +128,8 @@ var restaurantsdef = [
 ];
 
 var variousdef = [
-	{url: "?data=(node[type=route][route=bus](bbox);way[type=route][route=bus](bbox);rel[type=route][route=bus](bbox));(._;>;);out center;", naam: "Busstop", zichtbaar: false},
+	//{url: "?data=(node[type=route][route=bus](bbox);way[type=route][route=bus](bbox);rel[type=route][route=bus](bbox));(._;>;);out center;", naam: "Busstop", zichtbaar: false},
+	{url: "?data=(node[highway=bus_stop](bbox));(._;>;);out center;", naam: "Busstop", zichtbaar: false},
 	{url: "?data=(node[shop=copyshop](bbox);way[shop=copyshop](bbox);rel[shop=copyshop](bbox));(._;>;);out center;", naam: "Copyshop", zichtbaar: false},
 	{url: "?data=(node[emergency=defibrillator](bbox);way[emergency=defibrillator](bbox);rel[emergency=defibrillator](bbox));(._;>;);out center;", naam: "Defibrillator - AED", zichtbaar: false},
 	{url: "?data=(node[emergency=fire_extinguisher](bbox);node[emergency=fire_hose](bbox));(._;>;);out center;", naam: "Fire hose/extinguisher", zichtbaar: false},

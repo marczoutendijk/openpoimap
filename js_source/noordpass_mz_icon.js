@@ -73,7 +73,7 @@ function icon2use (name,uDef,num) {
 		switch (name) {
 			case "Alcohol" : return "mapicons/liquor.png";
 			case "Apartment" : return "mapicons/apartment-3.png";
-			case "Arts centre" : return "mapicons/university.png";
+			case "Arts centre" : return "mapicons/letter_a.png";
 			case "Artwork" : return "mapicons/letter_a.png";
 			case "Attraction" : return "mapicons/number_1.png";
 			case "ATM" : return "mapicons/atm-2.png";	
@@ -109,7 +109,7 @@ function icon2use (name,uDef,num) {
 			case "Drinking water" : return "mapicons/drinkingwater.png";
 			case "Fast food" : return "mapicons/fastfood.png";
 			case "Food court" : return "mapicons/letter_f.png";
-			case "Fire hose/extinguisher" : return "mapicons/letter_f.png";
+			case "Fire hose/extinguisher" : return "mapicons/fireexstinguisher.png";
 			case "Fuel" : return "mapicons/fillingstation.png";
 			case "Gallery" : return "mapicons/artgallery.png";
 			case "General" : return "mapicons/letter_g.png";
@@ -125,13 +125,14 @@ function icon2use (name,uDef,num) {
 			case "Information" : return "mapicons/information.png";
 			case "Jewelry" : return "mapicons/jewelry.png";
 			case "Leather" : return "mapicons/bags.png";
+			case "Library" : return "mapicons/library.png";
 			case "Memorial" : return "mapicons/memorial.png";
 			case "Monument" : return "mapicons/monument.png";
  			case "Monumental Tree" : return "mapicons/bigtree.png";
 			case "Motel" : return "mapicons/motel-2.png";
 			case "Museum" : return "mapicons/museum_art.png";
 			case "Musical instrument" : return "mapicons/music_rock.png";
-			case "Office" : return "mapicons/letter_o.png";		
+			case "Office" : return "mapicons/office-building.png";		
 			case "Optician" : return "mapicons/glasses.png";		
 			case "Organic" : return "mapicons/restaurant_vegetarian.png";
 			case "Parking" : return "mapicons/parkinggarage.png";

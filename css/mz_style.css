@@ -151,6 +151,29 @@
 		font-size: 0.9em;
 	}
 	
+	table td a:link {
+	color: blue;
+	text-decoration: none;
+	}	
+	
+	table td a:visited
+	{
+	color: blue;
+	text-decoration: none;
+	}
+
+	table td a:hover {
+	color: blue;
+	text-decoration: none;
+	border-bottom: 2px solid rgb(255,0,0)
+	}
+		
+	table td a:active {
+	color: blue;
+	text-decoration: none;
+	border-bottom: 2px solid rgb(255,0,0)
+	}	
+		
 	table td.popupKey{
 		width: 25%;
 		padding: 5px;

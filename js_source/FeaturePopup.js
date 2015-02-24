@@ -1,7 +1,11 @@
+//<!-- (mz) Laatste versie: 24-02-15, 15:36 -->
+
 var _ZOOM_ = "&zoom=18"; // zoomwaarde voor de Editors
 
 var CONNEX = "http://haltepagina.connexxion.nl/home/index?halte=";			// Connexion link
 var DELIJN = "https://www.delijn.be/nl/haltes/halte/";						// De Lijn in Vlaanderen
+
+var WIKI = '<a target = "_blank" href="http://wiki.openstreetmap.org/wiki/Key:';  // base url to key wiki
 
 var buttonShow = false;			// Keep the state of the hide/show button below the table
 
@@ -60,6 +64,11 @@ function showLinks() {
 					document.getElementById('show_button').innerHTML = 'Hide'; 		
 			}		
 	}
+
+// Turn keyvalue into link to relevant wiki article
+function makeWikiLink (key) { 	
+  	return WIKI + key + '">' + key + '</a>';
+  }
 			
 /**
  * FeaturePopup
@@ -161,31 +170,31 @@ FeaturePopup = OpenLayers.Class({
       tdValClass = '';
       // This switch selects the right wikipage for the relevant key and turns in into a link	
       switch (key) {
-      	case "amenity" 	: wikiKeyPage = '<a target = "_blank" href="http://wiki.openstreetmap.org/wiki/Key:amenity">' + key + '</a>';
+      	case "amenity" 	: wikiKeyPage =  WIKI + 'amenity">' + key + '</a>';
       	break;
-      	case "tourism" 	: wikiKeyPage = '<a target = "_blank" href="http://wiki.openstreetmap.org/wiki/Key:tourism">' + key + '</a>';
+      	case "tourism" 	: wikiKeyPage = WIKI + 'tourism">' + key + '</a>';
       	break;
-      	case "sport" 	: wikiKeyPage = '<a target = "_blank" href="http://wiki.openstreetmap.org/wiki/Key:sport">' + key + '</a>';
+      	case "sport" 	: wikiKeyPage = WIKI + 'sport">' + key + '</a>';
       	break;
-      	case "shop" 	: wikiKeyPage = '<a target = "_blank" href="http://wiki.openstreetmap.org/wiki/Key:shop">' + key + '</a>';
+      	case "shop" 	: wikiKeyPage = WIKI + 'shop">' + key + '</a>';
       	break;
-      	case "man_made" : wikiKeyPage = '<a target = "_blank" href="http://wiki.openstreetmap.org/wiki/Key:man_made">' + key + '</a>';
+      	case "man_made" : wikiKeyPage = WIKI + 'man_made">' + key + '</a>';
       	break;
-      	case "historic" : wikiKeyPage = '<a target = "_blank" href="http://wiki.openstreetmap.org/wiki/Key:historic">' + key + '</a>';
+      	case "historic" : wikiKeyPage = WIKI + 'historic">' + key + '</a>';
 		break;
-      	case "natural" 	: wikiKeyPage = '<a target = "_blank" href="http://wiki.openstreetmap.org/wiki/Key:natural">' + key + '</a>';
+      	case "natural" 	: wikiKeyPage = WIKI + 'natural">' + key + '</a>';
       	break;
-      	case "landuse" 	: wikiKeyPage = '<a target = "_blank" href="http://wiki.openstreetmap.org/wiki/Key:landuse">' + key + '</a>';
+      	case "landuse" 	: wikiKeyPage = WIKI + 'landuse">' + key + '</a>';
 		break;
-      	case "leisure" 	: wikiKeyPage = '<a target = "_blank" href="http://wiki.openstreetmap.org/wiki/Key:leisure">' + key + '</a>';
+      	case "leisure" 	: wikiKeyPage = WIKI + 'leisure">' + key + '</a>';
 		break;
-      	case "heritage" : wikiKeyPage = '<a target = "_blank" href="http://wiki.openstreetmap.org/wiki/Key:heritage">' + key + '</a>';
+      	case "heritage" : wikiKeyPage = WIKI + 'heritage">' + key + '</a>';
 		break;
-      	case "office" 	: wikiKeyPage = '<a target = "_blank" href="http://wiki.openstreetmap.org/wiki/Key:office">' + key + '</a>';
+      	case "office" 	: wikiKeyPage = WIKI + 'office">' + key + '</a>';
 		break;
-      	case "emergency": wikiKeyPage = '<a target = "_blank" href="http://wiki.openstreetmap.org/wiki/Key:emergency">' + key + '</a>';
+      	case "emergency": wikiKeyPage = WIKI + 'emergency">' + key + '</a>';
 		break;
-      	case "craft" 	: wikiKeyPage = '<a target = "_blank" href="http://wiki.openstreetmap.org/wiki/Key:craft">' + key + '</a>';
+      	case "craft" 	: wikiKeyPage = WIKI + 'craft">' + key + '</a>';
     }
       // If we have a wikipage, show it. Otherwise just return the key value
       // The class for the key and valuefield is currently the same 
@@ -198,13 +207,13 @@ FeaturePopup = OpenLayers.Class({
       	if (wikiKeyPage) {
           htmlTableHead += '<tr class="popupRow">' + tdKeyClass + keyVal + '</td>' + tdValClass + tagHtml + '</td></tr>';
     	} else {
-        	html += '<tr class="popupRow">' + tdKeyClass + keyVal + '</td>' + tdValClass + tagHtml + '</td></tr>';
+        	html += '<tr class="popupRow">' + tdKeyClass + makeWikiLink(keyVal) + '</td>' + tdValClass + tagHtml + '</td></tr>';
         }
       }
     });
     // process the open streetmap link and put in last line of table
     var htmlOSM = '<a target = "_blank" href="http://www.openstreetmap.org/browse/' + type + "/" + id + '">' + type + " " + id + "</a>";
-   	htmlTableFoot += '<tr class="popupRowOSM"><td class="popupKey">' + 'more info' + '</td><td class="popupValue">' + htmlOSM + '</td></tr>';
+   	htmlTableFoot += '<tr class="popupRowOSM"><td class="popupKey">' + 'OSM info' + '</td><td class="popupValue">' + htmlOSM + '</td></tr>';
    	htmlTableFoot += '</table>';
     return htmlTableStart + htmlTableHead + html + htmlTableFoot;
   },
@@ -214,6 +223,7 @@ FeaturePopup = OpenLayers.Class({
    * Added "image" & link
    */
    
+
   processTag : function(key, value, address) {
     var k = key.split(":");
     switch (k[0]) {
@@ -347,7 +357,6 @@ FeaturePopup = OpenLayers.Class({
   }, 
  
  // Create a thumbnail of the image that links to the original image
- // This 
    makeImageLink : function(href, text, newPage) {
     var html = "<a ";
     if (newPage) html += 'target="_blank" ';
@@ -376,6 +385,7 @@ FeaturePopup = OpenLayers.Class({
     return html + 'href="' + href + '">' + '<img src="' + text + '" height="60"/></a><br><div class="unknownLicense">Unknown license!</div>';
   }, 
  
+   
   processAddress : function(tags) {
     var street = tags["addr:street"];
     var number = tags["addr:housenumber"];
