@@ -110,6 +110,7 @@ function icon2use (name,uDef,num) {
 			case "Fast food" : return "mapicons/fastfood.png";
 			case "Food court" : return "mapicons/letter_f.png";
 			case "Fire hose/extinguisher" : return "mapicons/fireexstinguisher.png";
+			case "fixme" : return "mapicons/letter_x.png";
 			case "Fuel" : return "mapicons/fillingstation.png";
 			case "Gallery" : return "mapicons/artgallery.png";
 			case "General" : return "mapicons/letter_g.png";
@@ -177,7 +178,6 @@ function icon2use (name,uDef,num) {
 			case "Surfing" : return "mapicons/surfing.png";
 			case "Gymnastics" : return "mapicons/indoor-arena.png";
 			case "Horse racing" : return "mapicons/horseriding.png";
-			case "fixme" : return "mapicons/letter_x.png";
 			case "City" : return "mapicons/letter_city.png";
 			case "Town" : return "mapicons/letter_town.png";
 			case "Village" : return "mapicons/letter_village.png";
