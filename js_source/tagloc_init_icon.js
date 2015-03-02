@@ -5,6 +5,7 @@
 var lat = 47.74;
 var lon = 8.921;
 var zoom = 5;
+var searchBoxZoom = 13;
 
 var userPois = [];				// In deze array staat de selectie van de gebruiker
 var userChoices = [];			// Voor opslag van de userlayer als cookie
@@ -92,7 +93,7 @@ window.onload = function () {
 		autoClose: false,						
 		defaultLimit: 50,						
 		minDistance: 50,						
-		resultMinZoom: 13			   // Hiermee stel je in op welk niveau moet worden ingezoomd nadat de zoekterm is gevonden			
+		resultMinZoom: searchBoxZoom			   // Hiermee stel je in op welk niveau moet worden ingezoomd nadat de zoekterm is gevonden			
 	}));									
 
 // =========================  De Gebruikerskeuzen * USER pois ================================

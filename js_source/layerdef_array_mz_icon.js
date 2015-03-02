@@ -1,14 +1,13 @@
 //////////////////////////////////////////////////////////
 // OpenPoiMap aka Taglocator v1.0 - Marc Zoutendijk
 /////////////////////////////////////////////////////////
-// maandag 16 februari 2015
+// woensdag 25 februari 2015 
 
 //=====================================================================
 // Datablok met de verschillende laagdefinities
 //=====================================================================
 
 var amenitydef = [
-	{url: "?data=(node[amenity=arts_centre](bbox);way[amenity=arts_centre](bbox);rel[amenity=arts_centre](bbox));(._;>;);out center;", naam: "Arts centre", zichtbaar: false},
 	{url: "?data=(node[amenity=atm](bbox);way[amenity=atm](bbox);node[amenity=bank][atm][atm!=no](bbox);way[amenity=bank][atm][atm!=no](bbox);rel[amenity=bank][atm][atm!=no](bbox));(._;>;);out center;", naam: "ATM", zichtbaar: false},
 	{url: "?data=(node[amenity=bench](bbox);node(w););out center;", naam: "Bench", zichtbaar: false},
 	{url: "?data=(node[amenity=bicycle_parking](bbox);way[amenity=bicycle_parking](bbox);rel[amenity=bicycle_parking](bbox));(._;>;);out center;", naam: "Bicycle parking", zichtbaar: false},
@@ -30,6 +29,7 @@ var amenitydef = [
 
 var tourismdef = [
 // places to see
+	{url: "?data=(node[amenity=arts_centre](bbox);way[amenity=arts_centre](bbox);rel[amenity=arts_centre](bbox));(._;>;);out center;", naam: "Arts centre", zichtbaar: false},
 	{url: "?data=(node[tourism=artwork](bbox);way[tourism=artwork](bbox);rel[tourism=artwork](bbox));(._;>;);out center;", naam: "Artwork", zichtbaar: false},
 	{url: "?data=(node[tourism=attraction](bbox);way[tourism=attraction](bbox);rel[tourism=attraction](bbox));(._;>;);out center;", naam: "Attraction", zichtbaar: false},
 	{url: "?data=(node[tourism=gallery](bbox);way[tourism=gallery](bbox);rel[tourism=gallery](bbox));(._;>;);out center;", naam: "Gallery", zichtbaar: false},
@@ -131,10 +131,13 @@ var variousdef = [
 	//{url: "?data=(node[type=route][route=bus](bbox);way[type=route][route=bus](bbox);rel[type=route][route=bus](bbox));(._;>;);out center;", naam: "Busstop", zichtbaar: false},
 	{url: "?data=(node[highway=bus_stop](bbox));(._;>;);out center;", naam: "Busstop", zichtbaar: false},
 	{url: "?data=(node[shop=copyshop](bbox);way[shop=copyshop](bbox);rel[shop=copyshop](bbox));(._;>;);out center;", naam: "Copyshop", zichtbaar: false},
-	{url: "?data=(node[emergency=defibrillator](bbox);way[emergency=defibrillator](bbox);rel[emergency=defibrillator](bbox));(._;>;);out center;", naam: "Defibrillator - AED", zichtbaar: false},
-	{url: "?data=(node[emergency=fire_extinguisher](bbox);node[emergency=fire_hose](bbox));(._;>;);out center;", naam: "Fire hose/extinguisher", zichtbaar: false},
+	{url: "?data=(node[amenity=kindergarten](bbox);way[amenity=kindergarten](bbox);rel[amenity=kindergarten](bbox));(._;>;);out center;", naam: "Kindergarten", zichtbaar: false},
+	{url: "?data=(node[amenity=marketplace](bbox);way[amenity=marketplace](bbox);rel[amenity=marketplace](bbox));(._;>;);out center;", naam: "Marketplace", zichtbaar: false},
 	{url: "?data=(node[office](bbox);way[office](bbox);rel[office](bbox));(._;>;);out center;", naam: "Office", zichtbaar: false},	
+	{url: "?data=(node[amenity=recycling](bbox);way[amenity=recycling](bbox);rel[amenity=recycling](bbox));(._;>;);out center;", naam: "Recycling", zichtbaar: false},	
 	{url: "?data=(node[shop=travel_agency](bbox);way[shop=travel_agency](bbox);rel[shop=travel_agency](bbox));(._;>;);out center;", naam: "Travel agency<hr>", zichtbaar: false},
+	{url: "?data=(node[emergency=defibrillator](bbox);way[emergency=defibrillator](bbox);rel[emergency=defibrillator](bbox));(._;>;);out center;", naam: "Defibrillator - AED", zichtbaar: false},
+	{url: "?data=(node[emergency=fire_extinguisher](bbox);node[emergency=fire_hose](bbox));(._;>;);out center;", naam: "Fire hose/extinguisher<hr>", zichtbaar: false},
 // De fixme met een relation leverde teveel onduidelijk resultaten op. Verwijderd.	
 	{url: "?data=(node[fixme](bbox);way[fixme](bbox);node[FIXME](bbox);way[FIXME](bbox));(._;>;);out center;", naam: "fixme", zichtbaar: false},
 	{url: "?data=(node[image](bbox);way[image](bbox));(._;>;);out center;", naam: "Image", zichtbaar: false},
@@ -153,6 +156,31 @@ var cookieDefName = "taglocpois";				// de naam die voor de cookiefile wordt geb
 // Omdat de door de gebruiker opgegeven variabelen in een dynamische array moeten komen te staan, worden die hieronder aangemaakt
 // Sla alle door de gebruiker ingevoerde tag:value paren op in een array in het juiste formaat om er een query van te maken
 // Die array wordt weer gebruikt als invoer voor addLayers
+
+//=====================================
+// Valid input for the userpois:
+//====================================
+// craft=brewery
+// highway=bus_stop
+// landuse=grass
+// And any other key/value pair
+// 
+// to find all shops:
+// shop
+// 
+// to find all shops without phone:
+// shop][phone!~"."
+// 
+// Also yes/no as value:
+// tourism=yes
+// 
+// Find any e-mail address:
+// "contact:email"
+//
+// Anything IN name:
+// {name}amenity=school
+//========================================
+
 
 function UserTagObj (url,naam) {
 	this.url = url;

@@ -2,8 +2,8 @@
 // Versie met featurePopup van Gertjan
 // maandag 16 februari 2015 
 
-var zoomlevel = 12;	 // In de code is dit duidelijk herkenbaar
-var popUpZoom = 13;  // dit is het minimale zoomniveau (-1) voor het popupvenster, waarbij het begint te werken.
+var zoomlevel = 14;	 // Starting level for collecting data on the map
+var popUpZoom = 15;  // dit is het minimale zoomniveau (-1) voor het popupvenster, waarbij het begint te werken.
 var ICON_Z_INDEX = 11;
 
 function setStatusText(text) {
@@ -74,7 +74,7 @@ function icon2use (name,uDef,num) {
 			case "Alcohol" : return "mapicons/liquor.png";
 			case "Apartment" : return "mapicons/apartment-3.png";
 			case "Arts centre" : return "mapicons/letter_a.png";
-			case "Artwork" : return "mapicons/letter_a.png";
+			case "Artwork" : return "mapicons/artwork.png";
 			case "Attraction" : return "mapicons/number_1.png";
 			case "ATM" : return "mapicons/atm-2.png";	
 			case "Bakery" : return "mapicons/bread.png";
@@ -109,8 +109,8 @@ function icon2use (name,uDef,num) {
 			case "Drinking water" : return "mapicons/drinkingwater.png";
 			case "Fast food" : return "mapicons/fastfood.png";
 			case "Food court" : return "mapicons/letter_f.png";
-			case "Fire hose/extinguisher" : return "mapicons/fireexstinguisher.png";
 			case "fixme" : return "mapicons/letter_x.png";
+			case "Fire hose/extinguisher<hr>" : return "mapicons/fireexstinguisher.png";
 			case "Fuel" : return "mapicons/fillingstation.png";
 			case "Gallery" : return "mapicons/artgallery.png";
 			case "General" : return "mapicons/letter_g.png";
@@ -125,8 +125,10 @@ function icon2use (name,uDef,num) {
 			case "Image" : return "mapicons/image.png";
 			case "Information" : return "mapicons/information.png";
 			case "Jewelry" : return "mapicons/jewelry.png";
+			case "Kindergarten" : return "mapicons/daycare.png";			
 			case "Leather" : return "mapicons/bags.png";
 			case "Library" : return "mapicons/library.png";
+			case "Marketplace" : return "mapicons/letter_m.png";
 			case "Memorial" : return "mapicons/memorial.png";
 			case "Monument" : return "mapicons/monument.png";
  			case "Monumental Tree" : return "mapicons/bigtree.png";
@@ -145,6 +147,7 @@ function icon2use (name,uDef,num) {
 			case "Post office" : return "mapicons/postal.png";
 			case "Pub" : return "mapicons/pub.png";
 			case "Public camera<hr>" : return "mapicons/video.png";			
+			case "Recycling" : return "mapicons/letter_r.png";
 			case "Restaurant" : return "mapicons/restaurant.png";
 			case "School/college" : return "mapicons/school.png";
 			case "Seafood" : return "mapicons/restaurant_fish.png";
@@ -316,7 +319,7 @@ function showZoom(zoom) {
 function showPosition(position){
 		lat = position.coords.latitude;
 		lon = position.coords.longitude;
-		map.setCenter(new OpenLayers.LonLat(lon,lat).transform(map.displayProjection,map.projection), 13);
+		map.setCenter(new OpenLayers.LonLat(lon,lat).transform(map.displayProjection,map.projection), popUpZoom);
 	};
 		
 function getPos(){

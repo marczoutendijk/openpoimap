@@ -1,9 +1,11 @@
-//<!-- (mz) Laatste versie: 24-02-15, 15:36 -->
+//<!-- (mz) Laatste versie: 26-02-15, 10:48 -->
 
 var _ZOOM_ = "&zoom=18"; // zoomwaarde voor de Editors
 
 var CONNEX = "http://haltepagina.connexxion.nl/home/index?halte=";			// Connexion link
 var DELIJN = "https://www.delijn.be/nl/haltes/halte/";						// De Lijn in Vlaanderen
+var MDB = "http://www.molendatabase.nl/nederland/molen.php?nummer=";		// Molendatabase
+var DHM = "http://www.molens.nl/site/dbase/molen.php?mid=";					// De Hollandse Molen
 
 var WIKI = '<a target = "_blank" href="http://wiki.openstreetmap.org/wiki/Key:';  // base url to key wiki
 
@@ -274,18 +276,25 @@ FeaturePopup = OpenLayers.Class({
     case "building" :
     	if (k[1] == "colour") {
     	return value +  '&nbsp;&nbsp;<span style="background-color:' + value + '">' + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + '</span>';
-    	}
+    	} else return value;
     case "roof" :
     	if (k[1] == "colour") {
     	return value + '&nbsp;&nbsp;<span style="background-color:' + value + '">' + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + '</span>';
-    	}   	
+    	} else return value;
+    // check the special keys that refer to the Dutch windmill databases	  
+    case "dhm_id" :
+    	var molen = DHM + value;
+    	return this.makeLink(molen,value,true);
+    case "mdb_id" :	
+    	var molen = MDB + value;	
+    	return this.makeLink(molen,value,true);
+    // Do not process the next keys as they are allready shown in the header	
     case "name":
     case "operator":
     case "note":
     case "description":
     case "fixme":
     case "FIXME":
-      // Ignore the name/operator/note/description/fixme tag because we show it in the header
       return null;
     default:
       return value;
@@ -294,14 +303,12 @@ FeaturePopup = OpenLayers.Class({
   
   // Can we get  more detailed information about the busstop?
   // Connexxion (NL) and De_Lijn (BE) are supported in this version
-  
+  // Use only the first code. If more codes are given, every code after the first leads
+  // to an errorpage from the bus operator
   processBusstop : function (busOp,key,value) {
 	  if (key == 'code' || key == 'De_Lijn') {
 	  	k = value.split(/[;,]/);
 	  	html = this.makeLink(busOp + k[0], 'bus info: ' + k[0], true); 
-		for (i=1; i < k.length; i++) {
-			html += '</br>' +  this.makeLink(busOp + k[i], 'bus info: ' + k[i], true);
-		}	  	
 		 return html;
 	}
 	return value; 
@@ -310,6 +317,7 @@ FeaturePopup = OpenLayers.Class({
   /*
   * If value consists of more than one item - separated by characters given in the split set -
   * turn into html string with as many lines as items. Separation by </br>
+  * For an example see the Eiffeltower!
   */
   processMultiValue : function(value) {
 	var k = value.split(/[;,]/);
@@ -357,6 +365,9 @@ FeaturePopup = OpenLayers.Class({
   }, 
  
  // Create a thumbnail of the image that links to the original image
+ // This thumbnail is created in a rather stupid way: just force the image (however large) into 60 pix height!
+ // Still looking for a function that gets this done faster
+ // This function also adds a warning in case the license of the image is unkown.
    makeImageLink : function(href, text, newPage) {
     var html = "<a ";
     if (newPage) html += 'target="_blank" ';

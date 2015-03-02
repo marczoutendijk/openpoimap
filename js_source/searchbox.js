@@ -16,7 +16,7 @@ OpenLayers.Control.SearchBox=OpenLayers.Class(OpenLayers.Control, {
 	//	config
 	//----------------------------------------------------------------------
 
-	resultMinZoom: 12,
+	resultMinZoom: 16,
 
 	lang: 'nl',
 
