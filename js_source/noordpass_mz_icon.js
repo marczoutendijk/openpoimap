@@ -1,9 +1,10 @@
 //====================================
 // Versie met featurePopup van Gertjan
-// maandag 16 februari 2015 
+// <!-- (mz) Laatste versie: 06-03-15, 10:44 -->
+
 
 var zoomlevel = 14;	 // Starting level for collecting data on the map
-var popUpZoom = 15;  // dit is het minimale zoomniveau (-1) voor het popupvenster, waarbij het begint te werken.
+var popUpZoom = 15;  // dit is het minimale zoomniveau voor het popupvenster, waarbij het begint te werken.
 var ICON_Z_INDEX = 11;
 
 function setStatusText(text) {
@@ -67,7 +68,7 @@ ZoomLimitedBBOXStrategy = OpenLayers.Class(OpenLayers.Strategy.BBOX,
 // Deze functie selecteert het juiste icoontje bij een bepaalde tag
 // name = naam zoals gedefinieerd in de layerdef_array
 // uDef = Geeft aan of de userpois worden gebruikt
-// num = het nummer dat wordt gebruikt voor de afbeelding. Alleen als Udef = true.
+// num = het nummer dat wordt gebruikt voor de afbeelding. Alleen als uDef = true.
 function icon2use (name,uDef,num) {
 	if  (uDef == false)  { // geen gebruikers tags
 		switch (name) {
@@ -130,7 +131,7 @@ function icon2use (name,uDef,num) {
 			case "Library" : return "mapicons/library.png";
 			case "Marketplace" : return "mapicons/letter_m.png";
 			case "Memorial" : return "mapicons/memorial.png";
-			case "Monument" : return "mapicons/monument.png";
+			case "Monument/memorial" : return "mapicons/monument.png";
  			case "Monumental Tree" : return "mapicons/bigtree.png";
 			case "Motel" : return "mapicons/motel-2.png";
 			case "Museum" : return "mapicons/museum_art.png";
@@ -142,6 +143,7 @@ function icon2use (name,uDef,num) {
 			case "Pharmacy" : return "mapicons/medicine.png";			
 			case "Photo" : return "mapicons/photo.png";
 			case "Picnic" : return "mapicons/picnic-2.png";
+			case "Place of worship" : return "mapicons/church-2.png";
 			case "Police" : return "mapicons/police.png";
 			case "Post box" : return "mapicons/letter_p.png";
 			case "Post office" : return "mapicons/postal.png";
@@ -185,7 +187,7 @@ function icon2use (name,uDef,num) {
 			case "Town" : return "mapicons/letter_town.png";
 			case "Village" : return "mapicons/letter_village.png";
 			case "Hamlet" : return "mapicons/letter_hamlet.png";
-			case "Test" : return "mapicons/letter_t.png";		
+			case "Test" : return "mapicons/letter_t.png";	// voor testdoeleinden		
 			default :  return "img/marker-gold.png";
 		} //end switch 
 	} else {
@@ -195,17 +197,7 @@ function icon2use (name,uDef,num) {
 		}
 };
 
-// onderstaande code werkt in combinatie met layerdef_array_mz.js
-// De oorspronkelijke make_layer functie is nu uitgevoerd met een array als invoer.
-// data_url, name, zichtbaar	
-// De structuur is een object:
-
-// 	{
-// 		url: "?data=(node[amenity=bench](bbox);node(w););out;", 
-// 		naam: name="Bench", 
-// 		zichtbaar: false       // aangevinkt indien true
-// 	}
-
+// make_array_layer works with the layerdefinitions in layerdef_array_mz.js
 
 function make_array_layer(data_array,uDef,vulKleur) {
 	var largeLayerArray = [];							// voor het bewaren van de resultaten van make_large_layer
@@ -218,9 +210,8 @@ function make_array_layer(data_array,uDef,vulKleur) {
 }
 
 // ------------------------- originele layer -----------------------------------------------------------------------
-// make_large_layer wordt aangeroepen door make_layer of door make_array_layer.
+// make_large_layer is called by make_array_layer.
 
-//function make_large_layer(vulKleur,uDef, num, data_url, name, zoom, visible, dash, opacity, radius, radopacity) {	
 function make_large_layer(vulKleur,uDef, num, data_url, name, zoom, visible) {	
 				
 	var	styleMap = new OpenLayers.StyleMap({
@@ -231,7 +222,6 @@ function make_large_layer(vulKleur,uDef, num, data_url, name, zoom, visible) {
 		graphicWidth: 24,
 		graphicHeight: 30,
 		graphicYOffset: -30, // places the point of the marker on the node.
-		
 		graphicZIndex: ICON_Z_INDEX,
  		strokeWidth: 1	// for the drawing of the contour	
 		});

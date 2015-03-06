@@ -1,4 +1,5 @@
-//<!-- (mz) Laatste versie: 26-02-15, 10:48 -->
+//<!-- (mz) Laatste versie: 05-03-15, 11:37 -->
+
 
 var _ZOOM_ = "&zoom=18"; // zoomwaarde voor de Editors
 
@@ -6,6 +7,17 @@ var CONNEX = "http://haltepagina.connexxion.nl/home/index?halte=";			// Connexio
 var DELIJN = "https://www.delijn.be/nl/haltes/halte/";						// De Lijn in Vlaanderen
 var MDB = "http://www.molendatabase.nl/nederland/molen.php?nummer=";		// Molendatabase
 var DHM = "http://www.molens.nl/site/dbase/molen.php?mid=";					// De Hollandse Molen
+
+// The Dutch Monument Register requires two links to get to the information you need.
+// First you go this one, and once on that page you have to click again to get to the relevant page for that monument
+var MONUREG = "http://monumentenregister.cultureelerfgoed.nl/php/main.php?cAction=search&sCompMonNr=";
+
+// The links below are needed if you know both the OBJnr AND the MonNr.
+// Often they are the same, but sometimes they are different
+
+// var MON1 = "http://monumentenregister.cultureelerfgoed.nl/php/main.php?cAction=show&cOffset=0&cLimit=25&cOBJnr=";
+// var MON2 = "&oOrder=ASC&cLast=1&oField=OBJ_RIJKSNUMMER&sCompMonNr=";
+// var MON3 = "&sCompMonName=&sStatus=&sProvincie=&sGemeente=&sPlaats=&sStraat=&sHuisnummer=&sPostcode=&sFunctie=&sHoofdcategorie=&sSubcategorie=&sOmschrijving=&ID=0&oField=OBJ_RIJKSNUMMER";
 
 var WIKI = '<a target = "_blank" href="http://wiki.openstreetmap.org/wiki/Key:';  // base url to key wiki
 
@@ -263,9 +275,12 @@ FeaturePopup = OpenLayers.Class({
     case "addr":
       	return (address ? null : value);
     case "cxx": 		// Connexxion bus?
-    	return this.processBusstop(CONNEX,k[1],value);
-    case "ref": 		// De_Lijn bus?
-    	return this.processBusstop(DELIJN,k[1],value);
+    	if (k[1] == 'code') {
+    	return this.makeLink(CONNEX + value,'bus info: ' + value,true);
+    	}
+// Process all ref keys
+    case "ref": // k[1] = the xxx part of the ref:xxx key
+    	return this.processRef(k[1],value);
     case "heritage" : 	// heritage website?
     	if (k[1] == "website") {
     	return this.makeLink(value,value,true);
@@ -301,18 +316,23 @@ FeaturePopup = OpenLayers.Class({
     }
   },
   
-  // Can we get  more detailed information about the busstop?
-  // Connexxion (NL) and De_Lijn (BE) are supported in this version
-  // Use only the first code. If more codes are given, every code after the first leads
-  // to an errorpage from the bus operator
-  processBusstop : function (busOp,key,value) {
-	  if (key == 'code' || key == 'De_Lijn') {
+ 
+// Deal with the xxx part of the ref:xxx key
+// Sometimes value contains multiple values for busstops. Use only the first k[0]
+  processRef : function (key,value) {
 	  	k = value.split(/[;,]/);
-	  	html = this.makeLink(busOp + k[0], 'bus info: ' + k[0], true); 
-		 return html;
-	}
-	return value; 
+  		switch (key) {
+  			// rce is the code used by the Dutch Monument Register
+  			case 'rce' :
+  				return this.makeLink(MONUREG + value, 'Monument register: ' + value, true);
+  				//return this.makeLink(MON1 + value + MON2 + value + MON3, 'Monument register: ' + value, true);
+  			case 'De_Lijn':
+  				return this.makeLink(DELIJN + k[0], 'bus info: ' + k[0], true);
+  			default: 
+  				return value
+  		}
   },
+ 
   
   /*
   * If value consists of more than one item - separated by characters given in the split set -

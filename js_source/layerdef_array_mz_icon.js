@@ -1,10 +1,12 @@
 //////////////////////////////////////////////////////////
 // OpenPoiMap aka Taglocator v1.0 - Marc Zoutendijk
 /////////////////////////////////////////////////////////
-// woensdag 25 februari 2015 
+// <!-- (mz) Laatste versie: 06-03-15, 10:45 -->
+
+
 
 //=====================================================================
-// Datablok met de verschillende laagdefinities
+// This block contains the layerdefinitions
 //=====================================================================
 
 var amenitydef = [
@@ -17,6 +19,7 @@ var amenitydef = [
 	{url: "?data=(node[amenity=library](bbox);way[amenity=library](bbox);rel[amenity=library](bbox));(._;>;);out center;", naam: "Library", zichtbaar: false},
 	{url: "?data=(node[amenity=parking](bbox);way[amenity=parking](bbox);rel[amenity=parking](bbox));(._;>;);out center;", naam: "Parking", zichtbaar: false},
 	{url: "?data=(node[amenity=pharmacy](bbox);way[amenity=pharmacy](bbox);rel[amenity=pharmacy](bbox));(._;>;);out center;", naam: "Pharmacy", zichtbaar: false},
+	{url: "?data=(node[amenity=place_of_worship](bbox);way[amenity=place_of_worship](bbox);rel[amenity=place_of_worship](bbox));(._;>;);out center;", naam: "Place of worship", zichtbaar: false},
 	{url: "?data=(node[amenity=police](bbox);way[amenity=police](bbox);rel[amenity=police](bbox));(._;>;);out center;", naam: "Police", zichtbaar: false},
 	{url: "?data=(node[amenity=post_box](bbox);node(w););out center;", naam: "Post box", zichtbaar: false},
 	{url: "?data=(node[amenity=post_office](bbox);way[amenity=post_office](bbox);rel[amenity=post_office](bbox));(._;>;);out center;", naam: "Post office", zichtbaar: false},
@@ -35,7 +38,7 @@ var tourismdef = [
 	{url: "?data=(node[tourism=gallery](bbox);way[tourism=gallery](bbox);rel[tourism=gallery](bbox));(._;>;);out center;", naam: "Gallery", zichtbaar: false},
 	{url: "?data=(node[heritage](bbox);way[heritage](bbox);rel[heritage](bbox));(._;>;);out center;", naam: "Heritage", zichtbaar: false},
 	{url: "?data=(node[tourism=information](bbox);way[tourism=information](bbox));(._;>;);out center;", naam: "Information", zichtbaar: false},
-	{url: "?data=(node[historic=monument](bbox);way[historic=monument](bbox);rel[historic=monument](bbox));(._;>;);out center;", naam: "Monument", zichtbaar: false},
+	{url: "?data=(node[historic=monument](bbox);way[historic=monument](bbox);rel[historic=monument](bbox);node[historic=memorial](bbox);way[historic=memorial](bbox);rel[historic=memorial](bbox));(._;>;);out center;", naam: "Monument/memorial", zichtbaar: false},
 	{url: "?data=(node[natural=tree][historic=monument](bbox);node[natural=tree][monument=yes](bbox));(._;>;);out center;", naam: "Monumental Tree", zichtbaar: false},
 	{url: "?data=(node[tourism=museum](bbox);way[tourism=museum](bbox);rel[tourism=museum](bbox));(._;>;);out center;", naam: "Museum", zichtbaar: false},
 	{url: "?data=(node[tourism=picnic_site](bbox);way[tourism=picnic_site](bbox);rel[tourism=picnic_site](bbox));(._;>;);out center;", naam: "Picnic", zichtbaar: false},
@@ -74,7 +77,7 @@ var sportdef = [
 	{url: "?data=(way[sport=volleybal](bbox);node[sport=volleybal](bbox));(._;>;);out center;", naam: "Volleyball", zichtbaar: false}
 ];
 var shopdef = [
-//General store - Supermarket			
+//Various shops (excluding food)			
 	{url: "?data=(node[shop=beauty](bbox);way[shop=beauty](bbox);rel[shop=beauty](bbox));(._;>;);out center;", naam: "Beauty", zichtbaar: false},
 	{url: "?data=(node[shop=bicycle](bbox);way[shop=bicycle](bbox);rel[shop=bicycle](bbox));(._;>;);out center;", naam: "Bicycle", zichtbaar: false},
 	{url: "?data=(node[shop=books](bbox);way[shop=books](bbox);rel[shop=books](bbox);way[shop=stationery](bbox);node[shop=stationery](bbox);rel[shop=stationery](bbox));(._;>;);out center;", naam: "Books/Stationary", zichtbaar: false},
@@ -128,7 +131,6 @@ var restaurantsdef = [
 ];
 
 var variousdef = [
-	//{url: "?data=(node[type=route][route=bus](bbox);way[type=route][route=bus](bbox);rel[type=route][route=bus](bbox));(._;>;);out center;", naam: "Busstop", zichtbaar: false},
 	{url: "?data=(node[highway=bus_stop](bbox));(._;>;);out center;", naam: "Busstop", zichtbaar: false},
 	{url: "?data=(node[shop=copyshop](bbox);way[shop=copyshop](bbox);rel[shop=copyshop](bbox));(._;>;);out center;", naam: "Copyshop", zichtbaar: false},
 	{url: "?data=(node[amenity=kindergarten](bbox);way[amenity=kindergarten](bbox);rel[amenity=kindergarten](bbox));(._;>;);out center;", naam: "Kindergarten", zichtbaar: false},
@@ -138,7 +140,7 @@ var variousdef = [
 	{url: "?data=(node[shop=travel_agency](bbox);way[shop=travel_agency](bbox);rel[shop=travel_agency](bbox));(._;>;);out center;", naam: "Travel agency<hr>", zichtbaar: false},
 	{url: "?data=(node[emergency=defibrillator](bbox);way[emergency=defibrillator](bbox);rel[emergency=defibrillator](bbox));(._;>;);out center;", naam: "Defibrillator - AED", zichtbaar: false},
 	{url: "?data=(node[emergency=fire_extinguisher](bbox);node[emergency=fire_hose](bbox));(._;>;);out center;", naam: "Fire hose/extinguisher<hr>", zichtbaar: false},
-// De fixme met een relation leverde teveel onduidelijk resultaten op. Verwijderd.	
+// Do not include a relation for the fixme, as it produces a lot of extraneous data	
 	{url: "?data=(node[fixme](bbox);way[fixme](bbox);node[FIXME](bbox);way[FIXME](bbox));(._;>;);out center;", naam: "fixme", zichtbaar: false},
 	{url: "?data=(node[image](bbox);way[image](bbox));(._;>;);out center;", naam: "Image", zichtbaar: false},
 	{url: "?data=(node['surveillance:type'='camera'](bbox));(._;>;);out center;", naam: "Public camera<hr>", zichtbaar: false},
@@ -266,7 +268,7 @@ function layerdef(type){
 	
 
 
-// In de code voor de cookies de escape vervangen door encodeURIComponent() en decodeURICopmonent()
+// In de code voor de cookies de escape vervangen door encodeURIComponent() en decodeURIComponent()
 
 // Cookiestuf van Sander
 // Deze 2 functies gebruik ik niet		

@@ -92,7 +92,7 @@
 		font-weight:bold;
 		background-color: #a9a741;
 		cursor: default;
-	color: white;
+		color: white;
 }
 	.dorment{
 		font-family: Verdana;
@@ -100,7 +100,7 @@
 		font-weight:bold;
 		background-color: #fefdd5;
 		cursor: default;
-	color: maroon;
+		color: maroon;
 }
 	.action{
         font-family: Verdana;
@@ -144,8 +144,11 @@
 
 /* Code to style the popup window */
 
+	.olPopup {
+		height: auto !important;
+	}
+	
 	.popupCode{
-		width: 400px;
 		border: no;
 		border-collapse: collapse;
 		font-size: 0.9em;
@@ -175,7 +178,7 @@
 	}	
 		
 	table td.popupKey{
-		width: 25%;
+		width: auto;
 		padding: 5px;
 		color: black;
 		border: 1px black dotted;
@@ -186,7 +189,7 @@
 	}
 	
 	table td.popupMainKey{
-		width: 25%;
+		width: auto;
 		padding: 5px;
 		color: black;
 		border: 1px black dotted;
@@ -199,7 +202,7 @@
 	}
 
 	table td.popupKeyFixme{
-		width: 25%;
+		width: auto;
 		padding: 5px;
 		color: white;
 		background: red;
@@ -253,24 +256,19 @@
     font-size: 0.8em;
 	background-color: white;
 	padding: 4px;
+	height: auto !important;
 	}
+	
 	
 	.popupLinksShow {
 		margin-top: 5px;
 		margin-left: 5px;
 		font-size: 0.9em;
-		visibility: visible;
-/* 
 		display: inline;
- */
-
 	}
 	
 	.popupLinksHide {
-/* 
 		display: none;		
- */
-		visibility: hidden;
 	}
 
 	.buttonclass {

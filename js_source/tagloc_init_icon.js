@@ -7,13 +7,13 @@ var lon = 8.921;
 var zoom = 5;
 var searchBoxZoom = 13;
 
-var userPois = [];				// In deze array staat de selectie van de gebruiker
-var userChoices = [];			// Voor opslag van de userlayer als cookie
+var userPois = [];				// This array contains the current user poi
+var userChoices = [];			// This array contains all the user pois as they are kept in a cookie
 var keuzeCount = 0;
 var keus = 0;					// index in userChoices
 var tempCount = 0;
 var map;
-var COOKIE_KEEP = 60;			// Aantal dagen dat de cookies moeten worden bewaard
+var COOKIE_KEEP = 60;			// Number of days to keep the cookies
 var QURL = "http://overpass-api.de/api/interpreter/"; //default
 var featurePopup;
 
@@ -43,8 +43,6 @@ var tabtype = {
 	}
 };
 
-// Onderstaande code is weer de oospronkelijke permalink code.
-// De wijziging die Henk had bedacht is niet meer nodig nu ik de qstring op een andere wijze samenstel.
 // zoek naar een eventuele map variabele in de GET van de permalink
 
 var permalink_true = window.location.search;
