@@ -19,6 +19,12 @@
 		bottom: 60px;
 	}
  */
+ 
+ .hostedby {
+ 	font-size: 0.5em;
+	font-family: Verdana;
+	font-weight:bold;	
+ 	}
 	
 /* 
 	Hieronder de layout van de baselayer box
