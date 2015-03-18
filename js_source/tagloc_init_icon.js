@@ -5,7 +5,7 @@
 var lat = 47.74;
 var lon = 8.921;
 var zoom = 5;
-var searchBoxZoom = 13;
+var searchBoxZoom = 14;
 
 var userPois = [];				// This array contains the current user poi
 var userChoices = [];			// This array contains all the user pois as they are kept in a cookie

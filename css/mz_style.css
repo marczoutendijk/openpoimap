@@ -13,30 +13,32 @@
 	{
 	display:none
 	}
+/* 
 	div.olControlLocalTracks {
 		left: 15px;
 		bottom: 60px;
 	}
-	
-/* 
-	Hieronder wordt de kleur van de baselayer box gedefinieerd
  */
 	
+/* 
+	Hieronder de layout van de baselayer box
+ */
 	div.olControlLayerSwitcher .layersDiv {
 		background-color: #fefdd5;
 		padding-left: 0px;
-		font-size: 1em;
+		font-size: 0.9em;
 		color: #7a0c00;
-		border: 2px solid #7a0c00;
+		border: 1px solid #7a0c00;
 }
+
 	div.olControlAttribution {
 		position: absolute;
 		padding-left: 10px;
 		font-family: Verdana;
-		font-size: 0.7em;
+		font-size: 0.6em;
 		font-weight:normal;
-		width: 200px;
-		bottom: 10px;
+		width: 180px;
+		bottom: 100px;
 		left: 10px;
 		background-color:rgba(200,200,200,0.6);
 	}
@@ -65,7 +67,7 @@
 		left: 60px;
 		width: 400px;
 		border-style: solid;
-		border-width: 2px;
+		border-width: 1px;
 		border-color: black;
 	}
 	.zoom{
@@ -83,8 +85,7 @@
 	.kaartnaam {
 		font-family: Verdana;
 		font-size: 0.9em;
-		font-weight:bold;
-		
+		font-weight:bold;		
 	}
 	.choice{
 		font-family: Verdana;
@@ -297,8 +298,8 @@
 		border-style: solid;
 		margin-top: 1px;
 		padding: 5px;
-		border-width: 2px;
-		border-color: #652ea0;
+		border-width: 1px;
+		border-color: black;
 		background-color: #fefdd5;
 		font-family: Verdana;
 		font-size: 0.8em;

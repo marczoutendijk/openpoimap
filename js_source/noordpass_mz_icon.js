@@ -4,7 +4,7 @@
 
 
 var zoomlevel = 14;	 // Starting level for collecting data on the map
-var popUpZoom = 15;  // dit is het minimale zoomniveau voor het popupvenster, waarbij het begint te werken.
+var popUpZoom = 14;  // dit is het minimale zoomniveau voor het popupvenster, waarbij het begint te werken.
 var ICON_Z_INDEX = 11;
 
 function setStatusText(text) {
@@ -73,6 +73,7 @@ function icon2use (name,uDef,num) {
 	if  (uDef == false)  { // geen gebruikers tags
 		switch (name) {
 			case "Alcohol" : return "mapicons/liquor.png";
+			case "Alpine hut" : return "mapicons/alpine_hut.png";
 			case "Apartment" : return "mapicons/apartment-3.png";
 			case "Arts centre" : return "mapicons/letter_a.png";
 			case "Artwork" : return "mapicons/artwork.png";
@@ -117,7 +118,7 @@ function icon2use (name,uDef,num) {
 			case "General" : return "mapicons/letter_g.png";
 			case "Gift" : return "mapicons/gifts.png";
 			case "Grocery" : return "mapicons/grocery.png";
-			case "Guest house" : return "mapicons/number_2.png";
+			case "Guest house" : return "mapicons/bed_breakfast.png";
 			case "Hairdresser" : return "mapicons/barber.png";
 			case "Heritage" : return "mapicons/letter_h.png";			
  			case "Hostel" : return "mapicons/hostel_0star.png";
@@ -228,7 +229,7 @@ function make_large_layer(vulKleur,uDef, num, data_url, name, zoom, visible) {
 
 	// checkboxName is de naam zoal hij in de layerlist staat, na het selectievakje, inclusief de afbeelding!
 	// Het is een combinatie van icon en naam	
-	var checkBoxName = "<img style=\"vertical-align: middle; width=\"24\" height=\"28\"; src=\"" + icon2use(name,uDef,num) + "\">" + "&nbsp" + name;; 
+	var checkBoxName = "<img style=\"vertical-align: middle; width=\"22\" height=\"26\"; src=\"" + icon2use(name,uDef,num) + "\">" + "&nbsp" + name;; 
 	
 	var layer =  new OpenLayers.Layer.Vector(
 		checkBoxName, 
@@ -238,7 +239,8 @@ function make_large_layer(vulKleur,uDef, num, data_url, name, zoom, visible) {
 				url : data_url, 
 				format :  new OpenLayers.Format.OSMExtended( {
 					checkTags : true,
-					areaTags : ["building", "area", "leisure", "sport", "barrier", "tourism"]				
+					interestingTagsExclude : ["entrance","3dr:direction","level"],
+					areaTags : ["building","area", "leisure", "sport", "barrier"]				
 				})
 			}), 
 			styleMap : styleMap, 

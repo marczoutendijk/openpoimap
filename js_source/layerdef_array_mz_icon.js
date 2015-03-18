@@ -1,9 +1,7 @@
 //////////////////////////////////////////////////////////
 // OpenPoiMap aka Taglocator v1.0 - Marc Zoutendijk
 /////////////////////////////////////////////////////////
-// <!-- (mz) Laatste versie: 06-03-15, 10:45 -->
-
-
+// <!-- (mz) Laatste versie: 18-03-15, 12:01 -->
 
 //=====================================================================
 // This block contains the layerdefinitions
@@ -51,6 +49,7 @@ var tourismdef = [
 
 var hotelsdef = [
 // Places to stay	
+	{url: "?data=(node[tourism=alpine_hut](bbox);way[tourism=alpine_hut](bbox);rel[tourism=alpine_hut](bbox));(._;>;);out center;", naam: "Alpine hut", zichtbaar: false},
 	{url: "?data=(node[tourism=apartment](bbox);way[tourism=apartment](bbox);rel[tourism=apartment](bbox));(._;>;);out center;", naam: "Apartment", zichtbaar: false},
 	{url: "?data=(node[tourism=camp_site][backcountry!=yes](bbox);way[tourism=camp_site][backcountry!=yes](bbox);rel[tourism=camp_site][backcountry!=yes](bbox));(._;>;);out center;", naam: "Camp site", zichtbaar: false},
 	{url: "?data=(node[tourism=chalet](bbox);way[tourism=chalet](bbox);rel[tourism=chalet](bbox));(._;>;);out center;", naam: "Chalet", zichtbaar: false},			
@@ -108,7 +107,7 @@ var fooddef = [
 	{url: "?data=(node[shop=chocolate](bbox);way[shop=chocolate](bbox);rel[shop=chocolate](bbox);node[shop=confectionery](bbox);way[shop=confectionery](bbox);rel[shop=confectionery](bbox));(._;>;);out center;", naam: "Chocolate/Confectionery", zichtbaar: false},
 	{url: "?data=(node[shop=coffee](bbox);way[shop=coffee](bbox);rel[shop=coffee](bbox));(._;>;);out center;", naam: "Coffee", zichtbaar: false},
 	{url: "?data=(node[shop=dairy](bbox);way[shop=dairy](bbox));(._;>;);out center;", naam: "Dairy", zichtbaar: false},
-	{url: "?data=(node[shop=deli](bbox);way[shop=deli](bbox));(._;>;);out center;", naam: "Deli", zichtbaar: false},
+	{url: "?data=(node[shop=deli](bbox);way[shop=deli](bbox);node[shop=delicatessen](bbox);way[shop=delicatessen](bbox));(._;>;);out center;", naam: "Deli", zichtbaar: false},
 	{url: "?data=(node[amenity=drinking_water](bbox);way[amenity=drinking_water](bbox);rel[amenity=drinking_water](bbox));(._;>;);out center;", naam: "Drinking water", zichtbaar: false},
 	{url: "?data=(node[shop=grocery](bbox);way[shop=grocery](bbox));(._;>;);out center;", naam: "Grocery", zichtbaar: false},
 	{url: "?data=(node[shop=organic](bbox);way[shop=organic](bbox);rel[shop=organic](bbox));(._;>;);out center;", naam: "Organic", zichtbaar: false},

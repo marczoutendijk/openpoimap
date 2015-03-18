@@ -1,5 +1,4 @@
-//<!-- (mz) Laatste versie: 05-03-15, 11:37 -->
-
+//<!-- (mz) Laatste versie: 16-03-15, 20:13 -->
 
 var _ZOOM_ = "&zoom=18"; // zoomwaarde voor de Editors
 
@@ -35,16 +34,16 @@ function popupLinks(lonlat,feature,show){
 	var buttonClass = (show ? 'popupLinksShow' : 'popupLinksHide');
 	//if (show) {buttonClass = 'popupLinksShow'} else {buttonClass = 'popupLinksHide'}
 // Link naar OSM
-	var thelink = "<div id=\"tlPop\" class=\"" + buttonClass + "\"><b>View area with:</b><br><a href=\"http://www.openstreetmap.org?lat=" + lonlat.lat + "&lon=" + lonlat.lon + _ZOOM_ +  "\" target=\"_blank\"><img src='img/osm.gif'>OSM</a>&nbsp;&diams;&nbsp;"
+	var thelink = "<div id=\"tlPop\" class=\"" + buttonClass + "\"><b>View area with:</b><br><a href=\"http://www.openstreetmap.org?lat=" + lonlat.lat + "&lon=" + lonlat.lon + _ZOOM_ +  "\" target=\"_blank\"><img src='img/osm.gif'>&nbsp;OSM</a>&nbsp"
 	//alert(thelink);
 // Link naar Google	  
-	thelink = thelink + "<a href=\"https://maps.google.nl/maps?ll=" + lonlat.lat + "," + lonlat.lon + "&t=h&z=15\" target=\"_blank\"><img src='img/google.gif'>Google</a>&nbsp;&diams;&nbsp;";
+	thelink = thelink + "<a href=\"https://maps.google.nl/maps?ll=" + lonlat.lat + "," + lonlat.lon + "&t=h&z=15\" target=\"_blank\"><img src='img/google.gif'>&nbsp;Google</a>&nbsp;";
 // Link naar Bing
-	thelink = thelink + "<a href=\"http://www.bing.com/maps/?v=2&cp=" + lonlat.lat + "~" + lonlat.lon + "&lvl=15&dir=0&sty=h&form=LMLTCC\" target=\"_blank\"><img src='img/bing.gif'>Bing</a>&nbsp;&diams;&nbsp;";
+	thelink = thelink + "<a href=\"http://www.bing.com/maps/?v=2&cp=" + lonlat.lat + "~" + lonlat.lon + "&lvl=15&dir=0&sty=h&form=LMLTCC\" target=\"_blank\"><img src='img/bing.gif'>&nbsp;Bing </a>";
 // Link naar MtM	  
-	thelink = thelink + "<a href=\"http://mijndev.openstreetmap.nl/~allroads/mtm/?map=roads&zoom=" + map.getZoom() + "&lat=" +  lonlat.lat + "&lon=" +  lonlat.lon + "&layers=B000000FFFFFFFFFFFFTFF\" target=\"_blank\"><img src='img/osm.gif'>MtM</a>&nbsp;&diams;&nbsp;";
+	thelink = thelink + "<a href=\"http://mijndev.openstreetmap.nl/~allroads/mtm/?map=roads&zoom=" + map.getZoom() + "&lat=" +  lonlat.lat + "&lon=" +  lonlat.lon + "&layers=B000000FFFFFFFFFFFFTFF\" target=\"_blank\"><img src='img/osm.gif'>&nbsp;MtM</a>&nbsp;";
 // Link naar Mapillary	  
-	thelink = thelink + "<a href=\"http://www.mapillary.com/map/im/bbox/"  + (lonlat.lat - 0.005) + "/" + (lonlat.lat + 0.005) + "/" + (lonlat.lon -0.005) +  "/" + (lonlat.lon + 0.005) + "\" target=\"_blank\"><img src='img/mapillary.png'>Mapillary</a><p>";	
+	thelink = thelink + "<a href=\"http://www.mapillary.com/map/im/bbox/"  + (lonlat.lat - 0.005) + "/" + (lonlat.lat + 0.005) + "/" + (lonlat.lon -0.005) +  "/" + (lonlat.lon + 0.005) + "\" target=\"_blank\"><img src='img/mapillary.png'>&nbsp;Mapillary</a><p>";	
 
 	// Hoe wordt de te bewerken oppervlakte berekend voor JOSM?  
 	// var area = 0.01 // oorspronkelijke waarde
@@ -125,7 +124,6 @@ FeaturePopup = OpenLayers.Class({
     return this.processElement(fid[0], fid[1], feature.attributes);
   },
 
-
   /*
    * Create the div element for a single feature
    * Change by mz: operator, description and note (if available) included in header
@@ -140,7 +138,7 @@ FeaturePopup = OpenLayers.Class({
   	var htmlTableFoot = '';			// The concluding lines of the table
    	var wikiKeyPage = '';			// the wikipage that deals with this key value
    	var name = tags.name;
-   	var name_EN = tags["name:en"];
+   	var name_EN = tags["name:en"];	// Especially with foreign alphabets, the English name is helpfull
     var operator = tags.operator;
     var note = tags.note;
     var description = tags.description;
@@ -176,7 +174,7 @@ FeaturePopup = OpenLayers.Class({
     if (FIXME) {
     htmlTableHead += '<tr class="popupRowFixme"><td class="popupKeyFixme">' + 'FIXME' + '</td><td class="popupValue">' + FIXME + '</td></tr>';
 	}
-	// loop through remaing tags
+	// loop through remaining tags
     $.each( tags, function(key, val) {
     // Check to see if we have a main key
       wikiKeyPage = '';
@@ -225,9 +223,9 @@ FeaturePopup = OpenLayers.Class({
         }
       }
     });
-    // process the open streetmap link and put in last line of table
+    // process the open streetmap ID link and put in last line of table
     var htmlOSM = '<a target = "_blank" href="http://www.openstreetmap.org/browse/' + type + "/" + id + '">' + type + " " + id + "</a>";
-   	htmlTableFoot += '<tr class="popupRowOSM"><td class="popupKey">' + 'OSM info' + '</td><td class="popupValue">' + htmlOSM + '</td></tr>';
+   	htmlTableFoot += '<tr class="popupRowOSM"><td class="popupKey">' + 'OSM&nbsp;info' + '</td><td class="popupValue">' + htmlOSM + '</td></tr>';
    	htmlTableFoot += '</table>';
     return htmlTableStart + htmlTableHead + html + htmlTableFoot;
   },
@@ -237,7 +235,6 @@ FeaturePopup = OpenLayers.Class({
    * Added "image" & link
    */
    
-
   processTag : function(key, value, address) {
     var k = key.split(":");
     switch (k[0]) {
@@ -315,8 +312,7 @@ FeaturePopup = OpenLayers.Class({
       return value;
     }
   },
-  
- 
+
 // Deal with the xxx part of the ref:xxx key
 // Sometimes value contains multiple values for busstops. Use only the first k[0]
   processRef : function (key,value) {
@@ -326,13 +322,13 @@ FeaturePopup = OpenLayers.Class({
   			case 'rce' :
   				return this.makeLink(MONUREG + value, 'Monument register: ' + value, true);
   				//return this.makeLink(MON1 + value + MON2 + value + MON3, 'Monument register: ' + value, true);
+  			// The Flemish Public Transport Operator
   			case 'De_Lijn':
   				return this.makeLink(DELIJN + k[0], 'bus info: ' + k[0], true);
   			default: 
   				return value
   		}
   },
- 
   
   /*
   * If value consists of more than one item - separated by characters given in the split set -
@@ -361,7 +357,7 @@ FeaturePopup = OpenLayers.Class({
     case "twitter":
       return this.makeLink("https://twitter.com/" + value, value, true);
     case "facebook":
-      if (value.startsWith("http") || value.startsWith("www") || value.startsWith("facebook")) {
+      if (value.indexOf("http") == 0 || value.indexOf("www") == 0 || value.indexOf("facebook") == 0  ) {
         return this.makeLink(value, value, true);
       }
       return this.makeLink("https://www.facebook.com/" + value, value, true);
