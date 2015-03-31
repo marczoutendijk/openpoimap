@@ -1,7 +1,6 @@
 //====================================
 // Versie met featurePopup van Gertjan
-// <!-- (mz) Laatste versie: 06-03-15, 10:44 -->
-
+// <!-- (mz) Laatste versie: 31-03-15, 16:40 -->
 
 var zoomlevel = 14;	 // Starting level for collecting data on the map
 var popUpZoom = 14;  // dit is het minimale zoomniveau voor het popupvenster, waarbij het begint te werken.
@@ -102,6 +101,7 @@ function icon2use (name,uDef,num) {
 			case "Cinema" : return "mapicons/cinema.png";			
 			case "Clothes" : return "mapicons/clothers_female.png";
 			case "Coffee" : return "mapicons/coffee.png";
+			case "Construction" : return "mapicons/caution.png";
 			case "Copyshop" : return "mapicons/letter_c.png";
 			case "Cosmetics" : return "mapicons/perfumery.png";
 			case "Dairy" : return "mapicons/milk_and_cookies.png";
@@ -109,6 +109,7 @@ function icon2use (name,uDef,num) {
 			case "Deli" : return "mapicons/patisserie.png";
 			case "Department store" : return "mapicons/departmentstore.png";
 			case "Drinking water" : return "mapicons/drinkingwater.png";
+			case "E-bike charging" : return "mapicons/e-bike-charging.png";
 			case "Fast food" : return "mapicons/fastfood.png";
 			case "Food court" : return "mapicons/letter_f.png";
 			case "fixme" : return "mapicons/letter_x.png";
@@ -188,8 +189,8 @@ function icon2use (name,uDef,num) {
 			case "Town" : return "mapicons/letter_town.png";
 			case "Village" : return "mapicons/letter_village.png";
 			case "Hamlet" : return "mapicons/letter_hamlet.png";
-			case "Test" : return "mapicons/letter_t.png";	// voor testdoeleinden		
-			default :  return "img/marker-gold.png";
+//			case "Test" : return "mapicons/number_1.png";	// voor testdoeleinden		
+//			case "Test2" : return "mapicons/number_2.png";	// voor testdoeleinden		
 		} //end switch 
 	} else {
 			// gebruikers tags

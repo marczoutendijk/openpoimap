@@ -13,7 +13,7 @@ var keuzeCount = 0;
 var keus = 0;					// index in userChoices
 var tempCount = 0;
 var map;
-var COOKIE_KEEP = 60;			// Number of days to keep the cookies
+var COOKIE_KEEP = 365;			// Number of days to keep the cookies
 var QURL = "http://overpass-api.de/api/interpreter/"; //default
 var featurePopup;
 
@@ -102,7 +102,7 @@ window.onload = function () {
 // De array userPois bevat alleen maar de HUIDIGE keuze. 
 // Iedere keer als een gebruiker een set opslaat, wordt die set ook als cookiefile bewaard voor later gebruik.
 // Bij het starten van het programma wordt gekeken of die cookiefile bestaat en weer teruggelezen in de array userChoices.
-// De cookiefile wordt 30 dagen bewaard.
+// De cookiefile wordt 365 dagen bewaard.
 //================================================================================
 
 userChoices = checkCookie();				// Hebben we eerder een userkeuze opgeslagen?

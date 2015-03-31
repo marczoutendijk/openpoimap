@@ -1,7 +1,7 @@
 //////////////////////////////////////////////////////////
 // OpenPoiMap aka Taglocator v1.0 - Marc Zoutendijk
 /////////////////////////////////////////////////////////
-// <!-- (mz) Laatste versie: 18-03-15, 12:01 -->
+// <!-- (mz) Laatste versie: 31-03-15, 16:40 -->
 
 //=====================================================================
 // This block contains the layerdefinitions
@@ -27,6 +27,12 @@ var amenitydef = [
 	{url: "?data=(node[amenity=toilets](bbox);way[amenity=toilets](bbox);rel[amenity=toilets](bbox));(._;>;);out center;", naam: "Toilets", zichtbaar: false},
 	{url: "?data=(node[amenity=university](bbox);way[amenity=university](bbox);rel[amenity=university](bbox));(._;>;);out center;", naam: "University", zichtbaar: false}
 ];
+// Code voor de diverse religies - nog niet in gebruik
+// 	{url: "?data=(node[amenity=place_of_worship][religion=christian](bbox);way[amenity=place_of_worship][religion=christian](bbox));(._;>;);out center;", naam: "Church (Christian)", zichtbaar: false},
+// 	{url: "?data=(node[amenity=place_of_worship][religion=muslim](bbox);way[amenity=place_of_worship][religion=muslim](bbox));(._;>;);out center;", naam: "Mosque", zichtbaar: false},
+// 	{url: "?data=(node[amenity=place_of_worship][religion=buddhist](bbox);way[amenity=place_of_worship][religion=buddhist](bbox));(._;>;);out center;", naam: "Temple (Buddhist)", zichtbaar: false},
+// 	{url: "?data=(node[amenity=place_of_worship][religion=jewish](bbox);way[amenity=place_of_worship][religion=jewish](bbox));(._;>;);out center;", naam: "Synagogue", zichtbaar: false},
+// 	{url: "?data=(node[amenity=place_of_worship][religion=hindu](bbox);way[amenity=place_of_worship][religion=hindu](bbox));(._;>;);out center;", naam: "Temple (Hindu)", zichtbaar: false},
 
 var tourismdef = [
 // places to see
@@ -83,6 +89,7 @@ var shopdef = [
 	{url: "?data=(node[shop=car](bbox);way[shop=car](bbox);rel[shop=car](bbox));(._;>;);out center;", naam: "Car", zichtbaar: false},
 	{url: "?data=(node[shop=chemist](bbox);way[shop=chemist](bbox);rel[shop=chemist](bbox));(._;>;);out center;", naam: "Chemist", zichtbaar: false},
 	{url: "?data=(node[shop=clothes](bbox);way[shop=clothes](bbox);rel[shop=clothes](bbox));(._;>;);out center;", naam: "Clothes", zichtbaar: false},
+	{url: "?data=(node[shop=copyshop](bbox);way[shop=copyshop](bbox);rel[shop=copyshop](bbox));(._;>;);out center;", naam: "Copyshop", zichtbaar: false},
 	{url: "?data=(node[shop=cosmetics](bbox);way[shop=cosmetics](bbox);rel[shop=cosmetics](bbox));(._;>;);out center;", naam: "Cosmetics", zichtbaar: false},
 	{url: "?data=(node[shop=department_store](bbox);way[shop=department_store](bbox));(._;>;);out center;", naam: "Department store", zichtbaar: false},
 	{url: "?data=(node[shop=general](bbox);way[shop=general](bbox));(._;>;);out center;", naam: "General", zichtbaar: false},
@@ -131,7 +138,7 @@ var restaurantsdef = [
 
 var variousdef = [
 	{url: "?data=(node[highway=bus_stop](bbox));(._;>;);out center;", naam: "Busstop", zichtbaar: false},
-	{url: "?data=(node[shop=copyshop](bbox);way[shop=copyshop](bbox);rel[shop=copyshop](bbox));(._;>;);out center;", naam: "Copyshop", zichtbaar: false},
+	{url: "?data=(node[amenity=charging_station][bicycle=yes](bbox));(._;>;);out center;", naam: "E-bike charging", zichtbaar: false},
 	{url: "?data=(node[amenity=kindergarten](bbox);way[amenity=kindergarten](bbox);rel[amenity=kindergarten](bbox));(._;>;);out center;", naam: "Kindergarten", zichtbaar: false},
 	{url: "?data=(node[amenity=marketplace](bbox);way[amenity=marketplace](bbox);rel[amenity=marketplace](bbox));(._;>;);out center;", naam: "Marketplace", zichtbaar: false},
 	{url: "?data=(node[office](bbox);way[office](bbox);rel[office](bbox));(._;>;);out center;", naam: "Office", zichtbaar: false},	
@@ -141,12 +148,15 @@ var variousdef = [
 	{url: "?data=(node[emergency=fire_extinguisher](bbox);node[emergency=fire_hose](bbox));(._;>;);out center;", naam: "Fire hose/extinguisher<hr>", zichtbaar: false},
 // Do not include a relation for the fixme, as it produces a lot of extraneous data	
 	{url: "?data=(node[fixme](bbox);way[fixme](bbox);node[FIXME](bbox);way[FIXME](bbox));(._;>;);out center;", naam: "fixme", zichtbaar: false},
+	{url: "?data=(node[highway=construction](bbox);way[highway=construction](bbox));(._;>;);out center;", naam: "Construction", zichtbaar: false},
 	{url: "?data=(node[image](bbox);way[image](bbox));(._;>;);out center;", naam: "Image", zichtbaar: false},
 	{url: "?data=(node['surveillance:type'='camera'](bbox));(._;>;);out center;", naam: "Public camera<hr>", zichtbaar: false},
 	{url: "?data=(node[place=city](bbox));(._;>;);out center;", naam: "City", zichtbaar: false},
 	{url: "?data=(node[place=town](bbox));(._;>;);out center;", naam: "Town", zichtbaar: false},
 	{url: "?data=(node[place=village](bbox));(._;>;);out center;", naam: "Village", zichtbaar: false},
-	{url: "?data=(node[place=hamlet](bbox));(._;>;);out center;", naam: "Hamlet", zichtbaar: false}
+	{url: "?data=(node[place=hamlet](bbox));(._;>;);out center;", naam: "Hamlet", zichtbaar: false},
+//	{url: "?data=node(bbox)[amenity=charging_station][bicycle=yes];node(around:100)['amenity'~'cafe|pub|restaurant'];out;", naam: "Test", zichtbaar: false},
+//	{url: "?data=node(bbox)['amenity'~'atm']->.poi;node(around.poi:100)['amenity'~'pub|cafe|restaurant|fast_food'];out;", naam: "Test2", zichtbaar: false}
 ];
 
 var cookieDefName = "taglocpois";				// de naam die voor de cookiefile wordt gebruikt om de user pois in op te slaan.
@@ -188,30 +198,63 @@ function UserTagObj (url,naam) {
 	this.naam = naam;
 	this.zichtbaar = true;
 };
-
-function makeUserLayer (userTags) {						// userTags bevat de "key=value" paren
+function makeUserLayer (userTags) {							// userTags bevat de "key=value" paren
 		uLayer = [];
-		for (i=0; i < userTags.length; i++) {			// lus over alle paren
-			var keyValues = userTags[i];				// Voor hergebruik later in de functie
-			if (keyValues == '') continue;				// skip empty line
-			var name = '';
-			if (userTags[i].indexOf("{") == 0) {		// Is er een plaats gegeven? Dwz een woord tussen "{}"
-				k = userTags[i].indexOf("}")
-				var name = userTags[i].substring(1,k);	// welke plaats om te zoeken
-				keyValues = userTags[i].substring(k+1); // verwijder de "{name}" string
+		for (i=0; i < userTags.length; i++) {				// lus over alle paren
+			var keyValues = userTags[i];					// Voor hergebruik later in de functie
+			if (keyValues == '') continue;					// skip empty line
+			var mode = '';
+			if (userTags[i].indexOf("{") == 0) { mode = "searchIn" }
+				else if (userTags[i].indexOf("(") > 0)  { mode = "searchAround" }
+					else { mode = "normal" };
+			switch (mode) {
+
+//userstring: {Placetosearch}key=value			
+				case "searchIn" :
+					k = userTags[i].indexOf("}")
+					var name = userTags[i].substring(1,k);			// welke plaats om te zoeken
+					keyValues = userTags[i].substring(k+1); 		// verwijder de "{name}" string
+					labels = keyValues.split("=");					// labels bevat de "key", "value" paren, gescheiden door een ","
+					label = labels[labels.length-1];				// label is de "key" - index is zero based
+					if ((label == "yes") || (label == "no")) {		// nuttig om bij situaties als "tourism=yes/no" of "amenity=yes/no" te kunnen zien waar het om gaat!
+						label = userTags[i];						// Terugzetten naar oospronkelijke ingave.
+					}
+					url = "?data=area[name~'"  +  name + "']->.a;(way(area.a)[" + keyValues +  "];node(area.a)[" + keyValues + "];rel(area.a)[" + keyValues + "]);(._;>;);out center;";
+					naam = label + ' [' + name + ']';				
+				break;
+				
+//userstring: key=value(radius)key2=value2
+// In order to search something within a given distance from something else.
+// First search for key=value and store result in .poi then search around that point for key2=val2 and store result in .result
+// Finally - to show both both key and key2 search again around result to show key.
+// See discussion on: http://forum.openstreetmap.org/viewtopic.php?id=28807&p=13				
+				case "searchAround" :	
+					var around = '';
+					var aroundPosBegin = userTags[i].indexOf("(");						// Is er een aroundwaarde gegeven?
+					var aroundPosEnd = userTags[i].indexOf(")");
+					around = userTags[i].substring(aroundPosBegin+1,aroundPosEnd);		// around heeft nu de waarde die de gebruiker heeft opgegeven
+					keyValues = userTags[i].substring(0,aroundPosBegin);				// Het eerste deel voor de query
+					var aroundKeyValues = userTags[i].substring(aroundPosEnd+1);		// De key-value pairs voor de query in het around-deel
+					var aroundLabels = aroundKeyValues.split("=");
+					labels = keyValues.split("=");										// labels bevat de "key=value" paren, gescheiden door een ","
+					label = labels[labels.length-1];									// label bevat nu de "key" - index is zero based
+					if ((label == "yes") || (label == "no")) {							// nuttig om bij situaties als "tourism=yes/no" of "amenity=yes/no" te kunnen zien waar het om gaat!
+						label = keyValues;												// Terugzetten naar oospronkelijke ingave.
+					}
+					url = "?data=(node(bbox)[" + keyValues + "];)->.poi;(node(around.poi:" + around + ")[" + aroundKeyValues + "]->.result;node(around.result:" + around + ")[" + keyValues + "];);out;";
+					naam = label + " near: " + aroundLabels[aroundLabels.length-1];
+				break;
+				
+// all other userstrings
+				case "normal" :
+					labels = keyValues.split("=");						// labels bevat de "key", "value" paren, gescheiden door een ","
+					label = labels[labels.length-1];					// label is de "key" - index is zero based
+					if ((label == "yes") || (label == "no")) {			// nuttig om bij situaties als "tourism=yes/no" of "amenity=yes/no" te kunnen zien waar het om gaat!
+						label = userTags[i];							// Terugzetten naar oospronkelijke ingave.
+					}
+					url = "?data=(node[" + keyValues + "](bbox);way[" + keyValues + "](bbox);rel[" + keyValues +  "](bbox));(._;>;);out center;";
+					naam = label;
 			}
-			labels = keyValues.split("=");				// labels bevat de "key", "value" paren, gescheiden door een ","
-			label = labels[labels.length-1];			// label is de "key"
-			if ((label == "yes") || (label == "no")) {	// nuttig om bij situaties als "tourism=yes/no" of "amenity=yes/no" te kunnen zien waar het om gaat!
-				label = userTags[i];					// Terugzetten naar oospronkelijke ingave.
-			}
-			if (name) {
-				url = "?data=area[name~'"  +  name + "']->.a;(way(area.a)[" + keyValues +  "];node(area.a)[" + keyValues + "];rel(area.a)[" + keyValues + "]);(._;>;);out center;";
-				naam = label + ' [' + name + ']';
-				} else {
-				url = "?data=(node[" + keyValues + "](bbox);way[" + keyValues + "](bbox);rel[" + keyValues +  "](bbox));(._;>;);out center;";
-				naam = label;
-				}
 			var uTag = new UserTagObj(url,naam);
 			uLayer[i] = uTag;
 		}
@@ -222,6 +265,7 @@ function layerdef(type){
 // De make_array_layer functie wordt in noordpass_mz.js gedefinieerd.
 // De dash parameter wordt hieronder niet gebruikt, maar kan als 3e parameter worden doorgegeven
 // Als de gebuiker zijn eigen tags heeft opgegeven, dan is dat zichtbaar in userDef
+// De kleur die als laatste parameter wordt meegegeven, is de kleur die wordt gebruikt om contouren van het gebied te markeren
 
 	var userPoisDef;
 	switch (type) {
@@ -304,7 +348,7 @@ function getCookie(cname) {
 function checkCookie() {
 	var i = 1;									// om de index achter de cookienaam te genereren
 	lines = [];									// tijdelijk opslag
-	cookieName = cookieDefName + String(i);		// userpois1, userpois2, ....
+	cookieName = cookieDefName + String(i);		// "userpois1", "userpois2", ....
     _item_ = getCookie(cookieName);				// Is deze cookie aanwezig?
     while (_item_!="") {						// Ja
         lines.push(_item_);						// Toevoegen aan array
@@ -314,4 +358,5 @@ function checkCookie() {
     }
     return lines;								// Teruggeven
 }
+
 
