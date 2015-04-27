@@ -20,7 +20,7 @@ OpenLayers.Control.SearchBox=OpenLayers.Class(OpenLayers.Control, {
 
 	lang: 'nl',
 
-	textLabel: 'Search for:',
+	textLabel: '',
 	textNoHits: 'Not found.',
 
 	textKeepOpen: 'leave open',
@@ -28,7 +28,7 @@ OpenLayers.Control.SearchBox=OpenLayers.Class(OpenLayers.Control, {
 	resources: null,
 	resource: {
 
-		textLabel: 'Search with Nominatim:',
+		textLabel: '',
 
 		url: 'http://nominatim.openstreetmap.org/search?' +
 			'format=json&json_callback={callback}&limit={limit}&addressdetails=0&q={query}',

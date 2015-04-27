@@ -1,7 +1,7 @@
 //////////////////////////////////////////////////////////
 // OpenPoiMap aka Taglocator v1.0 - Marc Zoutendijk
 /////////////////////////////////////////////////////////
-// <!-- (mz) Laatste versie: 31-03-15, 16:40 -->
+// <!-- (mz) Laatste versie: 27-04-15,  -->
 
 //=====================================================================
 // This block contains the layerdefinitions
@@ -76,6 +76,7 @@ var sportdef = [
 	{url: "?data=(way[sport=horse_racing](bbox);(way[sport=equestrian](bbox);node[sport=horse_racing](bbox);(node[sport=equestrian](bbox));(._;>;);out center;", naam: "Horse racing", zichtbaar: false},
 	{url: "?data=(way[sport=ice_hockey](bbox);node[sport=ice_hockey](bbox);rel[sport=ice_hockey](bbox);way[leisure=ice_rink](bbox));(node[leisure=ice_rink](bbox));(._;>;);out center;", naam: "Ice hockey", zichtbaar: false},
 	{url: "?data=(way[sport=soccer](bbox);node[sport=soccer](bbox);rel[sport=soccer](bbox));(._;>;);out center;", naam: "Soccer", zichtbaar: false},
+	{url: "?data=(way[leisure=sports_centre](bbox);node[leisure=sports_centre](bbox);rel[leisure=sports_centre](bbox));(._;>;);out center;", naam: "Sports centre", zichtbaar: false},		
 	{url: "?data=(way[sport=surfing](bbox);node[sport=surfing](bbox);rel[sport=surfing](bbox));(._;>;);out center;", naam: "Surfing", zichtbaar: false},
 	{url: "?data=(way[sport=swimming](bbox);node[sport=swimming](bbox);rel[sport=swimming](bbox));(._;>;);out center;", naam: "Swimming", zichtbaar: false},
 	{url: "?data=(way[sport=tennis](bbox);node[sport=tennis](bbox));(._;>;);out center;", naam: "Tennis", zichtbaar: false},
@@ -154,9 +155,7 @@ var variousdef = [
 	{url: "?data=(node[place=city](bbox));(._;>;);out center;", naam: "City", zichtbaar: false},
 	{url: "?data=(node[place=town](bbox));(._;>;);out center;", naam: "Town", zichtbaar: false},
 	{url: "?data=(node[place=village](bbox));(._;>;);out center;", naam: "Village", zichtbaar: false},
-	{url: "?data=(node[place=hamlet](bbox));(._;>;);out center;", naam: "Hamlet", zichtbaar: false},
-//	{url: "?data=node(bbox)[amenity=charging_station][bicycle=yes];node(around:100)['amenity'~'cafe|pub|restaurant'];out;", naam: "Test", zichtbaar: false},
-//	{url: "?data=node(bbox)['amenity'~'atm']->.poi;node(around.poi:100)['amenity'~'pub|cafe|restaurant|fast_food'];out;", naam: "Test2", zichtbaar: false}
+	{url: "?data=(node[place=hamlet](bbox));(._;>;);out center;", naam: "Hamlet", zichtbaar: false}
 ];
 
 var cookieDefName = "taglocpois";				// de naam die voor de cookiefile wordt gebruikt om de user pois in op te slaan.
@@ -190,6 +189,9 @@ var cookieDefName = "taglocpois";				// de naam die voor de cookiefile wordt geb
 //
 // Anything IN name:
 // {name}amenity=school
+//
+// Something near to something else
+// key1=val(radius)key2=val
 //========================================
 
 
@@ -197,21 +199,22 @@ function UserTagObj (url,naam) {
 	this.url = url;
 	this.naam = naam;
 	this.zichtbaar = true;
-};
+}
+
 function makeUserLayer (userTags) {							// userTags bevat de "key=value" paren
 		uLayer = [];
 		for (i=0; i < userTags.length; i++) {				// lus over alle paren
 			var keyValues = userTags[i];					// Voor hergebruik later in de functie
 			if (keyValues == '') continue;					// skip empty line
 			var mode = '';
-			if (userTags[i].indexOf("{") == 0) { mode = "searchIn" }
-				else if (userTags[i].indexOf("(") > 0)  { mode = "searchAround" }
-					else { mode = "normal" };
+			if (userTags[i].indexOf("{") == 0) { mode = "searchIn"; }
+				else if (userTags[i].indexOf("(") > 0)  { mode = "searchAround"; }
+					else { mode = "normal"; }
 			switch (mode) {
 
 //userstring: {Placetosearch}key=value			
 				case "searchIn" :
-					k = userTags[i].indexOf("}")
+					k = userTags[i].indexOf("}");
 					var name = userTags[i].substring(1,k);			// welke plaats om te zoeken
 					keyValues = userTags[i].substring(k+1); 		// verwijder de "{name}" string
 					labels = keyValues.split("=");					// labels bevat de "key", "value" paren, gescheiden door een ","
@@ -241,9 +244,19 @@ function makeUserLayer (userTags) {							// userTags bevat de "key=value" paren
 					if ((label == "yes") || (label == "no")) {							// nuttig om bij situaties als "tourism=yes/no" of "amenity=yes/no" te kunnen zien waar het om gaat!
 						label = keyValues;												// Terugzetten naar oospronkelijke ingave.
 					}
-					url = "?data=(node(bbox)[" + keyValues + "];)->.poi;(node(around.poi:" + around + ")[" + aroundKeyValues + "]->.result;node(around.result:" + around + ")[" + keyValues + "];);out;";
-					naam = label + " near: " + aroundLabels[aroundLabels.length-1];
+					if (around.indexOf("-") == 0) {
+						around = around.substring(1);
+						aroundKeyValuesNeg = aroundKeyValues.replace("~","!~");
+						//alert(aroundKeyValuesNeg);
+						url = "?data=(node(bbox)[" + keyValues + "];way(bbox)[" + keyValues + "];)->.allnodes;((way(bbox)[" + aroundKeyValues + "];)->.poi;(node(around.poi:" + around + ")[" + keyValues + "]->.result;way(around.poi:" + around +")[" + keyValues + "]->.result;way(around.result:" + around + ")[" + aroundKeyValues + "];);)->.nearnodes;((.allnodes; - .nearnodes;);way(bbox)[" + keyValues + "][" + aroundKeyValuesNeg + "];);(._;>;)->.notnear;.notnear out center;";
+						naam = label + " NOT near: " + aroundLabels[aroundLabels.length-1];
+					} else {
+						url = "?data=(node(bbox)[" + keyValues + "];)->.poi;(node(around.poi:" + around + ")[" + aroundKeyValues + "]->.result;node(around.result:" + around + ")[" + keyValues + "];);out center;";
+						naam = label + " near: " + aroundLabels[aroundLabels.length-1];
+					}
 				break;
+				
+				
 				
 // all other userstrings
 				case "normal" :
@@ -309,21 +322,6 @@ function layerdef(type){
 	}
 } //end function layerdef
 	
-
-
-// In de code voor de cookies de escape vervangen door encodeURIComponent() en decodeURIComponent()
-
-// Cookiestuf van Sander
-// Deze 2 functies gebruik ik niet		
-// function saveUserPois (userChoice) {
-// 	//layerdef('userpoilayer');
-// 	setCookie(cookieDefName, encodeURIComponent(userChoice.join(',')), 30); // bewaar de gebruikerskeuze 30 dagen
-// }
-// 
-// function getUserPois (poinames) {
-// 	return decodeURIComponent(getCookie(poinames)).replace(/,/g, '\n');
-// }
-
 function setCookie(cname, cvalue, exdays) {
 	var d = new Date();
 	d.setTime(d.getTime() + (exdays*24*60*60*1000));

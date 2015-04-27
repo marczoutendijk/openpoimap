@@ -64,10 +64,22 @@ ZoomLimitedBBOXStrategy = OpenLayers.Class(OpenLayers.Strategy.BBOX,
 }
 );
 
+// For some icons on the map a different geometry is needed. Especially for triangular traffic signs
+// The next two functions deal with this - although only for one condition: "Construction"
+// 
+function graphW (name) {
+	return (name == "Construction" ) ? 23 : 24;
+}
+
+function graphH (name) {
+	return (name == "Construction" ) ? 20 : 30;
+}
+
 // Deze functie selecteert het juiste icoontje bij een bepaalde tag
 // name = naam zoals gedefinieerd in de layerdef_array
 // uDef = Geeft aan of de userpois worden gebruikt
 // num = het nummer dat wordt gebruikt voor de afbeelding. Alleen als uDef = true.
+
 function icon2use (name,uDef,num) {
 	if  (uDef == false)  { // geen gebruikers tags
 		switch (name) {
@@ -101,7 +113,7 @@ function icon2use (name,uDef,num) {
 			case "Cinema" : return "mapicons/cinema.png";			
 			case "Clothes" : return "mapicons/clothers_female.png";
 			case "Coffee" : return "mapicons/coffee.png";
-			case "Construction" : return "mapicons/caution.png";
+			case "Construction" : return "mapicons/highwayconstruction.png";
 			case "Copyshop" : return "mapicons/letter_c.png";
 			case "Cosmetics" : return "mapicons/perfumery.png";
 			case "Dairy" : return "mapicons/milk_and_cookies.png";
@@ -182,8 +194,9 @@ function icon2use (name,uDef,num) {
 			case "Hockey" : return "mapicons/hockey.png";
 			case "Cycling" : return "mapicons/cycling.png";
 			case "Swimming" : return "mapicons/swimming.png";
+			case "Sports centre" : return "mapicons/indoor-arena.png";
 			case "Surfing" : return "mapicons/surfing.png";
-			case "Gymnastics" : return "mapicons/indoor-arena.png";
+			case "Gymnastics" : return "mapicons/gymnastics.png";
 			case "Horse racing" : return "mapicons/horseriding.png";
 			case "City" : return "mapicons/letter_city.png";
 			case "Town" : return "mapicons/letter_town.png";
@@ -197,7 +210,14 @@ function icon2use (name,uDef,num) {
 			// Gebruik een icon met een oplopende nummering
 			return "mapicons/number_" + num + ".png";
 		}
-};
+}
+
+
+// Adjust the formatting of the icons and text in the layerlist
+function getCheckboxName (name,uDef,num) {
+	return (name == "Construction") ? "<img style=\"vertical-align: middle; width=\"18\" height=\"21\"; src=\"" + icon2use(name,uDef,num) + "\">" + "&nbsp" + name : "<img style=\"vertical-align: middle; width=\"22\" height=\"26\"; src=\"" + icon2use(name,uDef,num) + "\">" + "&nbsp" + name;
+}
+
 
 // make_array_layer works with the layerdefinitions in layerdef_array_mz.js
 
@@ -221,16 +241,17 @@ function make_large_layer(vulKleur,uDef, num, data_url, name, zoom, visible) {
 		graphicOpacity: 1,
 		fillColor: vulKleur,
 		fillOpacity: 0.1,
-		graphicWidth: 24,
-		graphicHeight: 30,
-		graphicYOffset: -30, // places the point of the marker on the node.
+		graphicWidth: graphW(name),
+		graphicHeight: graphH(name),
+		graphicYOffset: -graphH(name), // places the point of the marker on the node.
 		graphicZIndex: ICON_Z_INDEX,
  		strokeWidth: 1	// for the drawing of the contour	
 		});
 
 	// checkboxName is de naam zoal hij in de layerlist staat, na het selectievakje, inclusief de afbeelding!
 	// Het is een combinatie van icon en naam	
-	var checkBoxName = "<img style=\"vertical-align: middle; width=\"22\" height=\"26\"; src=\"" + icon2use(name,uDef,num) + "\">" + "&nbsp" + name;; 
+	
+	var checkBoxName = getCheckboxName(name,uDef,num); 
 	
 	var layer =  new OpenLayers.Layer.Vector(
 		checkBoxName, 
@@ -250,8 +271,6 @@ function make_large_layer(vulKleur,uDef, num, data_url, name, zoom, visible) {
 		} 
 		);
 	layer.events.register("loadend", layer, make_features_added_closure());
-	
-	
 	return layer;
 }
 
@@ -313,16 +332,16 @@ function showPosition(position){
 		lat = position.coords.latitude;
 		lon = position.coords.longitude;
 		map.setCenter(new OpenLayers.LonLat(lon,lat).transform(map.displayProjection,map.projection), popUpZoom);
-	};
+	}
 		
 function getPos(){
 	if (navigator.geolocation) {
 		var my_geo_options = {enableHighAccuracy: true};
 		navigator.geolocation.getCurrentPosition(showPosition,noPos,my_geo_options);
-		};
-	};
+		}
+	}
 		
 function noPos(ercode) {
 	alert("Unable to get location");
-	};
+	}
 

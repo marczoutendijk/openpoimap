@@ -22,21 +22,21 @@ var featurePopup;
 function parseUserValues(text) {
 	var lines = text.split('\n');
 	return lines;
-};
+}
 
 
 var tabtype = {
 	name: "amenity",
 	clearall: function (){ // Deselecteer alle keuzevakjes
 		for (i = map.layers.length - 1; i > 1; i--) { 
-			if (map.layers[i].isBaseLayer == false) { // only to overlays
+			if (map.layers[i].isBaseLayer === false) { // only to overlays
 					map.layers[i].setVisibility(false);
 			}
 		}
 	},
 	selectall: function (){ // Selecteer alle keuzevakje
 		for (i = map.layers.length - 1; i > 1; i--) { 
-			if (map.layers[i].isBaseLayer == false) { // only to overlays
+			if (map.layers[i].isBaseLayer === false) { // only to overlays
 					map.layers[i].setVisibility(true);
 			}
 		}
@@ -54,9 +54,6 @@ if (permalink_true.length > 0){
 		tabtype.name = q[1];
 	}
 }
-
-// mz:	javascript onload uit body tag verwijderd.
-// 		nu als onload function
 
 window.onload = function () {
 
@@ -77,10 +74,10 @@ window.onload = function () {
 		projection: new OpenLayers.Projection("EPSG:900913"),
 		displayProjection: new OpenLayers.Projection("EPSG:4326"),
 		theme: null, // zie stylesheets
-      	eventListeners: {
+		eventListeners: {
         featureclick: function(e) {
           featurePopup.click(e);
-    		}
+			}
         }
 	} );
 	ls.maximizeControl(); 
@@ -92,7 +89,53 @@ window.onload = function () {
 		defaultLimit: 50,						
 		minDistance: 50,						
 		resultMinZoom: searchBoxZoom			   // Hiermee stel je in op welk niveau moet worden ingezoomd nadat de zoekterm is gevonden			
-	}));									
+	}));	
+
+// Inzoomen door een vierkant te tekenen met shift toets ingedrukt.
+	
+	map.addControl(new OpenLayers.Control({
+		handler: null,
+		destroy:function(){
+			if(this.handler) this.handler.destroy();
+			this.handler=null;
+			OpenLayers.Control.prototype.destroy.apply(this,arguments);
+		},
+
+		draw: function () {
+			this.handler = new OpenLayers.Handler.Box(this, {
+				'done': this.done
+			}, {
+				keyMask: OpenLayers.Handler.MOD_CTRL
+			});
+			this.handler.activate();
+		},
+		done: function (bounds) {
+			if (!isNaN(bounds.left)) {
+				lB = this.map.getLonLatFromPixel(
+					new OpenLayers.Pixel(bounds.left, bounds.bottom));
+				lB.transform(map.getProjectionObject(), map.displayProjection);
+
+				rT = this.map.getLonLatFromPixel(
+					new OpenLayers.Pixel(bounds.right, bounds.top));
+				rT.transform(map.getProjectionObject(), map.displayProjection);
+
+				bounds = new OpenLayers.Bounds (
+					lB.lon.toFixed(5),
+					lB.lat.toFixed(5),
+					rT.lon.toFixed(5),
+					rT.lat.toFixed(5));
+
+				result = OpenLayers.String.format(
+					'(${left},${bottom},${right},${top})',
+					bounds);
+
+				url = OpenLayers.String.format(
+	'http://www.openstreetmap.org/?minlon=${left}&minlat=${bottom}&maxlon=${right}&maxlat=${top}',
+					bounds);
+					location.href=url;
+			}
+		}
+	}));								
 
 // =========================  De Gebruikerskeuzen * USER pois ================================
 // De gebruikerskeuzen worden opgeslagen in een lokale array: userChoices.
@@ -117,12 +160,12 @@ document.getElementById('show_button').onclick = function () {
 	if (userPois.length > 0) {		// eigen keuze van gebuiker?		
 		switchtab("userpoilayer",tabtype.name);
 	}
-}
+};
 
 //invoerveld wissen
 document.getElementById('clear_button').onclick = function () {
-	document.getElementById('tagselector_input').value = ""
-}
+	document.getElementById('tagselector_input').value = "";
+};
 
 // Gebruikers keuzen opslaan		
 document.getElementById('save_button').onclick = function () {
@@ -134,7 +177,7 @@ document.getElementById('save_button').onclick = function () {
 		cookieName = cookieDefName + String(keuzeCount);			// de naam voor deze cookie is userpois1, userpois2 ..
 		setCookie(cookieName,userPois,COOKIE_KEEP);					// sla deze keuze op
 	}
-}
+};
 
 // Gebruikerskeuzen teruglezen		
 document.getElementById('load_button').onclick = function () {
@@ -145,14 +188,14 @@ document.getElementById('load_button').onclick = function () {
 		document.getElementById('tagselector_input').value = "End of choices\n"+"Click load to start again";
 		tempCount = keuzeCount;			// reset de lusteller weer naar de startwaarde (de laatst ingevoerde gebuikerskeus).
 	} // Begin weer opnieuw met het doorlopen van de keuzen
-}
+};
 
 // ==== de baselayers ==
 //Mapquest
 	var mapquest = new OpenLayers.Layer.OSM(
 		"MapQuest",
 		"http://otile1.mqcdn.com/tiles/1.0.0/osm/${z}/${x}/${y}.png",
-		{'attribution': '© <a href="http://www.openstreetmap.org/copyright/en" 	target="_blank">OpenStreetMap</a> Contributors<br>Cartography © MapQuest<br>Overlay data licensed under ODbL'}
+		{'attribution': '© <a href="http://www.openstreetmap.org/copyright/en" target="_blank">OpenStreetMap</a> Contributors<br>Cartography © MapQuest<br>Overlay data licensed under ODbL'}
 	); 
 //Mapnik
 	layerMapnik = new OpenLayers.Layer.OSM.Mapnik(
@@ -176,7 +219,7 @@ document.getElementById('load_button').onclick = function () {
 			new OpenLayers.Projection("EPSG:900913")
 		);
 		
-	layerdef(tabtype.name); 		// roept externe layerdefinitie in layerdef.js aan
+	layerdef(tabtype.name);		// roept externe layerdefinitie in layerdef.js aan
 	
 		
 	document.getElementById(tabtype.name).className = "choice";
@@ -188,5 +231,5 @@ document.getElementById('load_button').onclick = function () {
 // Dit is met de nieuwe code van Gerjan Idema
 	featurePopup = new FeaturePopup(QURL,map);
 
- 	
-} //end of window.onload  
+	
+}; //end of window.onload  
