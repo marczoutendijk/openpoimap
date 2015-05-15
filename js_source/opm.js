@@ -327,7 +327,9 @@ FeaturePopup = OpenLayers.Class({
 			case "mdb_id":
 				molen = MDB + value;
 				return this.makeLink(molen, value, true);
-				// Do not process the next keys as they are allready shown in the header			case "name":
+			//case "schalansky_ref" :
+				// Do not process the next keys as they are allready shown in the header
+			case "name":
 			case "operator":
 			case "note":
 			case "description":
@@ -1160,7 +1162,7 @@ function icon2use (name,uDef,num) {
 			case "Library" : return "mapicons/library.png";
 			case "Marketplace" : return "mapicons/letter_m.png";
 			case "Memorial" : return "mapicons/memorial.png";
-			case "Monument/memorial" : return "mapicons/monument.png";
+			case "Monument/memorial" : return "mapicons/memorial.png";
  			case "Monumental Tree" : return "mapicons/bigtree.png";
 			case "Motel" : return "mapicons/motel-2.png";
 			case "Museum" : return "mapicons/museum_art.png";
@@ -1185,6 +1187,7 @@ function icon2use (name,uDef,num) {
 			case "Shoes" : return "mapicons/highhills.png";
 			case "Shopping centre" : return "mapicons/mall.png";
 			case "Soccer" : return "mapicons/soccer.png";
+			case "Statue" : return "mapicons/statue-2.png";
 			case "Supermarket" : return "mapicons/supermarket.png";
 			case "Taxi" : return "mapicons/taxi.png";
 			case "Theatre" : return "mapicons/theater.png";
@@ -1217,6 +1220,8 @@ function icon2use (name,uDef,num) {
 			case "Town" : return "mapicons/letter_town.png";
 			case "Village" : return "mapicons/letter_village.png";
 			case "Hamlet" : return "mapicons/letter_hamlet.png";
+			case "fietspad" : return "mapicons/letter_f.png";
+			
 //			case "Test" : return "mapicons/number_1.png";	// voor testdoeleinden		
 //			case "Test2" : return "mapicons/number_2.png";	// voor testdoeleinden		
 		} //end switch 
@@ -1410,6 +1415,7 @@ var tourismdef = [
 	{url: "?data=(node[natural=tree][historic=monument](bbox);node[natural=tree][monument=yes](bbox));(._;>;);out center;", naam: "Monumental Tree", zichtbaar: false},
 	{url: "?data=(node[tourism=museum](bbox);way[tourism=museum](bbox);rel[tourism=museum](bbox));(._;>;);out center;", naam: "Museum", zichtbaar: false},
 	{url: "?data=(node[tourism=picnic_site](bbox);way[tourism=picnic_site](bbox);rel[tourism=picnic_site](bbox));(._;>;);out center;", naam: "Picnic", zichtbaar: false},
+	{url: "?data=(node[historic=statue](bbox);way[historic=statue](bbox));(._;>;);out center;", naam: "Statue", zichtbaar: false},
 	{url: "?data=(node[tourism=theme_park](bbox);way[tourism=theme_park](bbox);rel[tourism=picnic_site](bbox));(._;>;);out center;", naam: "Theme park", zichtbaar: false},
 	{url: "?data=(node[tourism=viewpoint](bbox);way[tourism=viewpoint](bbox);rel[tourism=viewpoint](bbox));(._;>;);out center;", naam: "Viewpoint", zichtbaar: false},
 	{url: "?data=(node[man_made=windmill](bbox);way[man_made=windmill](bbox);rel[man_made=windmill](bbox));(._;>;);out center;", naam: "Windmill", zichtbaar: false},
@@ -1519,7 +1525,9 @@ var variousdef = [
 	{url: "?data=(node[place=city](bbox));(._;>;);out center;", naam: "City", zichtbaar: false},
 	{url: "?data=(node[place=town](bbox));(._;>;);out center;", naam: "Town", zichtbaar: false},
 	{url: "?data=(node[place=village](bbox));(._;>;);out center;", naam: "Village", zichtbaar: false},
-	{url: "?data=(node[place=hamlet](bbox));(._;>;);out center;", naam: "Hamlet", zichtbaar: false}
+	{url: "?data=(node[place=hamlet](bbox));(._;>;);out center;", naam: "Hamlet", zichtbaar: false},
+	{url: "?data=(way(bbox)[name~'^[Ff]ietspad'];)->.fietspaden;(way(foreach.fietspaden)[highway=cycleway][name][name~'^[Ff]ietspad$']);(._;>;);out center;", naam:"fietspad", zichtbaar: false}
+//	{url: "?data=(way[name~'^Fietspad|^fietspad|^pad$|^Pad$|cycleway|^path$|^Path$'](bbox);node(w);way[highway=cycleway][name!~'.'](bbox);node(w););out center;", naam:"fietspad", zichtbaar: false}
 ];
 
 var cookieDefName = "taglocpois";				// de naam die voor de cookiefile wordt gebruikt om de user pois in op te slaan.
