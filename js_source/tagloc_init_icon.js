@@ -1,4 +1,7 @@
 // Init for Taglocator
+// Taglocator is de testversie voor OPM.
+// <!-- (mz) Laatste versie: 28-07-15, 18:10 -->
+// Trying another overpass server. (not working!)
 
 
 // standaard positie/zoom		
@@ -15,6 +18,10 @@ var tempCount = 0;
 var map;
 var COOKIE_KEEP = 365;			// Number of days to keep the cookies
 var QURL = "http://overpass-api.de/api/interpreter/"; //default
+// After discussion with Roland Olbricht he send me 2 other possible overpass servers
+// I can't get them to work though...
+var QURL2 = "http://dev.overpass-api.de/api_drolbr/"; 
+var QURL3 = "http://overpass.osm.rambler.ru/cgi/";
 var featurePopup;
 
 // Gebruikerswaarden per regel in array opslaan
@@ -57,9 +64,9 @@ if (permalink_true.length > 0){
 
 window.onload = function () {
 
-	var ls = new OpenLayers.Control.LayerSwitcher();
-	plink = new OpenLayers.Control.Permalink({base: "?map=" + tabtype.name});
-	map = new OpenLayers.Map ("map", {
+	var ls = new OpenLayers.Control.LayerSwitcher({'div':OpenLayers.Util.getElement('layerswitcher')});
+	plink = new OpenLayers.Control.Permalink({base: '?map=' + tabtype.name});
+	map = new OpenLayers.Map ('map', {
 		controls:[
 			ls,
 			new OpenLayers.Control.Navigation(),
@@ -75,10 +82,15 @@ window.onload = function () {
 		displayProjection: new OpenLayers.Projection("EPSG:4326"),
 		theme: null, // zie stylesheets
 		eventListeners: {
-        featureclick: function(e) {
-          featurePopup.click(e);
+			featureclick: function(e) {
+				featurePopup.click(e);
 			}
-        }
+// 			featureover: function(e) {
+// 				setStatusText("BOE");
+// 			},
+// 			featureout: function(e) {
+// 			},
+		}
 	} );
 	ls.maximizeControl(); 
 		
@@ -91,6 +103,11 @@ window.onload = function () {
 		resultMinZoom: searchBoxZoom			   // Hiermee stel je in op welk niveau moet worden ingezoomd nadat de zoekterm is gevonden			
 	}));	
 
+// Add the scaleline in the leftbottom
+
+	map.addControl (new OpenLayers.Control.ScaleLine ({
+	}));
+	
 // Inzoomen door een vierkant te tekenen met shift toets ingedrukt.
 	
 	map.addControl(new OpenLayers.Control({

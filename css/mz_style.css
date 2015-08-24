@@ -19,7 +19,6 @@
 		bottom: 60px;
 	}
  */
- 
  .hostedby {
  	font-size: 0.5em;
 	font-family: Verdana;
@@ -34,7 +33,9 @@
 		padding-left: 0px;
 		font-size: 0.9em;
 		color: #7a0c00;
+/* 
 		border: 1px solid #7a0c00;
+ */
 }
 
 	div.olControlAttribution {
@@ -291,6 +292,7 @@
 		color: yellow;
 		background-color: red;
 	}	
+	
 
 /************************************************
 *

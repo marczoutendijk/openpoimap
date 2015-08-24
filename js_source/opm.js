@@ -2,10 +2,11 @@
 // OpenPoiMap Javascript library
 //*****************************************************************
 
-// Version 1.06
+// Version 1.09
 
 // This library contains 4 separate blocks of code that were previously (up to version 1.05) included as standalone js-files.
-//<!-- (mz) Laatste versie: 27-04-15, 11:42 -->
+//<!-- (mz) Laatste versie: 24-08-15, 09:52 -->
+
 
 //*****************************************************************
 // FeaturePopup.js
@@ -32,7 +33,7 @@ var MONUREG = "http://monumentenregister.cultureelerfgoed.nl/php/main.php?cActio
 
 var WIKI = '<a target = "_blank" href="http://wiki.openstreetmap.org/wiki/Key:'; // base url to key wiki
 
-var buttonShow = false; // Keep the state of the hide/show button below the table
+var buttonShow = false; // Keep the state of the hide/show button below the table in the popupwindow
 
 function showMoreLessButton(show) {
 	if (show) {
@@ -140,11 +141,11 @@ FeaturePopup = OpenLayers.Class({
 	 * All items with a main keyvalue (Amenity, Tourism etc ) are shown in the toprows of the table
 	 */
 	processElement: function(type, id, tags) {
-		var html = ''; // The html code for popup is split into 4 sections.
-		var htmlTableStart = ''; // This contains the definition of the table, including style
-		var htmlTableHead = ''; // This is the part that follows after the table definition. It contains all the main key values
-		var htmlTableFoot = ''; // The concluding lines of the table
-		var wikiKeyPage = ''; // the wikipage that deals with this key value
+		var html = ''; 				// The html code for popup is split into 4 sections:
+		var htmlTableStart = ''; 	// 1. This contains the definition of the table, including style
+		var htmlTableHead = ''; 	// 2. This is the part that follows after the table definition. It contains all the main key values
+		var htmlTableFoot = ''; 	// 3. The concluding lines of the table
+		var wikiKeyPage = ''; 		// 4. the wikipage that deals with this key value
 		var name = tags.name;
 		var name_EN = tags["name:en"]; // Especially with foreign alphabets, the English name is helpfull
 		var operator = tags.operator;
@@ -152,7 +153,7 @@ FeaturePopup = OpenLayers.Class({
 		var description = tags.description;
 		var fixme = tags.fixme;
 		var FIXME = tags.FIXME;
-		if (name && name_EN) { // Is er een name _EN_ een name:en key aanwezig? Indien ja dan name:en toevoegen aan name.
+		if (name && name_EN) { // Do we have both a name and an ENglish name? If yes, use both.
 			name += '<br/>' + name_EN;
 		}
 		if (name && operator) {
@@ -327,8 +328,9 @@ FeaturePopup = OpenLayers.Class({
 			case "mdb_id":
 				molen = MDB + value;
 				return this.makeLink(molen, value, true);
-			//case "schalansky_ref" :
-				// Do not process the next keys as they are allready shown in the header
+			//case "Schalansky_ref" : for future development that use this key.
+			
+				// Do not process the next keys as they are already shown in the header
 			case "name":
 			case "operator":
 			case "note":
@@ -410,7 +412,7 @@ FeaturePopup = OpenLayers.Class({
 
 	// Create a thumbnail of the image that links to the original image
 	// This thumbnail is created in a rather stupid way: just force the image (however large) into 60 pix height!
-	// Still looking for a function that gets this done faster
+	// Still looking for a method that gets this done better/smarter/faster without taking to much time or need for external code
 	// This function also adds a warning in case the license of the image is unkown.
 	makeImageLink: function(href, text, newPage) {
 		var html = "<a ";
@@ -426,6 +428,12 @@ FeaturePopup = OpenLayers.Class({
 		if (href.indexOf("File:") == 0) { // Image file reference is to a wikimedia file - no thumbnail yet!
 			var imageLink = 'https://commons.wikimedia.org/wiki/' + href;
 			return html + 'href="' + imageLink + '">' + imageLink + '</a>';
+		}
+		// Pleas note!!!
+		// This test for mapillary is based on the fact that all images are located at this address!
+		//  Keep an eye on it for future changes...
+		if (href.indexOf("https://d1cuyjsrcm0gby.cloudfront.net/") == 0) { // Image file reference is to a mapillary image file
+			return html + 'href="' + href + '">' + '<img src="' + href + '" height="60"/></a>';
 		}
 		// Dan de links die niet goed tot een thumbnail zijn te herleiden	   
 		if (href.indexOf("wikimedia") > 0) { // Image file reference is to a wikimedia file - no thumbnail yet! 
@@ -1151,6 +1159,7 @@ function icon2use (name,uDef,num) {
 			case "Guest house" : return "mapicons/bed_breakfast.png";
 			case "Hairdresser" : return "mapicons/barber.png";
 			case "Heritage" : return "mapicons/letter_h.png";			
+			case "Historic" : return "mapicons/star-3.png";			
  			case "Hostel" : return "mapicons/hostel_0star.png";
  			case "Hotel" : return "mapicons/hotel_0star.png";
 			case "Ice cream" : return "mapicons/icecream.png";
@@ -1221,6 +1230,8 @@ function icon2use (name,uDef,num) {
 			case "Village" : return "mapicons/letter_village.png";
 			case "Hamlet" : return "mapicons/letter_hamlet.png";
 			case "fietspad" : return "mapicons/letter_f.png";
+			case "Note-Node" : return "mapicons/number_1.png";
+			case "Note-Way" : return "mapicons/number_2.png";
 			
 //			case "Test" : return "mapicons/number_1.png";	// voor testdoeleinden		
 //			case "Test2" : return "mapicons/number_2.png";	// voor testdoeleinden		
@@ -1268,7 +1279,7 @@ function make_large_layer(vulKleur,uDef, num, data_url, name, zoom, visible) {
  		strokeWidth: 1	// for the drawing of the contour	
 		});
 
-	// checkboxName is de naam zoal hij in de layerlist staat, na het selectievakje, inclusief de afbeelding!
+	// checkBoxName is de naam zoals hij in de layerlist staat, na het selectievakje, inclusief de afbeelding!
 	// Het is een combinatie van icon en naam	
 	
 	var checkBoxName = getCheckboxName(name,uDef,num); 
@@ -1346,7 +1357,7 @@ function switchtab(newtab, activetab) { // was switchlayers(newlayer,active)
 // update zoomindicatie
 function showZoom(zoom) {
 	document.getElementById("zoom").innerHTML = map.Getzoom();
-}
+	}
 
 function showPosition(position){
 		lat = position.coords.latitude;
@@ -1410,6 +1421,8 @@ var tourismdef = [
 	{url: "?data=(node[tourism=attraction](bbox);way[tourism=attraction](bbox);rel[tourism=attraction](bbox));(._;>;);out center;", naam: "Attraction", zichtbaar: false},
 	{url: "?data=(node[tourism=gallery](bbox);way[tourism=gallery](bbox);rel[tourism=gallery](bbox));(._;>;);out center;", naam: "Gallery", zichtbaar: false},
 	{url: "?data=(node[heritage](bbox);way[heritage](bbox);rel[heritage](bbox));(._;>;);out center;", naam: "Heritage", zichtbaar: false},
+// Check for all historic tags but exclude those that already have their own 
+	{url: "?data=(node[historic][historic!~'memorial|monument|statue'](bbox);way[historic][historic!~'memorial|monument|statue'](bbox);rel[historic][historic!~'memorial|monument|statue'](bbox));(._;>;);out center;", naam: "Historic", zichtbaar: false},
 	{url: "?data=(node[tourism=information](bbox);way[tourism=information](bbox));(._;>;);out center;", naam: "Information", zichtbaar: false},
 	{url: "?data=(node[historic=monument](bbox);way[historic=monument](bbox);rel[historic=monument](bbox);node[historic=memorial](bbox);way[historic=memorial](bbox);rel[historic=memorial](bbox));(._;>;);out center;", naam: "Monument/memorial", zichtbaar: false},
 	{url: "?data=(node[natural=tree][historic=monument](bbox);node[natural=tree][monument=yes](bbox));(._;>;);out center;", naam: "Monumental Tree", zichtbaar: false},
@@ -1519,14 +1532,17 @@ var variousdef = [
 	{url: "?data=(node[emergency=fire_extinguisher](bbox);node[emergency=fire_hose](bbox));(._;>;);out center;", naam: "Fire hose/extinguisher<hr>", zichtbaar: false},
 // Do not include a relation for the fixme, as it produces a lot of extraneous data	
 	{url: "?data=(node[fixme](bbox);way[fixme](bbox);node[FIXME](bbox);way[FIXME](bbox));(._;>;);out center;", naam: "fixme", zichtbaar: false},
+//	{url: "?data=(node[~'^fixme$',i](bbox);way[~'^fixme$',i](bbox));(._;>;);out center;", naam: "fixme", zichtbaar: false},
+	{url: "?data=(node[note](bbox));(._;>;);out center;", naam: "Note-Node", zichtbaar: false},
+	{url: "?data=(way[note](bbox));(._;>;);out center;", naam: "Note-Way", zichtbaar: false},
 	{url: "?data=(node[highway=construction](bbox);way[highway=construction](bbox));(._;>;);out center;", naam: "Construction", zichtbaar: false},
 	{url: "?data=(node[image](bbox);way[image](bbox));(._;>;);out center;", naam: "Image", zichtbaar: false},
 	{url: "?data=(node['surveillance:type'='camera'](bbox));(._;>;);out center;", naam: "Public camera<hr>", zichtbaar: false},
 	{url: "?data=(node[place=city](bbox));(._;>;);out center;", naam: "City", zichtbaar: false},
 	{url: "?data=(node[place=town](bbox));(._;>;);out center;", naam: "Town", zichtbaar: false},
 	{url: "?data=(node[place=village](bbox));(._;>;);out center;", naam: "Village", zichtbaar: false},
-	{url: "?data=(node[place=hamlet](bbox));(._;>;);out center;", naam: "Hamlet", zichtbaar: false},
-	{url: "?data=(way(bbox)[name~'^[Ff]ietspad'];)->.fietspaden;(way(foreach.fietspaden)[highway=cycleway][name][name~'^[Ff]ietspad$']);(._;>;);out center;", naam:"fietspad", zichtbaar: false}
+	{url: "?data=(node[place=hamlet](bbox));(._;>;);out center;", naam: "Hamlet", zichtbaar: false}
+//	{url: "?data=(way(bbox)[name~'^[Ff]ietspad'];)->.fietspaden;(way(foreach.fietspaden)[highway=cycleway][name][name~'^[Ff]ietspad$']);(._;>;);out center;", naam:"fietspad", zichtbaar: false}
 //	{url: "?data=(way[name~'^Fietspad|^fietspad|^pad$|^Pad$|cycleway|^path$|^Path$'](bbox);node(w);way[highway=cycleway][name!~'.'](bbox);node(w););out center;", naam:"fietspad", zichtbaar: false}
 ];
 
@@ -1594,12 +1610,12 @@ function makeUserLayer (userTags) {							// userTags bevat de "key=value" paren
 					if ((label == "yes") || (label == "no")) {		// nuttig om bij situaties als "tourism=yes/no" of "amenity=yes/no" te kunnen zien waar het om gaat!
 						label = userTags[i];						// Terugzetten naar oospronkelijke ingave.
 					}
-					url = "?data=area[name~'"  +  name + "']->.a;(way(area.a)[" + keyValues +  "];node(area.a)[" + keyValues + "];rel(area.a)[" + keyValues + "]);(._;>;);out center;";
+					url = "?data=area[name="  +  name + "][type=boundary][boundary=administrative][admin_level~'[48]']->.a;(way(area.a)[" + keyValues +  "];node(area.a)[" + keyValues + "];rel(area.a)[" + keyValues + "]);(._;>;);out center;";
 					naam = label + ' [' + name + ']';				
 				break;
 				
 //userstring: key=value(radius)key2=value2
-// In order to search something within a given distance from something else.
+// To search something within a given distance from something else.
 // First search for key=value and store result in .poi then search around that point for key2=val2 and store result in .result
 // Finally - to show both both key and key2 search again around result to show key.
 // See discussion on: http://forum.openstreetmap.org/viewtopic.php?id=28807&p=13				
@@ -1728,5 +1744,3 @@ function checkCookie() {
     }
     return lines;								// Teruggeven
 }
-
-
