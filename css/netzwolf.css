@@ -70,9 +70,13 @@ div.olPopupMarker:hover div.tooltip {
 #tagselector {
 	position: absolute;
 	z-index: 10000;
-	right: 220px;
-	top: 5px;
-	padding: 1ex;
+	left: 250px;
+	top: 95px;
+	font-family: Verdana;
+	font-size: 0.9em;
+	font-weight: bold;
+	padding: 6px;
+	margin-top: 1px;
 	border: 1px solid gray;
 	background: #fefdd5;
 }

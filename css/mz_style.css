@@ -24,7 +24,13 @@
 	font-family: Verdana;
 	font-weight:bold;	
  	}
-	
+ 	
+/* 
+ div.smallmap {
+ 	width: 85%;
+ 	height: 100%;
+ }		
+ */
 /* 
 	Hieronder de layout van de baselayer box
  */
@@ -33,9 +39,6 @@
 		padding-left: 0px;
 		font-size: 0.9em;
 		color: #7a0c00;
-/* 
-		border: 1px solid #7a0c00;
- */
 }
 
 	div.olControlAttribution {
@@ -127,11 +130,6 @@
 		background-color:#FF0000;
 		top: 20px;
 		left: 500px;
-/* 
-		border-style: none;
-		border-width: 2px;
-		border-color: black;
- */
 		visibility: hidden;
 	}
 		

@@ -2,10 +2,10 @@
 // OpenPoiMap Javascript library
 //*****************************************************************
 
-// Version 1.09
+// Version 1.1
 
 // This library contains 4 separate blocks of code that were previously (up to version 1.05) included as standalone js-files.
-//<!-- (mz) Laatste versie: 24-08-15, 09:52 -->
+//<!-- (mz) Laatste versie: 02-09-15, 15:01 -->
 
 
 //*****************************************************************
@@ -1109,11 +1109,11 @@ function icon2use (name,uDef,num) {
 	if  (uDef == false)  { // geen gebruikers tags
 		switch (name) {
 			case "Alcohol" : return "mapicons/liquor.png";
-			case "Alpine hut" : return "mapicons/alpine_hut.png";
+			case "Alpine hut" : return "mapicons/alpinehut.png";
 			case "Apartment" : return "mapicons/apartment-3.png";
 			case "Arts centre" : return "mapicons/letter_a.png";
 			case "Artwork" : return "mapicons/artwork.png";
-			case "Attraction" : return "mapicons/number_1.png";
+			case "Attraction" : return "mapicons/star.png";
 			case "ATM" : return "mapicons/atm-2.png";	
 			case "Bakery" : return "mapicons/bread.png";
 			case "Bar" : return "mapicons/bar.png";
@@ -1131,6 +1131,8 @@ function icon2use (name,uDef,num) {
 			case "Cafe" : return "mapicons/cafetaria.png";
 			case "Camp site" : return "mapicons/camping-2.png";
 			case "Car" : return "mapicons/car.png";
+			case "Castle" : return "mapicons/castle-2.png";
+			case "Cemetery" : return "mapicons/cemetary.png";
 			case "Chalet" : return "mapicons/letter_c.png";
 			case "Cheese" : return "mapicons/cheese.png";
 			case "Chemist" : return "mapicons/drugstore.png";
@@ -1145,6 +1147,7 @@ function icon2use (name,uDef,num) {
 			case "Defibrillator - AED" : return "mapicons/aed-2.png";
 			case "Deli" : return "mapicons/patisserie.png";
 			case "Department store" : return "mapicons/departmentstore.png";
+			case "DIY/hardware" : return "mapicons/tools.png";
 			case "Drinking water" : return "mapicons/drinkingwater.png";
 			case "E-bike charging" : return "mapicons/e-bike-charging.png";
 			case "Fast food" : return "mapicons/fastfood.png";
@@ -1153,12 +1156,13 @@ function icon2use (name,uDef,num) {
 			case "Fire hose/extinguisher<hr>" : return "mapicons/fireexstinguisher.png";
 			case "Fuel" : return "mapicons/fillingstation.png";
 			case "Gallery" : return "mapicons/artgallery.png";
+			case "Garden centre" : return "mapicons/flowers-1.png";
 			case "General" : return "mapicons/letter_g.png";
 			case "Gift" : return "mapicons/gifts.png";
 			case "Grocery" : return "mapicons/grocery.png";
 			case "Guest house" : return "mapicons/bed_breakfast.png";
 			case "Hairdresser" : return "mapicons/barber.png";
-			case "Heritage" : return "mapicons/letter_h.png";			
+			case "Heritage" : return "mapicons/worldheritagesite.png";			
 			case "Historic" : return "mapicons/star-3.png";			
  			case "Hostel" : return "mapicons/hostel_0star.png";
  			case "Hotel" : return "mapicons/hotel_0star.png";
@@ -1180,8 +1184,10 @@ function icon2use (name,uDef,num) {
 			case "Optician" : return "mapicons/glasses.png";		
 			case "Organic" : return "mapicons/restaurant_vegetarian.png";
 			case "Parking" : return "mapicons/parkinggarage.png";
+			case "Pets" : return "mapicons/pets.png";			
 			case "Pharmacy" : return "mapicons/medicine.png";			
 			case "Photo" : return "mapicons/photo.png";
+			case "Phone" : return "mapicons/phones.png";
 			case "Picnic" : return "mapicons/picnic-2.png";
 			case "Place of worship" : return "mapicons/church-2.png";
 			case "Police" : return "mapicons/police.png";
@@ -1199,17 +1205,23 @@ function icon2use (name,uDef,num) {
 			case "Statue" : return "mapicons/statue-2.png";
 			case "Supermarket" : return "mapicons/supermarket.png";
 			case "Taxi" : return "mapicons/taxi.png";
+			case "Textiles" : return "mapicons/textiles.png";
 			case "Theatre" : return "mapicons/theater.png";
 			case "Theme park" : return "mapicons/letter_t.png";
 			case "Toilets" : return "mapicons/toilets.png";
 			case "Toys" : return "mapicons/toys.png";
 			case "Travel agency<hr>" : return "mapicons/travel_agency.png";
-			case "University" : return "mapicons/university.png";			
-			case "Viewpoint" : return "mapicons/sight-2.png";
+			case "University<hr>" : return "mapicons/university.png";			
+			case "Viewpoint" : return "mapicons/viewpoint.png";
 			case "Watermill" : return "mapicons/watermill-2.png";
 			case "Windmill" : return "mapicons/windmill-2.png";
 			case "Wine" : return "mapicons/winebar.png";			
 			case "ZOO" : return "mapicons/zoo.png";
+			case "Christian Church" : return "mapicons/chapel-2.png";
+			case "Mosque" : return "mapicons/mosquee.png";
+			case "Buddhist Temple" : return "mapicons/bouddha.png";
+			case "Hindu Temple" : return "mapicons/templehindu.png";
+			case "Synagogue" : return "mapicons/synagogue-2.png";
 // sport			
 			case "American football" : return "mapicons/usfootball.png";
 			case "Golf" : return "mapicons/golfing.png";
@@ -1312,11 +1324,9 @@ function switchtab(newtab, activetab) { // was switchlayers(newlayer,active)
 	// this destroys all layers that are not baselayers 
 	// and construct a list of visable layers in the current view
 
-	//var currentChoice = getSelectedOverlaysURL();
 	tabtype[activetab] = "";
 	
 	for (i = map.layers.length - 1; i > 1; i--) { // store visibility and than destroy layer
-	 	//selectControl.deactivate();
 		if (map.layers[i].isBaseLayer == false) {
 			if (map.layers[i].visibility == true){
 				tabtype[activetab] = "1" + tabtype[activetab];  // tabtype[activetab] > "00101100001" where last character is last layer
@@ -1397,38 +1407,39 @@ var amenitydef = [
 	{url: "?data=(node[amenity=library](bbox);way[amenity=library](bbox);rel[amenity=library](bbox));(._;>;);out center;", naam: "Library", zichtbaar: false},
 	{url: "?data=(node[amenity=parking](bbox);way[amenity=parking](bbox);rel[amenity=parking](bbox));(._;>;);out center;", naam: "Parking", zichtbaar: false},
 	{url: "?data=(node[amenity=pharmacy](bbox);way[amenity=pharmacy](bbox);rel[amenity=pharmacy](bbox));(._;>;);out center;", naam: "Pharmacy", zichtbaar: false},
-	{url: "?data=(node[amenity=place_of_worship](bbox);way[amenity=place_of_worship](bbox);rel[amenity=place_of_worship](bbox));(._;>;);out center;", naam: "Place of worship", zichtbaar: false},
 	{url: "?data=(node[amenity=police](bbox);way[amenity=police](bbox);rel[amenity=police](bbox));(._;>;);out center;", naam: "Police", zichtbaar: false},
 	{url: "?data=(node[amenity=post_box](bbox);node(w););out center;", naam: "Post box", zichtbaar: false},
 	{url: "?data=(node[amenity=post_office](bbox);way[amenity=post_office](bbox);rel[amenity=post_office](bbox));(._;>;);out center;", naam: "Post office", zichtbaar: false},
-	{url: "?data=(node[amenity=school](bbox);way[amenity=school](bbox);rel[amenity=school](bbox);node[amenity=college](bbox);way[amenity=college](bbox);rel[amenity=college](bbox));(._;>;);out center;", naam: "School/college", zichtbaar: false},
+	{url: "?data=(node[amenity~'^school$|^college$'](bbox);way[amenity~'^school$|^college$'](bbox);rel[amenity~'^school$|^college$'](bbox));(._;>;);out center;", naam: "School/college", zichtbaar: false},
 	{url: "?data=(node[amenity=taxi](bbox);way[amenity=taxi](bbox);rel[amenity=taxi](bbox));(._;>;);out center;", naam: "Taxi", zichtbaar: false},
 	{url: "?data=(node[amenity=theatre](bbox);way[amenity=theatre](bbox);rel[amenity=theatre](bbox));(._;>;);out center;", naam: "Theatre", zichtbaar: false},
 	{url: "?data=(node[amenity=toilets](bbox);way[amenity=toilets](bbox);rel[amenity=toilets](bbox));(._;>;);out center;", naam: "Toilets", zichtbaar: false},
-	{url: "?data=(node[amenity=university](bbox);way[amenity=university](bbox);rel[amenity=university](bbox));(._;>;);out center;", naam: "University", zichtbaar: false}
+	{url: "?data=(node[amenity=university](bbox);way[amenity=university](bbox);rel[amenity=university](bbox));(._;>;);out center;", naam: "University<hr>", zichtbaar: false},
+// Check for various religions. We check on 5 religions AND also on a general place_of_worship but excluding the others.
+	{url: "?data=(node[amenity=place_of_worship][religion!~'christian|muslim|buddhist|hindu|jewish'](bbox);way[amenity=place_of_worship][religion!~'christian|muslim|buddhist|hindu|jewish'](bbox);rel[amenity=place_of_worship][religion!~'christian|muslim|buddhist|hindu|jewish'](bbox));(._;>;);out center;", naam: "Place of worship", zichtbaar: false},
+ 	{url: "?data=(node[amenity=place_of_worship][religion=christian](bbox);way[amenity=place_of_worship][religion=christian](bbox));(._;>;);out center;", naam: "Christian Church", zichtbaar: false},
+ 	{url: "?data=(node[amenity=place_of_worship][religion=muslim](bbox);way[amenity=place_of_worship][religion=muslim](bbox));(._;>;);out center;", naam: "Mosque", zichtbaar: false},
+ 	{url: "?data=(node[amenity=place_of_worship][religion=buddhist](bbox);way[amenity=place_of_worship][religion=buddhist](bbox));(._;>;);out center;", naam: "Buddhist Temple", zichtbaar: false},
+  	{url: "?data=(node[amenity=place_of_worship][religion=hindu](bbox);way[amenity=place_of_worship][religion=hindu](bbox));(._;>;);out center;", naam: "Hindu Temple", zichtbaar: false},
+ 	{url: "?data=(node[amenity=place_of_worship][religion=jewish](bbox);way[amenity=place_of_worship][religion=jewish](bbox));(._;>;);out center;", naam: "Synagogue", zichtbaar: false},
+	{url: "?data=(node[landuse=cemetery](bbox);way[landuse=cemetery](bbox);rel[landuse=cemetery](bbox));(._;>;);out center;", naam: "Cemetery", zichtbaar: false}
 ];
-// Code voor de diverse religies - nog niet in gebruik
-// 	{url: "?data=(node[amenity=place_of_worship][religion=christian](bbox);way[amenity=place_of_worship][religion=christian](bbox));(._;>;);out center;", naam: "Church (Christian)", zichtbaar: false},
-// 	{url: "?data=(node[amenity=place_of_worship][religion=muslim](bbox);way[amenity=place_of_worship][religion=muslim](bbox));(._;>;);out center;", naam: "Mosque", zichtbaar: false},
-// 	{url: "?data=(node[amenity=place_of_worship][religion=buddhist](bbox);way[amenity=place_of_worship][religion=buddhist](bbox));(._;>;);out center;", naam: "Temple (Buddhist)", zichtbaar: false},
-// 	{url: "?data=(node[amenity=place_of_worship][religion=jewish](bbox);way[amenity=place_of_worship][religion=jewish](bbox));(._;>;);out center;", naam: "Synagogue", zichtbaar: false},
-// 	{url: "?data=(node[amenity=place_of_worship][religion=hindu](bbox);way[amenity=place_of_worship][religion=hindu](bbox));(._;>;);out center;", naam: "Temple (Hindu)", zichtbaar: false},
-
 var tourismdef = [
 // places to see
 	{url: "?data=(node[amenity=arts_centre](bbox);way[amenity=arts_centre](bbox);rel[amenity=arts_centre](bbox));(._;>;);out center;", naam: "Arts centre", zichtbaar: false},
 	{url: "?data=(node[tourism=artwork](bbox);way[tourism=artwork](bbox);rel[tourism=artwork](bbox));(._;>;);out center;", naam: "Artwork", zichtbaar: false},
 	{url: "?data=(node[tourism=attraction](bbox);way[tourism=attraction](bbox);rel[tourism=attraction](bbox));(._;>;);out center;", naam: "Attraction", zichtbaar: false},
+	{url: "?data=(node[historic=castle](bbox);way[historic=castle](bbox);rel[historic=castle](bbox));(._;>;);out center;", naam: "Castle", zichtbaar: false},
 	{url: "?data=(node[tourism=gallery](bbox);way[tourism=gallery](bbox);rel[tourism=gallery](bbox));(._;>;);out center;", naam: "Gallery", zichtbaar: false},
 	{url: "?data=(node[heritage](bbox);way[heritage](bbox);rel[heritage](bbox));(._;>;);out center;", naam: "Heritage", zichtbaar: false},
 // Check for all historic tags but exclude those that already have their own 
-	{url: "?data=(node[historic][historic!~'memorial|monument|statue'](bbox);way[historic][historic!~'memorial|monument|statue'](bbox);rel[historic][historic!~'memorial|monument|statue'](bbox));(._;>;);out center;", naam: "Historic", zichtbaar: false},
+	{url: "?data=(node[historic][historic!~'memorial|monument|statue|castle'](bbox);way[historic][historic!~'memorial|monument|statue|castle'](bbox);rel[historic][historic!~'memorial|monument|statue|castle'](bbox));(._;>;);out center;", naam: "Historic", zichtbaar: false},
 	{url: "?data=(node[tourism=information](bbox);way[tourism=information](bbox));(._;>;);out center;", naam: "Information", zichtbaar: false},
-	{url: "?data=(node[historic=monument](bbox);way[historic=monument](bbox);rel[historic=monument](bbox);node[historic=memorial](bbox);way[historic=memorial](bbox);rel[historic=memorial](bbox));(._;>;);out center;", naam: "Monument/memorial", zichtbaar: false},
+	{url: "?data=(node[historic~'^monument$|^memorial$'][landmark][landmark!~'statue'](bbox);way[historic~'^monument$|^memorial$'](bbox);rel[historic~'^monument$|^memorial$'](bbox));(._;>;);out center;", naam: "Monument/memorial", zichtbaar: false},
 	{url: "?data=(node[natural=tree][historic=monument](bbox);node[natural=tree][monument=yes](bbox));(._;>;);out center;", naam: "Monumental Tree", zichtbaar: false},
 	{url: "?data=(node[tourism=museum](bbox);way[tourism=museum](bbox);rel[tourism=museum](bbox));(._;>;);out center;", naam: "Museum", zichtbaar: false},
 	{url: "?data=(node[tourism=picnic_site](bbox);way[tourism=picnic_site](bbox);rel[tourism=picnic_site](bbox));(._;>;);out center;", naam: "Picnic", zichtbaar: false},
-	{url: "?data=(node[historic=statue](bbox);way[historic=statue](bbox));(._;>;);out center;", naam: "Statue", zichtbaar: false},
+	{url: "?data=(node[historic=statue](bbox);node[landmark=statue](bbox);node[artwork_type=statue](bbox));(._;>;);out center;", naam: "Statue", zichtbaar: false},
 	{url: "?data=(node[tourism=theme_park](bbox);way[tourism=theme_park](bbox);rel[tourism=picnic_site](bbox));(._;>;);out center;", naam: "Theme park", zichtbaar: false},
 	{url: "?data=(node[tourism=viewpoint](bbox);way[tourism=viewpoint](bbox);rel[tourism=viewpoint](bbox));(._;>;);out center;", naam: "Viewpoint", zichtbaar: false},
 	{url: "?data=(node[man_made=windmill](bbox);way[man_made=windmill](bbox);rel[man_made=windmill](bbox));(._;>;);out center;", naam: "Windmill", zichtbaar: false},
@@ -1469,23 +1480,28 @@ var shopdef = [
 //Various shops (excluding food)			
 	{url: "?data=(node[shop=beauty](bbox);way[shop=beauty](bbox);rel[shop=beauty](bbox));(._;>;);out center;", naam: "Beauty", zichtbaar: false},
 	{url: "?data=(node[shop=bicycle](bbox);way[shop=bicycle](bbox);rel[shop=bicycle](bbox));(._;>;);out center;", naam: "Bicycle", zichtbaar: false},
-	{url: "?data=(node[shop=books](bbox);way[shop=books](bbox);rel[shop=books](bbox);way[shop=stationery](bbox);node[shop=stationery](bbox);rel[shop=stationery](bbox));(._;>;);out center;", naam: "Books/Stationary", zichtbaar: false},
+	{url: "?data=(node[shop~'books|stationary'](bbox);way[shop~'books|stationary'](bbox);rel[shop~'books|stationary'](bbox));(._;>;);out center;", naam: "Books/Stationary", zichtbaar: false},
 	{url: "?data=(node[shop=car](bbox);way[shop=car](bbox);rel[shop=car](bbox));(._;>;);out center;", naam: "Car", zichtbaar: false},
 	{url: "?data=(node[shop=chemist](bbox);way[shop=chemist](bbox);rel[shop=chemist](bbox));(._;>;);out center;", naam: "Chemist", zichtbaar: false},
 	{url: "?data=(node[shop=clothes](bbox);way[shop=clothes](bbox);rel[shop=clothes](bbox));(._;>;);out center;", naam: "Clothes", zichtbaar: false},
 	{url: "?data=(node[shop=copyshop](bbox);way[shop=copyshop](bbox);rel[shop=copyshop](bbox));(._;>;);out center;", naam: "Copyshop", zichtbaar: false},
 	{url: "?data=(node[shop=cosmetics](bbox);way[shop=cosmetics](bbox);rel[shop=cosmetics](bbox));(._;>;);out center;", naam: "Cosmetics", zichtbaar: false},
-	{url: "?data=(node[shop=department_store](bbox);way[shop=department_store](bbox));(._;>;);out center;", naam: "Department store", zichtbaar: false},
-	{url: "?data=(node[shop=general](bbox);way[shop=general](bbox));(._;>;);out center;", naam: "General", zichtbaar: false},
+	{url: "?data=(node[shop=department_store](bbox);way[shop=department_store](bbox);rel[shop=department_store](bbox));(._;>;);out center;", naam: "Department store", zichtbaar: false},
+	{url: "?data=(node[shop~'doityourself|hardware'](bbox);way[shop~'doityourself|hardware'](bbox);rel[shop~'doityourself|hardware'](bbox));(._;>;);out center;", naam: "DIY/hardware", zichtbaar: false},
+	{url: "?data=(node[shop=garden_centre](bbox);way[shop=garden_centre](bbox);rel[shop=garden_centre](bbox));(._;>;);out center;", naam: "Garden centre", zichtbaar: false},
+	{url: "?data=(node[shop=general](bbox);way[shop=general](bbox);rel[shop=general](bbox));(._;>;);out center;", naam: "General", zichtbaar: false},
 	{url: "?data=(node[shop=gift](bbox);way[shop=gift](bbox);rel[shop=gift](bbox));(._;>;);out center;", naam: "Gift", zichtbaar: false},
 	{url: "?data=(node[shop=hairdresser](bbox);way[shop=hairdresser](bbox);rel[shop=hairdresser](bbox));(._;>;);out center;", naam: "Hairdresser", zichtbaar: false},		
 	{url: "?data=(node[shop=jewelry](bbox);way[shop=jewelry](bbox);rel[shop=jewelry](bbox));(._;>;);out center;", naam: "Jewelry", zichtbaar: false},
 	{url: "?data=(node[shop=leather](bbox);way[shop=leather](bbox);rel[shop=leather](bbox));(._;>;);out center;", naam: "Leather", zichtbaar: false},
 	{url: "?data=(node[shop=musical_instrument](bbox);way[shop=musical_instrument](bbox);rel[shop=musical_instrument](bbox));(._;>;);out center;", naam: "Musical instrument",lijn: 2.7, zichtbaar: false},		
 	{url: "?data=(node[shop=optician](bbox);way[shop=optician](bbox);rel[shop=optician](bbox));(._;>;);out center;", naam: "Optician", zichtbaar: false},
+	{url: "?data=(node[shop=pets](bbox);way[shop=pets](bbox);rel[shop=pets](bbox));(._;>;);out center;", naam: "Pets", zichtbaar: false},
+	{url: "?data=(node[shop=mobile_phone](bbox);way[shop=mobile_phone](bbox);rel[shop=mobile_phone](bbox));(._;>;);out center;", naam: "Phone", zichtbaar: false},
 	{url: "?data=(node[shop=photo](bbox);way[shop=photo](bbox);rel[shop=photo](bbox));(._;>;);out center;", naam: "Photo", zichtbaar: false},
 	{url: "?data=(node[shop=shoes](bbox);way[shop=shoes](bbox));(._;>;);out center;", naam: "Shoes", zichtbaar: false},
 	{url: "?data=(node[shop=mall](bbox);way[shop=mall](bbox);rel[shop=mall](bbox));(._;>;);out center;", naam: "Shopping centre", zichtbaar: false},
+	{url: "?data=(node[shop=textiles](bbox);way[shop=textiles](bbox);rel[shop=textiles](bbox));(._;>;);out center;", naam: "Textiles", zichtbaar: false},
 	{url: "?data=(node[shop=toys](bbox);way[shop=toys](bbox);rel[shop=toys](bbox));(._;>;);out center;", naam: "Toys", zichtbaar: false}
 ];
 var fooddef = [
@@ -1495,7 +1511,7 @@ var fooddef = [
 	{url: "?data=(node[shop=beverages](bbox);way[shop=beverages](bbox);rel[shop=beverages](bbox));(._;>;);out center;", naam: "Beverages", zichtbaar: false},
 	{url: "?data=(node[shop=butcher](bbox);way[shop=butcher](bbox);rel[shop=butcher](bbox));(._;>;);out center;", naam: "Butcher", zichtbaar: false},
 	{url: "?data=(node[shop=cheese](bbox);way[shop=cheese](bbox);rel[shop=cheese](bbox));(._;>;);out center;", naam: "Cheese", zichtbaar: false},
-	{url: "?data=(node[shop=chocolate](bbox);way[shop=chocolate](bbox);rel[shop=chocolate](bbox);node[shop=confectionery](bbox);way[shop=confectionery](bbox);rel[shop=confectionery](bbox));(._;>;);out center;", naam: "Chocolate/Confectionery", zichtbaar: false},
+	{url: "?data=(node[shop~'chocolate|confectionery'](bbox);way[shop~'chocolate|confectionery'](bbox);rel[shop~'chocolate|confectionery'](bbox));(._;>;);out center;", naam: "Chocolate/Confectionery", zichtbaar: false},
 	{url: "?data=(node[shop=coffee](bbox);way[shop=coffee](bbox);rel[shop=coffee](bbox));(._;>;);out center;", naam: "Coffee", zichtbaar: false},
 	{url: "?data=(node[shop=dairy](bbox);way[shop=dairy](bbox));(._;>;);out center;", naam: "Dairy", zichtbaar: false},
 	{url: "?data=(node[shop=deli](bbox);way[shop=deli](bbox);node[shop=delicatessen](bbox);way[shop=delicatessen](bbox));(._;>;);out center;", naam: "Deli", zichtbaar: false},

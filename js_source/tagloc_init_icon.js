@@ -1,6 +1,6 @@
-// Init for Taglocator
+// Init for Taglocator 1.1
 // Taglocator is de testversie voor OPM.
-// <!-- (mz) Laatste versie: 28-07-15, 18:10 -->
+// <!-- (mz) Laatste versie: 02-09-15, 15:07 -->
 // Trying another overpass server. (not working!)
 
 
@@ -10,7 +10,7 @@ var lon = 8.921;
 var zoom = 5;
 var searchBoxZoom = 14;
 
-var userPois = [];				// This array contains the current user poi
+var userPois = [];				// This array contains the current user pois
 var userChoices = [];			// This array contains all the user pois as they are kept in a cookie
 var keuzeCount = 0;
 var keus = 0;					// index in userChoices
@@ -20,6 +20,8 @@ var COOKIE_KEEP = 365;			// Number of days to keep the cookies
 var QURL = "http://overpass-api.de/api/interpreter/"; //default
 // After discussion with Roland Olbricht he send me 2 other possible overpass servers
 // I can't get them to work though...
+// var QURL = "http://dev.overpass-api.de/api_drolbr/"; //default
+
 var QURL2 = "http://dev.overpass-api.de/api_drolbr/"; 
 var QURL3 = "http://overpass.osm.rambler.ru/cgi/";
 var featurePopup;
@@ -76,7 +78,7 @@ window.onload = function () {
 		],
 		maxExtent: new OpenLayers.Bounds(-20037508.34,-20037508.34,20037508.34,20037508.34),
 		maxResolution: 156543.0399,
-		numZoomLevels: 20,
+		numZoomLevels: 19,
 		units: 'm',
 		projection: new OpenLayers.Projection("EPSG:900913"),
 		displayProjection: new OpenLayers.Projection("EPSG:4326"),
@@ -236,7 +238,7 @@ document.getElementById('load_button').onclick = function () {
 			new OpenLayers.Projection("EPSG:900913")
 		);
 		
-	layerdef(tabtype.name);		// roept externe layerdefinitie in layerdef.js aan
+	layerdef(tabtype.name);		// defined in opm.js
 	
 		
 	document.getElementById(tabtype.name).className = "choice";
@@ -245,7 +247,7 @@ document.getElementById('load_button').onclick = function () {
 	}  
 
 // mz: Dit is de code die zorgt voor het popupscherm als je ergens op de kaart klikt.
-// Dit is met de nieuwe code van Gerjan Idema
+// Dit is met de nieuwe code van Gertjan Idema
 	featurePopup = new FeaturePopup(QURL,map);
 
 	
