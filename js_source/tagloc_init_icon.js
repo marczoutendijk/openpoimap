@@ -1,4 +1,4 @@
-// Init for Taglocator 1.1
+// Init for Taglocator 1.2
 // Taglocator is de testversie voor OPM.
 // <!-- (mz) Laatste versie: 02-09-15, 15:07 -->
 // Trying another overpass server. (not working!)
@@ -87,11 +87,6 @@ window.onload = function () {
 			featureclick: function(e) {
 				featurePopup.click(e);
 			}
-// 			featureover: function(e) {
-// 				setStatusText("BOE");
-// 			},
-// 			featureout: function(e) {
-// 			},
 		}
 	} );
 	ls.maximizeControl(); 

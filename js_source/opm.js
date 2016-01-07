@@ -2,10 +2,11 @@
 // OpenPoiMap Javascript library
 //*****************************************************************
 
-// Version 1.1
+// Version 1.2
 
 // This library contains 4 separate blocks of code that were previously (up to version 1.05) included as standalone js-files.
-//<!-- (mz) Laatste versie: 02-09-15, 15:01 -->
+//<!-- (mz) Laatste versie: 07-01-16, 15:38 -->
+
 
 
 //*****************************************************************
@@ -72,6 +73,7 @@ function popupLinks(lonlat, feature, show) {
 	thelink = thelink + "</div>"; // id = tlPop
 	return thelink;
 }
+
 
 //Toggle to show or hide the lines with various viewers and editors
 function showLinks() {
@@ -430,7 +432,7 @@ FeaturePopup = OpenLayers.Class({
 			return html + 'href="' + imageLink + '">' + imageLink + '</a>';
 		}
 		// Pleas note!!!
-		// This test for mapillary is based on the fact that all images are located at this address!
+		// This test for mapillary is based on the fact that all images seem to be located at this address!
 		//  Keep an eye on it for future changes...
 		if (href.indexOf("https://d1cuyjsrcm0gby.cloudfront.net/") == 0) { // Image file reference is to a mapillary image file
 			return html + 'href="' + href + '">' + '<img src="' + href + '" height="60"/></a>';
@@ -443,7 +445,7 @@ FeaturePopup = OpenLayers.Class({
 		if (href.indexOf("flickr") > 0) { // Image file reference is to a flickr image. No thumbnail possible?
 			return html + 'href="' + href + '">' + href + '</a><br><div class="unknownLicense">Unknown license!</div>';
 		}
-		if (href.indexOf("wikipedia") > 0) { // Image file reference is to a flickr image. No thumbnail possible?
+		if (href.indexOf("wikipedia") > 0) { // Image file reference is to a wikepedia page
 			return html + 'href="' + href + '">' + href + '</a>';
 		}
 		return html + 'href="' + href + '">' + '<img src="' + text + '" height="60"/></a><br><div class="unknownLicense">Unknown license!</div>';
@@ -1209,6 +1211,7 @@ function icon2use (name,uDef,num) {
 			case "Theatre" : return "mapicons/theater.png";
 			case "Theme park" : return "mapicons/letter_t.png";
 			case "Toilets" : return "mapicons/toilets.png";
+			case "Tourism=yes" : return "mapicons/sight-2.png";
 			case "Toys" : return "mapicons/toys.png";
 			case "Travel agency<hr>" : return "mapicons/travel_agency.png";
 			case "University<hr>" : return "mapicons/university.png";			
@@ -1216,8 +1219,8 @@ function icon2use (name,uDef,num) {
 			case "Watermill" : return "mapicons/watermill-2.png";
 			case "Windmill" : return "mapicons/windmill-2.png";
 			case "Wine" : return "mapicons/winebar.png";			
-			case "ZOO" : return "mapicons/zoo.png";
-			case "Christian Church" : return "mapicons/chapel-2.png";
+			case "ZOO<hr>" : return "mapicons/zoo.png";
+			case "Church" : return "mapicons/chapel-2.png";
 			case "Mosque" : return "mapicons/mosquee.png";
 			case "Buddhist Temple" : return "mapicons/bouddha.png";
 			case "Hindu Temple" : return "mapicons/templehindu.png";
@@ -1241,6 +1244,7 @@ function icon2use (name,uDef,num) {
 			case "Town" : return "mapicons/letter_town.png";
 			case "Village" : return "mapicons/letter_village.png";
 			case "Hamlet" : return "mapicons/letter_hamlet.png";
+			case "Suburb" : return "mapicons/letter_s.png";
 			case "fietspad" : return "mapicons/letter_f.png";
 			case "Note-Node" : return "mapicons/number_1.png";
 			case "Note-Way" : return "mapicons/number_2.png";
@@ -1417,17 +1421,18 @@ var amenitydef = [
 	{url: "?data=(node[amenity=university](bbox);way[amenity=university](bbox);rel[amenity=university](bbox));(._;>;);out center;", naam: "University<hr>", zichtbaar: false},
 // Check for various religions. We check on 5 religions AND also on a general place_of_worship but excluding the others.
 	{url: "?data=(node[amenity=place_of_worship][religion!~'christian|muslim|buddhist|hindu|jewish'](bbox);way[amenity=place_of_worship][religion!~'christian|muslim|buddhist|hindu|jewish'](bbox);rel[amenity=place_of_worship][religion!~'christian|muslim|buddhist|hindu|jewish'](bbox));(._;>;);out center;", naam: "Place of worship", zichtbaar: false},
- 	{url: "?data=(node[amenity=place_of_worship][religion=christian](bbox);way[amenity=place_of_worship][religion=christian](bbox));(._;>;);out center;", naam: "Christian Church", zichtbaar: false},
+ 	{url: "?data=(node[amenity=place_of_worship][religion=christian](bbox);way[amenity=place_of_worship][religion=christian](bbox));(._;>;);out center;", naam: "Church", zichtbaar: false},
  	{url: "?data=(node[amenity=place_of_worship][religion=muslim](bbox);way[amenity=place_of_worship][religion=muslim](bbox));(._;>;);out center;", naam: "Mosque", zichtbaar: false},
  	{url: "?data=(node[amenity=place_of_worship][religion=buddhist](bbox);way[amenity=place_of_worship][religion=buddhist](bbox));(._;>;);out center;", naam: "Buddhist Temple", zichtbaar: false},
   	{url: "?data=(node[amenity=place_of_worship][religion=hindu](bbox);way[amenity=place_of_worship][religion=hindu](bbox));(._;>;);out center;", naam: "Hindu Temple", zichtbaar: false},
  	{url: "?data=(node[amenity=place_of_worship][religion=jewish](bbox);way[amenity=place_of_worship][religion=jewish](bbox));(._;>;);out center;", naam: "Synagogue", zichtbaar: false},
-	{url: "?data=(node[landuse=cemetery](bbox);way[landuse=cemetery](bbox);rel[landuse=cemetery](bbox));(._;>;);out center;", naam: "Cemetery", zichtbaar: false}
+ // Check only for cemetery for human beings	
+	{url: "?data=(node[landuse=cemetery][animal!~'.'](bbox);way[landuse=cemetery][animal!~'.'](bbox);rel[landuse=cemetery][animal!~'.'](bbox));(._;>;);out center;", naam: "Cemetery", zichtbaar: false}
 ];
 var tourismdef = [
 // places to see
 	{url: "?data=(node[amenity=arts_centre](bbox);way[amenity=arts_centre](bbox);rel[amenity=arts_centre](bbox));(._;>;);out center;", naam: "Arts centre", zichtbaar: false},
-	{url: "?data=(node[tourism=artwork](bbox);way[tourism=artwork](bbox);rel[tourism=artwork](bbox));(._;>;);out center;", naam: "Artwork", zichtbaar: false},
+	{url: "?data=(node[tourism=artwork][artwork_type!~'statue'](bbox);way[tourism=artwork](bbox);rel[tourism=artwork](bbox));(._;>;);out center;", naam: "Artwork", zichtbaar: false},
 	{url: "?data=(node[tourism=attraction](bbox);way[tourism=attraction](bbox);rel[tourism=attraction](bbox));(._;>;);out center;", naam: "Attraction", zichtbaar: false},
 	{url: "?data=(node[historic=castle](bbox);way[historic=castle](bbox);rel[historic=castle](bbox));(._;>;);out center;", naam: "Castle", zichtbaar: false},
 	{url: "?data=(node[tourism=gallery](bbox);way[tourism=gallery](bbox);rel[tourism=gallery](bbox));(._;>;);out center;", naam: "Gallery", zichtbaar: false},
@@ -1435,16 +1440,17 @@ var tourismdef = [
 // Check for all historic tags but exclude those that already have their own 
 	{url: "?data=(node[historic][historic!~'memorial|monument|statue|castle'](bbox);way[historic][historic!~'memorial|monument|statue|castle'](bbox);rel[historic][historic!~'memorial|monument|statue|castle'](bbox));(._;>;);out center;", naam: "Historic", zichtbaar: false},
 	{url: "?data=(node[tourism=information](bbox);way[tourism=information](bbox));(._;>;);out center;", naam: "Information", zichtbaar: false},
-	{url: "?data=(node[historic~'^monument$|^memorial$'][landmark][landmark!~'statue'](bbox);way[historic~'^monument$|^memorial$'](bbox);rel[historic~'^monument$|^memorial$'](bbox));(._;>;);out center;", naam: "Monument/memorial", zichtbaar: false},
-	{url: "?data=(node[natural=tree][historic=monument](bbox);node[natural=tree][monument=yes](bbox));(._;>;);out center;", naam: "Monumental Tree", zichtbaar: false},
+	{url: "?data=(node[historic~'^monument$|^memorial$'](bbox);way[historic~'^monument$|^memorial$'](bbox);rel[historic~'^monument$|^memorial$'](bbox));(._;>;);out center;", naam: "Monument/memorial", zichtbaar: false},
+	{url: "?data=(node[natural=tree][monument=yes](bbox));(._;>;);out center;", naam: "Monumental Tree", zichtbaar: false},
 	{url: "?data=(node[tourism=museum](bbox);way[tourism=museum](bbox);rel[tourism=museum](bbox));(._;>;);out center;", naam: "Museum", zichtbaar: false},
 	{url: "?data=(node[tourism=picnic_site](bbox);way[tourism=picnic_site](bbox);rel[tourism=picnic_site](bbox));(._;>;);out center;", naam: "Picnic", zichtbaar: false},
-	{url: "?data=(node[historic=statue](bbox);node[landmark=statue](bbox);node[artwork_type=statue](bbox));(._;>;);out center;", naam: "Statue", zichtbaar: false},
-	{url: "?data=(node[tourism=theme_park](bbox);way[tourism=theme_park](bbox);rel[tourism=picnic_site](bbox));(._;>;);out center;", naam: "Theme park", zichtbaar: false},
+	{url: "?data=(node[historic=statue](bbox);node[landmark=statue](bbox);node[tourism=artwork][artwork_type=statue](bbox));(._;>;);out center;", naam: "Statue", zichtbaar: false},
+	{url: "?data=(node[tourism=theme_park](bbox);way[tourism=theme_park](bbox);rel[tourism=theme_park](bbox));(._;>;);out center;", naam: "Theme park", zichtbaar: false},
 	{url: "?data=(node[tourism=viewpoint](bbox);way[tourism=viewpoint](bbox);rel[tourism=viewpoint](bbox));(._;>;);out center;", naam: "Viewpoint", zichtbaar: false},
 	{url: "?data=(node[man_made=windmill](bbox);way[man_made=windmill](bbox);rel[man_made=windmill](bbox));(._;>;);out center;", naam: "Windmill", zichtbaar: false},
 	{url: "?data=(node[man_made=watermill](bbox);way[man_made=watermill](bbox);rel[man_made=watermill](bbox));(._;>;);out center;", naam: "Watermill", zichtbaar: false},
-	{url: "?data=(node[tourism=zoo](bbox);way[tourism=zoo](bbox);rel[tourism=zoo](bbox));(._;>;);out center;", naam: "ZOO", zichtbaar: false}
+	{url: "?data=(node[tourism=zoo](bbox);way[tourism=zoo](bbox);rel[tourism=zoo](bbox));(._;>;);out center;", naam: "ZOO<hr>", zichtbaar: false},
+	{url: "?data=(node[tourism=yes](bbox);way[tourism=yes](bbox);rel[tourism=yes](bbox));(._;>;);out center;", naam: "Tourism=yes", zichtbaar: false}
 ];
 
 var hotelsdef = [
@@ -1453,7 +1459,7 @@ var hotelsdef = [
 	{url: "?data=(node[tourism=apartment](bbox);way[tourism=apartment](bbox);rel[tourism=apartment](bbox));(._;>;);out center;", naam: "Apartment", zichtbaar: false},
 	{url: "?data=(node[tourism=camp_site][backcountry!=yes](bbox);way[tourism=camp_site][backcountry!=yes](bbox);rel[tourism=camp_site][backcountry!=yes](bbox));(._;>;);out center;", naam: "Camp site", zichtbaar: false},
 	{url: "?data=(node[tourism=chalet](bbox);way[tourism=chalet](bbox);rel[tourism=chalet](bbox));(._;>;);out center;", naam: "Chalet", zichtbaar: false},			
-	{url: "?data=(node[tourism=guest_house](bbox);way[tourism=guest_house](bbox);rel[tourism=guest_house](bbox));(._;>;);out center;", naam: "Guest house", zichtbaar: false},
+	{url: "?data=(node[tourism~'guest_house|bed_and_breakfast'](bbox);way[tourism~'guest_house|bed_and_breakfast'](bbox);rel[tourism~'guest_house|bed_and_breakfast'](bbox));(._;>;);out center;", naam: "Guest house", zichtbaar: false},
 	{url: "?data=(node[tourism=hostel](bbox);way[tourism=hostel](bbox);rel[tourism=hostel](bbox));(._;>;);out center;", naam: "Hostel", zichtbaar: false},
 	{url: "?data=(node[tourism=hotel](bbox);way[tourism=hotel](bbox);rel[tourism=hotel](bbox));(._;>;);out center;", naam: "Hotel", zichtbaar: false},
 	{url: "?data=(node[tourism=motel](bbox);way[tourism=motel](bbox);rel[tourism=motel](bbox));(._;>;);out center;", naam: "Motel", zichtbaar: false}				
@@ -1494,7 +1500,7 @@ var shopdef = [
 	{url: "?data=(node[shop=hairdresser](bbox);way[shop=hairdresser](bbox);rel[shop=hairdresser](bbox));(._;>;);out center;", naam: "Hairdresser", zichtbaar: false},		
 	{url: "?data=(node[shop=jewelry](bbox);way[shop=jewelry](bbox);rel[shop=jewelry](bbox));(._;>;);out center;", naam: "Jewelry", zichtbaar: false},
 	{url: "?data=(node[shop=leather](bbox);way[shop=leather](bbox);rel[shop=leather](bbox));(._;>;);out center;", naam: "Leather", zichtbaar: false},
-	{url: "?data=(node[shop=musical_instrument](bbox);way[shop=musical_instrument](bbox);rel[shop=musical_instrument](bbox));(._;>;);out center;", naam: "Musical instrument",lijn: 2.7, zichtbaar: false},		
+	{url: "?data=(node[shop=musical_instrument](bbox);way[shop=musical_instrument](bbox);rel[shop=musical_instrument](bbox));(._;>;);out center;", naam: "Musical instrument", zichtbaar: false},		
 	{url: "?data=(node[shop=optician](bbox);way[shop=optician](bbox);rel[shop=optician](bbox));(._;>;);out center;", naam: "Optician", zichtbaar: false},
 	{url: "?data=(node[shop=pets](bbox);way[shop=pets](bbox);rel[shop=pets](bbox));(._;>;);out center;", naam: "Pets", zichtbaar: false},
 	{url: "?data=(node[shop=mobile_phone](bbox);way[shop=mobile_phone](bbox);rel[shop=mobile_phone](bbox));(._;>;);out center;", naam: "Phone", zichtbaar: false},
@@ -1539,7 +1545,7 @@ var restaurantsdef = [
 var variousdef = [
 	{url: "?data=(node[highway=bus_stop](bbox));(._;>;);out center;", naam: "Busstop", zichtbaar: false},
 	{url: "?data=(node[amenity=charging_station][bicycle=yes](bbox));(._;>;);out center;", naam: "E-bike charging", zichtbaar: false},
-	{url: "?data=(node[amenity=kindergarten](bbox);way[amenity=kindergarten](bbox);rel[amenity=kindergarten](bbox));(._;>;);out center;", naam: "Kindergarten", zichtbaar: false},
+	{url: "?data=(node[amenity~'childcare|kindergarten'](bbox);way[amenity~'childcare|kindergarten'](bbox);rel[amenity~'childcare|kindergarten'](bbox));(._;>;);out center;", naam: "Kindergarten", zichtbaar: false},
 	{url: "?data=(node[amenity=marketplace](bbox);way[amenity=marketplace](bbox);rel[amenity=marketplace](bbox));(._;>;);out center;", naam: "Marketplace", zichtbaar: false},
 	{url: "?data=(node[office](bbox);way[office](bbox);rel[office](bbox));(._;>;);out center;", naam: "Office", zichtbaar: false},	
 	{url: "?data=(node[amenity=recycling](bbox);way[amenity=recycling](bbox);rel[amenity=recycling](bbox));(._;>;);out center;", naam: "Recycling", zichtbaar: false},	
@@ -1557,7 +1563,9 @@ var variousdef = [
 	{url: "?data=(node[place=city](bbox));(._;>;);out center;", naam: "City", zichtbaar: false},
 	{url: "?data=(node[place=town](bbox));(._;>;);out center;", naam: "Town", zichtbaar: false},
 	{url: "?data=(node[place=village](bbox));(._;>;);out center;", naam: "Village", zichtbaar: false},
-	{url: "?data=(node[place=hamlet](bbox));(._;>;);out center;", naam: "Hamlet", zichtbaar: false}
+	{url: "?data=(node[place=hamlet](bbox));(._;>;);out center;", naam: "Hamlet", zichtbaar: false},
+	{url: "?data=(node[place=suburb](bbox));(._;>;);out center;", naam: "Suburb", zichtbaar: false}
+	
 //	{url: "?data=(way(bbox)[name~'^[Ff]ietspad'];)->.fietspaden;(way(foreach.fietspaden)[highway=cycleway][name][name~'^[Ff]ietspad$']);(._;>;);out center;", naam:"fietspad", zichtbaar: false}
 //	{url: "?data=(way[name~'^Fietspad|^fietspad|^pad$|^Pad$|cycleway|^path$|^Path$'](bbox);node(w);way[highway=cycleway][name!~'.'](bbox);node(w););out center;", naam:"fietspad", zichtbaar: false}
 ];
