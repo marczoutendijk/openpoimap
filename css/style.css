@@ -101,7 +101,10 @@ div.olControlMousePosition {
     width: 18px;
     right: 0;
     bottom: 80px;
+    visibility: hidden;
+/* 
     cursor: pointer;
+ */
 }
 
 .olControlOverviewMapExtentRectangle {
@@ -317,20 +320,11 @@ div.olControlSaveFeaturesItemInactive {
  */
 .olControlLayerSwitcher {
     position: absolute;
-/* 
-    top: 3px;
- */
     right: 0;
-/* 
-    width: 20em;
- */
     width: 15%;
     height: 100%;
     font-family: sans-serif;
     font-weight: bold;
-/* 
-    margin-top: 3px;
- */
     margin-left: 3px;
     margin-bottom: 3px;
     font-size: 0.6em;
@@ -358,13 +352,21 @@ div.olControlSaveFeaturesItemInactive {
     padding-left: 10px;
 }
 
+/* 
+Laatste versie: 08-01-16, 15:41
+In this version of openpoimap it is useless to hide the layerswitcher as it is outside the map.
+It is hidden
+ */
 .olControlLayerSwitcher .maximizeDiv,
 .olControlLayerSwitcher .minimizeDiv {
     width: 18px;
     height: 18px;
     top: 5px;
     right: 0;
+    visibility: hidden;
+/* 
     cursor: pointer;
+ */
 }
 
 .olBingAttribution {

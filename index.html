@@ -1,4 +1,4 @@
-<!-- OpenPoiMap aka Taglocator v1.1 - Marc Zoutendijk  -->
+<!-- OpenPoiMap aka Taglocator v1.26 - Marc Zoutendijk  -->
 <!-- (mz) Laatste versie: 07-01-16, 15:35 -->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html>
@@ -34,20 +34,30 @@ ONDERSTAANDE REGEL ALLEEN VOOR DE NL VERSIE! taglocator.html
  -->
 	<script src="js_source/nominatim_nl.js" type="text/javascript"></script>
 	
-<!-- 
-Hieronder de code voor google analytics
- -->
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-  ga('create', 'UA-38609407-3', 'auto');
-  ga('send', 'pageview');
-</script>
 	
 </head>
 <body>
+<!-- 
+Code to show edit/view button on top of screen
+With this you can always edit, even if there is no poi selected
+Thanks to code from Simon Poole
+ -->
+<div style="position: absolute;left:500px; z-index:1999; width: 100%">
+	<ul id="sddm">
+    	<li><a href="#" 
+        onmouseover="mopen('m1')" 
+        onmouseout="mclosetime()">View/Edit</a>
+        <div id="m1" style="z-index:2000"
+            onmouseover="mcancelclosetime()" 
+            onmouseout="mclosetime()">
+        <a href="#" onClick="openOSMI();">View in OSM Inspector</a>
+        <a href="#" onClick="openJOSM();">Edit in JOSM</a>
+        <a href="#" onClick="openP2();">Edit in Potlatch2</a>
+        <a href="#" onClick="openiD();">Edit in iD</a>
+        </li>
+    </ul>
+</div>
+
 <iframe height=0 width=0 name="josm_frame" class="hidden"></iframe> 
 <div id='layerswitcher' class='olControlLayerSwitcher'></div>
 <div id="map" style="width: 85%; height: 100%;"></div>
@@ -55,6 +65,7 @@ Hieronder de code voor google analytics
 	<b>User POIs</b>
 	<div>
 		<textarea id="tagselector_input" cols="30" rows="20">
+Instructions:		
 &bull;To find breweries use:
 craft=brewery
 &bull;Where is grass?
@@ -70,7 +81,8 @@ tourism=yes
 &bull;Anything IN name:
 {name}amenity=school
 &bull;Something near to something else:
-key1=val(distance)key2=val</textarea>
+key1=val(distance)key2=val
+&bull;Press clear before you enter something!
 </textarea>
 		<br/>
 		<button id="show_button">show</button> 
@@ -84,7 +96,7 @@ key1=val(distance)key2=val</textarea>
 	<table width="100%" border="0" cellspacing="0" cellpadding="6" height="100%">
 		<tr>
 			<td class="hostedby" style="border-bottom:1px solid #000000;border-right:1px solid #000000;">Hosted by<br><a href="http://oxilion.nl" target="_blank">oxillion.nl</a></td>
-			<td colspan="3" class="kaartnaam" style="border-bottom:1px solid #000000;border-right:1px solid #000000;" align="center">OpenPoiMap <a href='https://wiki.openstreetmap.org/wiki/Taglocator' target='_blank'><img src='img/help.gif'></a> 1.2</td>
+			<td colspan="3" class="kaartnaam" style="border-bottom:1px solid #000000;border-right:1px solid #000000;" align="center">OpenPoiMap <a href='https://wiki.openstreetmap.org/wiki/Taglocator' target='_blank'><img src='img/help.gif'></a> 1.26</td>
 			<td id="userpoilayer" class="dorment" style="border-bottom:1px solid #000000;" onclick="switchtab(this.id,tabtype.name);"align="center">User pois</td>
 		</tr>
 		<tr>

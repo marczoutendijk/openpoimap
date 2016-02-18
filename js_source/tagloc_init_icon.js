@@ -3,7 +3,6 @@
 // <!-- (mz) Laatste versie: 02-09-15, 15:07 -->
 // Trying another overpass server. (not working!)
 
-
 // standaard positie/zoom		
 var lat = 47.74;
 var lon = 8.921;

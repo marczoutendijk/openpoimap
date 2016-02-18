@@ -2,12 +2,10 @@
 // OpenPoiMap Javascript library
 //*****************************************************************
 
-// Version 1.2
+// Version 1.26
 
 // This library contains 4 separate blocks of code that were previously (up to version 1.05) included as standalone js-files.
-//<!-- (mz) Laatste versie: 07-01-16, 15:38 -->
-
-
+//<!-- (mz) Laatste versie: 14-01-16, 10:40 -->
 
 //*****************************************************************
 // FeaturePopup.js
@@ -34,7 +32,7 @@ var MONUREG = "http://monumentenregister.cultureelerfgoed.nl/php/main.php?cActio
 
 var WIKI = '<a target = "_blank" href="http://wiki.openstreetmap.org/wiki/Key:'; // base url to key wiki
 
-var buttonShow = false; // Keep the state of the hide/show button below the table in the popupwindow
+var buttonShow = false; // Keep the state of the hide/show button (in the popup)
 
 function showMoreLessButton(show) {
 	if (show) {
@@ -1117,6 +1115,7 @@ function icon2use (name,uDef,num) {
 			case "Artwork" : return "mapicons/artwork.png";
 			case "Attraction" : return "mapicons/star.png";
 			case "ATM" : return "mapicons/atm-2.png";	
+			case "Bank" : return "mapicons/bank.png";	
 			case "Bakery" : return "mapicons/bread.png";
 			case "Bar" : return "mapicons/bar.png";
 			case "BBQ" : return "mapicons/letter_b.png";
@@ -1133,6 +1132,7 @@ function icon2use (name,uDef,num) {
 			case "Cafe" : return "mapicons/cafetaria.png";
 			case "Camp site" : return "mapicons/camping-2.png";
 			case "Car" : return "mapicons/car.png";
+			case "Casino" : return "mapicons/casino.png";
 			case "Castle" : return "mapicons/castle-2.png";
 			case "Cemetery" : return "mapicons/cemetary.png";
 			case "Chalet" : return "mapicons/letter_c.png";
@@ -1152,6 +1152,7 @@ function icon2use (name,uDef,num) {
 			case "DIY/hardware" : return "mapicons/tools.png";
 			case "Drinking water" : return "mapicons/drinkingwater.png";
 			case "E-bike charging" : return "mapicons/e-bike-charging.png";
+			case "Embassy" : return "mapicons/embassy.png";
 			case "Fast food" : return "mapicons/fastfood.png";
 			case "Food court" : return "mapicons/letter_f.png";
 			case "fixme" : return "mapicons/letter_x.png";
@@ -1173,15 +1174,17 @@ function icon2use (name,uDef,num) {
 			case "Information" : return "mapicons/information.png";
 			case "Jewelry" : return "mapicons/jewelry.png";
 			case "Kindergarten" : return "mapicons/daycare.png";			
+			case "Kiosk" : return "mapicons/kiosk.png";			
 			case "Leather" : return "mapicons/bags.png";
 			case "Library" : return "mapicons/library.png";
-			case "Marketplace" : return "mapicons/letter_m.png";
+			case "Marketplace" : return "mapicons/market.png";
 			case "Memorial" : return "mapicons/memorial.png";
 			case "Monument/memorial" : return "mapicons/memorial.png";
- 			case "Monumental Tree" : return "mapicons/bigtree.png";
-			case "Motel" : return "mapicons/motel-2.png";
+ 			case "Monumental Tree" : return "mapicons/tree.png";
+			case "Motel<hr>" : return "mapicons/motel-2.png";
 			case "Museum" : return "mapicons/museum_art.png";
 			case "Musical instrument" : return "mapicons/music_rock.png";
+			case "Music school" : return "mapicons/musicschool.png";
 			case "Office" : return "mapicons/office-building.png";		
 			case "Optician" : return "mapicons/glasses.png";		
 			case "Organic" : return "mapicons/restaurant_vegetarian.png";
@@ -1197,25 +1200,29 @@ function icon2use (name,uDef,num) {
 			case "Post office" : return "mapicons/postal.png";
 			case "Pub" : return "mapicons/pub.png";
 			case "Public camera<hr>" : return "mapicons/video.png";			
-			case "Recycling" : return "mapicons/letter_r.png";
+			case "Recycling" : return "mapicons/recycle.png";
 			case "Restaurant" : return "mapicons/restaurant.png";
+			case "Sauna" : return "mapicons/sauna.png";
 			case "School/college" : return "mapicons/school.png";
 			case "Seafood" : return "mapicons/restaurant_fish.png";
 			case "Shoes" : return "mapicons/highhills.png";
 			case "Shopping centre" : return "mapicons/mall.png";
 			case "Soccer" : return "mapicons/soccer.png";
+			case "Spa" : return "mapicons/spa.png";
 			case "Statue" : return "mapicons/statue-2.png";
 			case "Supermarket" : return "mapicons/supermarket.png";
 			case "Taxi" : return "mapicons/taxi.png";
 			case "Textiles" : return "mapicons/textiles.png";
 			case "Theatre" : return "mapicons/theater.png";
-			case "Theme park" : return "mapicons/letter_t.png";
+			case "Theme park" : return "mapicons/themepark.png";
 			case "Toilets" : return "mapicons/toilets.png";
 			case "Tourism=yes" : return "mapicons/sight-2.png";
 			case "Toys" : return "mapicons/toys.png";
 			case "Travel agency<hr>" : return "mapicons/travel_agency.png";
 			case "University<hr>" : return "mapicons/university.png";			
 			case "Viewpoint" : return "mapicons/viewpoint.png";
+			case "Viewpoint" : return "mapicons/viewpoint.png";
+			case "Vineyard" : return "mapicons/vineyard.png";
 			case "Watermill" : return "mapicons/watermill-2.png";
 			case "Windmill" : return "mapicons/windmill-2.png";
 			case "Wine" : return "mapicons/winebar.png";			
@@ -1246,8 +1253,8 @@ function icon2use (name,uDef,num) {
 			case "Hamlet" : return "mapicons/letter_hamlet.png";
 			case "Suburb" : return "mapicons/letter_s.png";
 			case "fietspad" : return "mapicons/letter_f.png";
-			case "Note-Node" : return "mapicons/number_1.png";
-			case "Note-Way" : return "mapicons/number_2.png";
+			case "Note-Node" : return "mapicons/note1.png";
+			case "Note-Way" : return "mapicons/note2.png";
 			
 //			case "Test" : return "mapicons/number_1.png";	// voor testdoeleinden		
 //			case "Test2" : return "mapicons/number_2.png";	// voor testdoeleinden		
@@ -1403,12 +1410,15 @@ function noPos(ercode) {
 
 var amenitydef = [
 	{url: "?data=(node[amenity=atm](bbox);way[amenity=atm](bbox);node[amenity=bank][atm][atm!=no](bbox);way[amenity=bank][atm][atm!=no](bbox);rel[amenity=bank][atm][atm!=no](bbox));(._;>;);out center;", naam: "ATM", zichtbaar: false},
+	{url: "?data=(node[amenity=bank](bbox);way[amenity=bank](bbox);rel[amenity=bank](bbox));(._;>;);out center;", naam: "Bank", zichtbaar: false},
 	{url: "?data=(node[amenity=bench](bbox);node(w););out center;", naam: "Bench", zichtbaar: false},
 	{url: "?data=(node[amenity=bicycle_parking](bbox);way[amenity=bicycle_parking](bbox);rel[amenity=bicycle_parking](bbox));(._;>;);out center;", naam: "Bicycle parking", zichtbaar: false},
 	{url: "?data=(node[amenity=bicycle_rental](bbox);way[amenity=bicycle_rental](bbox);rel[amenity=bicycle_rental](bbox));(._;>;);out center;", naam: "Bicycle rental", zichtbaar: false},
 	{url: "?data=(node[amenity=cinema](bbox);way[amenity=cinema](bbox);rel[amenity=cinema](bbox));(._;>;);out center;", naam: "Cinema", zichtbaar: false},
+	{url: "?data=(node[amenity=embassy](bbox);way[amenity=embassy](bbox);rel[amenity=embassy](bbox));(._;>;);out center;", naam: "Embassy", zichtbaar: false},
 	{url: "?data=(node[amenity=fuel](bbox);way[amenity=fuel](bbox);rel[amenity=fuel](bbox));(._;>;);out center;", naam: "Fuel", zichtbaar: false},
 	{url: "?data=(node[amenity=library](bbox);way[amenity=library](bbox);rel[amenity=library](bbox));(._;>;);out center;", naam: "Library", zichtbaar: false},
+	{url: "?data=(node[amenity=music_school](bbox);way[amenity=music_school](bbox);rel[amenity=music_school](bbox));(._;>;);out center;", naam: "Music school", zichtbaar: false},
 	{url: "?data=(node[amenity=parking](bbox);way[amenity=parking](bbox);rel[amenity=parking](bbox));(._;>;);out center;", naam: "Parking", zichtbaar: false},
 	{url: "?data=(node[amenity=pharmacy](bbox);way[amenity=pharmacy](bbox);rel[amenity=pharmacy](bbox));(._;>;);out center;", naam: "Pharmacy", zichtbaar: false},
 	{url: "?data=(node[amenity=police](bbox);way[amenity=police](bbox);rel[amenity=police](bbox));(._;>;);out center;", naam: "Police", zichtbaar: false},
@@ -1420,12 +1430,13 @@ var amenitydef = [
 	{url: "?data=(node[amenity=toilets](bbox);way[amenity=toilets](bbox);rel[amenity=toilets](bbox));(._;>;);out center;", naam: "Toilets", zichtbaar: false},
 	{url: "?data=(node[amenity=university](bbox);way[amenity=university](bbox);rel[amenity=university](bbox));(._;>;);out center;", naam: "University<hr>", zichtbaar: false},
 // Check for various religions. We check on 5 religions AND also on a general place_of_worship but excluding the others.
+// zaterdag 9 januari 2016 Included rel for the stand-alone religions
 	{url: "?data=(node[amenity=place_of_worship][religion!~'christian|muslim|buddhist|hindu|jewish'](bbox);way[amenity=place_of_worship][religion!~'christian|muslim|buddhist|hindu|jewish'](bbox);rel[amenity=place_of_worship][religion!~'christian|muslim|buddhist|hindu|jewish'](bbox));(._;>;);out center;", naam: "Place of worship", zichtbaar: false},
- 	{url: "?data=(node[amenity=place_of_worship][religion=christian](bbox);way[amenity=place_of_worship][religion=christian](bbox));(._;>;);out center;", naam: "Church", zichtbaar: false},
- 	{url: "?data=(node[amenity=place_of_worship][religion=muslim](bbox);way[amenity=place_of_worship][religion=muslim](bbox));(._;>;);out center;", naam: "Mosque", zichtbaar: false},
- 	{url: "?data=(node[amenity=place_of_worship][religion=buddhist](bbox);way[amenity=place_of_worship][religion=buddhist](bbox));(._;>;);out center;", naam: "Buddhist Temple", zichtbaar: false},
-  	{url: "?data=(node[amenity=place_of_worship][religion=hindu](bbox);way[amenity=place_of_worship][religion=hindu](bbox));(._;>;);out center;", naam: "Hindu Temple", zichtbaar: false},
- 	{url: "?data=(node[amenity=place_of_worship][religion=jewish](bbox);way[amenity=place_of_worship][religion=jewish](bbox));(._;>;);out center;", naam: "Synagogue", zichtbaar: false},
+ 	{url: "?data=(node[amenity=place_of_worship][religion=christian](bbox);way[amenity=place_of_worship][religion=christian](bbox);rel[amenity=place_of_worship][religion=christian](bbox));(._;>;);out center;", naam: "Church", zichtbaar: false},
+ 	{url: "?data=(node[amenity=place_of_worship][religion=muslim](bbox);way[amenity=place_of_worship][religion=muslim](bbox);rel[amenity=place_of_worship][religion=muslim](bbox));(._;>;);out center;", naam: "Mosque", zichtbaar: false},
+ 	{url: "?data=(node[amenity=place_of_worship][religion=buddhist](bbox);way[amenity=place_of_worship][religion=buddhist](bbox);rel[amenity=place_of_worship][religion=buddhist](bbox));(._;>;);out center;", naam: "Buddhist Temple", zichtbaar: false},
+  	{url: "?data=(node[amenity=place_of_worship][religion=hindu](bbox);way[amenity=place_of_worship][religion=hindu](bbox);rel[amenity=place_of_worship][religion=hindu](bbox));(._;>;);out center;", naam: "Hindu Temple", zichtbaar: false},
+ 	{url: "?data=(node[amenity=place_of_worship][religion=jewish](bbox);way[amenity=place_of_worship][religion=jewish](bbox);rel[amenity=place_of_worship][religion=jewish](bbox));(._;>;);out center;", naam: "Synagogue", zichtbaar: false},
  // Check only for cemetery for human beings	
 	{url: "?data=(node[landuse=cemetery][animal!~'.'](bbox);way[landuse=cemetery][animal!~'.'](bbox);rel[landuse=cemetery][animal!~'.'](bbox));(._;>;);out center;", naam: "Cemetery", zichtbaar: false}
 ];
@@ -1434,6 +1445,7 @@ var tourismdef = [
 	{url: "?data=(node[amenity=arts_centre](bbox);way[amenity=arts_centre](bbox);rel[amenity=arts_centre](bbox));(._;>;);out center;", naam: "Arts centre", zichtbaar: false},
 	{url: "?data=(node[tourism=artwork][artwork_type!~'statue'](bbox);way[tourism=artwork](bbox);rel[tourism=artwork](bbox));(._;>;);out center;", naam: "Artwork", zichtbaar: false},
 	{url: "?data=(node[tourism=attraction](bbox);way[tourism=attraction](bbox);rel[tourism=attraction](bbox));(._;>;);out center;", naam: "Attraction", zichtbaar: false},
+	{url: "?data=(node[leisure=casino](bbox);way[leisure=casino](bbox);rel[leisure=casino](bbox));(._;>;);out center;", naam: "Casino", zichtbaar: false},
 	{url: "?data=(node[historic=castle](bbox);way[historic=castle](bbox);rel[historic=castle](bbox));(._;>;);out center;", naam: "Castle", zichtbaar: false},
 	{url: "?data=(node[tourism=gallery](bbox);way[tourism=gallery](bbox);rel[tourism=gallery](bbox));(._;>;);out center;", naam: "Gallery", zichtbaar: false},
 	{url: "?data=(node[heritage](bbox);way[heritage](bbox);rel[heritage](bbox));(._;>;);out center;", naam: "Heritage", zichtbaar: false},
@@ -1447,6 +1459,7 @@ var tourismdef = [
 	{url: "?data=(node[historic=statue](bbox);node[landmark=statue](bbox);node[tourism=artwork][artwork_type=statue](bbox));(._;>;);out center;", naam: "Statue", zichtbaar: false},
 	{url: "?data=(node[tourism=theme_park](bbox);way[tourism=theme_park](bbox);rel[tourism=theme_park](bbox));(._;>;);out center;", naam: "Theme park", zichtbaar: false},
 	{url: "?data=(node[tourism=viewpoint](bbox);way[tourism=viewpoint](bbox);rel[tourism=viewpoint](bbox));(._;>;);out center;", naam: "Viewpoint", zichtbaar: false},
+	{url: "?data=(node[landuse=vineyard](bbox);way[landuse=vineyard](bbox);rel[landuse=vineyard](bbox));(._;>;);out center;", naam: "Vineyard", zichtbaar: false},
 	{url: "?data=(node[man_made=windmill](bbox);way[man_made=windmill](bbox);rel[man_made=windmill](bbox));(._;>;);out center;", naam: "Windmill", zichtbaar: false},
 	{url: "?data=(node[man_made=watermill](bbox);way[man_made=watermill](bbox);rel[man_made=watermill](bbox));(._;>;);out center;", naam: "Watermill", zichtbaar: false},
 	{url: "?data=(node[tourism=zoo](bbox);way[tourism=zoo](bbox);rel[tourism=zoo](bbox));(._;>;);out center;", naam: "ZOO<hr>", zichtbaar: false},
@@ -1462,7 +1475,11 @@ var hotelsdef = [
 	{url: "?data=(node[tourism~'guest_house|bed_and_breakfast'](bbox);way[tourism~'guest_house|bed_and_breakfast'](bbox);rel[tourism~'guest_house|bed_and_breakfast'](bbox));(._;>;);out center;", naam: "Guest house", zichtbaar: false},
 	{url: "?data=(node[tourism=hostel](bbox);way[tourism=hostel](bbox);rel[tourism=hostel](bbox));(._;>;);out center;", naam: "Hostel", zichtbaar: false},
 	{url: "?data=(node[tourism=hotel](bbox);way[tourism=hotel](bbox);rel[tourism=hotel](bbox));(._;>;);out center;", naam: "Hotel", zichtbaar: false},
-	{url: "?data=(node[tourism=motel](bbox);way[tourism=motel](bbox);rel[tourism=motel](bbox));(._;>;);out center;", naam: "Motel", zichtbaar: false}				
+	{url: "?data=(node[tourism=motel](bbox);way[tourism=motel](bbox);rel[tourism=motel](bbox));(._;>;);out center;", naam: "Motel<hr>", zichtbaar: false},
+	{url: "?data=(node[amenity=casino](bbox);way[amenity=casino](bbox);rel[amenity=casino](bbox));(._;>;);out center;", naam: "Casino", zichtbaar: false},
+	{url: "?data=(node[leisure=spa](bbox);way[leisure=spa](bbox);rel[leisure=spa](bbox));(._;>;);out center;", naam: "Spa", zichtbaar: false},				
+	{url: "?data=(node[leisure=sauna](bbox);way[leisure=sauna](bbox);rel[leisure=sauna](bbox));(._;>;);out center;", naam: "Sauna", zichtbaar: false}				
+				
 ];
 
 var sportdef = [
@@ -1498,8 +1515,11 @@ var shopdef = [
 	{url: "?data=(node[shop=general](bbox);way[shop=general](bbox);rel[shop=general](bbox));(._;>;);out center;", naam: "General", zichtbaar: false},
 	{url: "?data=(node[shop=gift](bbox);way[shop=gift](bbox);rel[shop=gift](bbox));(._;>;);out center;", naam: "Gift", zichtbaar: false},
 	{url: "?data=(node[shop=hairdresser](bbox);way[shop=hairdresser](bbox);rel[shop=hairdresser](bbox));(._;>;);out center;", naam: "Hairdresser", zichtbaar: false},		
-	{url: "?data=(node[shop=jewelry](bbox);way[shop=jewelry](bbox);rel[shop=jewelry](bbox));(._;>;);out center;", naam: "Jewelry", zichtbaar: false},
+// See tagging-list january 2016	
+	{url: "?data=(node[shop~'jewelry|jewellery'](bbox);way[shop~'jewelry|jewellery'](bbox);rel[shop~'jewelry|jewellery'](bbox));(._;>;);out center;", naam: "Jewelry", zichtbaar: false},
+	{url: "?data=(node[shop=kiosk](bbox);way[shop=kiosk](bbox);rel[shop=kiosk](bbox));(._;>;);out center;", naam: "Kiosk", zichtbaar: false},
 	{url: "?data=(node[shop=leather](bbox);way[shop=leather](bbox);rel[shop=leather](bbox));(._;>;);out center;", naam: "Leather", zichtbaar: false},
+	{url: "?data=(node[amenity=marketplace](bbox);way[amenity=marketplace](bbox);rel[amenity=marketplace](bbox));(._;>;);out center;", naam: "Marketplace", zichtbaar: false},
 	{url: "?data=(node[shop=musical_instrument](bbox);way[shop=musical_instrument](bbox);rel[shop=musical_instrument](bbox));(._;>;);out center;", naam: "Musical instrument", zichtbaar: false},		
 	{url: "?data=(node[shop=optician](bbox);way[shop=optician](bbox);rel[shop=optician](bbox));(._;>;);out center;", naam: "Optician", zichtbaar: false},
 	{url: "?data=(node[shop=pets](bbox);way[shop=pets](bbox);rel[shop=pets](bbox));(._;>;);out center;", naam: "Pets", zichtbaar: false},
@@ -1544,7 +1564,7 @@ var restaurantsdef = [
 
 var variousdef = [
 	{url: "?data=(node[highway=bus_stop](bbox));(._;>;);out center;", naam: "Busstop", zichtbaar: false},
-	{url: "?data=(node[amenity=charging_station][bicycle=yes](bbox));(._;>;);out center;", naam: "E-bike charging", zichtbaar: false},
+	{url: "?data=(node[amenity=charging_station][bicycle=yes](bbox);rel[amenity=charging_station][bicycle=yes](bbox));(._;>;);out center;", naam: "E-bike charging", zichtbaar: false},
 	{url: "?data=(node[amenity~'childcare|kindergarten'](bbox);way[amenity~'childcare|kindergarten'](bbox);rel[amenity~'childcare|kindergarten'](bbox));(._;>;);out center;", naam: "Kindergarten", zichtbaar: false},
 	{url: "?data=(node[amenity=marketplace](bbox);way[amenity=marketplace](bbox);rel[amenity=marketplace](bbox));(._;>;);out center;", naam: "Marketplace", zichtbaar: false},
 	{url: "?data=(node[office](bbox);way[office](bbox);rel[office](bbox));(._;>;);out center;", naam: "Office", zichtbaar: false},	
@@ -1768,3 +1788,113 @@ function checkCookie() {
     }
     return lines;								// Teruggeven
 }
+
+function openOSMI()
+{
+	var centerLonLat = map.getCenter().transform(map.getProjectionObject(),new OpenLayers.Projection("EPSG:4326"));
+	
+	window.open("http://tools.geofabrik.de/osmi/?lon="+centerLonLat.lon+"&lat="+centerLonLat.lat+"&zoom="+ map.getZoom());
+}
+
+function openP2()
+{
+	if (map.getZoom() >= 13)
+	{
+        	var centerLonLat = map.getCenter().transform(map.getProjectionObject(),new OpenLayers.Projection("EPSG:4326"));
+
+        	window.open("http://www.openstreetmap.org/edit?editor=potlatch2&lat=" + centerLonLat.lat + "&lon=" + centerLonLat.lon + "&zoom="+map.getZoom());
+	}
+	else
+	{
+		alert("Zoom in to at least level 13 before editing!");
+	}
+}
+
+function openiD()
+{
+        if (map.getZoom() >= 13)
+        {
+                var centerLonLat = map.getCenter().transform(map.getProjectionObject(),new OpenLayers.Projection("EPSG:4326"));
+
+                window.open("http://www.openstreetmap.org/edit?editor=id#map="+map.getZoom()+ "/" + centerLonLat.lat + "/" + centerLonLat.lon);
+        }
+        else
+        {
+                alert("Zoom in to at least level 13 before editing!");
+        }
+}
+
+
+function openJOSM()
+{
+	if (map.getZoom() >= 13)
+	{
+        	var bounds = map.getExtent().transform(map.getProjectionObject(),new OpenLayers.Projection("EPSG:4326"));
+                $.ajax({
+                        url: 'http://127.0.0.1:8111/load_and_zoom' +
+                                '?left='   + bounds.left +
+                                '&right='  + bounds.right +
+                                '&top='    + bounds.top +
+                                '&bottom=' + bounds.bottom +
+                                '&new_layer=0',
+                        complete: function(response) {
+                                if (response.status != 200) {
+                                        window.alert('Could not connect to JOSM. Is JOSM running? Is Remote Control enabled?');
+                                }
+                        }
+                });
+
+	}
+	else
+	{
+		alert("Zoom in to at least level 13 before editing!");
+	}
+}
+
+// ===== Simon Poole View/Edit
+var timeout	= 500;
+var closetimer	= 0;
+var ddmenuitem	= 0;
+
+function mopen(id)
+{	
+	// cancel close timer
+	mcancelclosetime();
+
+	// close old layer
+	if(ddmenuitem) ddmenuitem.style.visibility = 'hidden';
+
+	// get new layer and show it
+	ddmenuitem = document.getElementById(id);
+	ddmenuitem.style.visibility = 'visible';
+
+}
+// close showed layer
+function mclose()
+{
+	if(ddmenuitem) ddmenuitem.style.visibility = 'hidden';
+}
+
+// go close timer
+function mclosetime()
+{
+	closetimer = window.setTimeout(mclose, timeout);
+}
+
+// cancel close timer
+function mcancelclosetime()
+{
+	if(closetimer)
+	{
+		window.clearTimeout(closetimer);
+		closetimer = null;
+	}
+}
+
+// function perma() 
+// {
+// // 	alert('Ja!');
+//     var centerLonLat = map.getCenter().transform(map.getProjectionObject(),new OpenLayers.Projection("EPSG:4326"));
+//  	window.history.replaceState("", "OpenPoiMap", "/~marczoutendijk/openpoimap/taglocatorhtml?map=amenity&zoom=" + map.getZoom + "&lat="+centerLonLat.lat + "&lon=" + centerLonLat.lon + "&layers=" + map.layers);
+// }
+
