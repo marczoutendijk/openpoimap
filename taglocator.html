@@ -1,6 +1,5 @@
-<!-- OpenPoiMap aka Taglocator v1.26 - Marc Zoutendijk  -->
-<!-- (mz) Laatste versie: 07-01-16, 15:58 -->
-
+<!-- OpenPoiMap aka Taglocator v1.27 - Marc Zoutendijk  -->
+<!-- (mz) Laatste versie: 04-12-15, 09:52 -->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">	
 <html>
 <head>
@@ -33,14 +32,36 @@ ONDERSTAANDE REGEL ALLEEN VOOR DE NL VERSIE! taglocator.html
 	
 </head>
 <body>
+<!-- 
+Code to show edit/view button on top of screen
+With this you can always edit, even if there is no poi selected
+Thanks to code from Simon Poole
+ -->
+<div style="position: absolute;left:500px; z-index:1999; width: 100%">
+	<ul id="sddm">
+    	<li><a href="#" 
+        onmouseover="mopen('m1')" 
+        onmouseout="mclosetime()">View/Edit</a>
+        <div id="m1" style="z-index:2000"
+            onmouseover="mcancelclosetime()" 
+            onmouseout="mclosetime()">
+        <a href="#" onClick="openOSMI();">View in OSM Inspector <img src="css/img/windowopen.png"></a>
+        <a href="#" onClick="openJOSM();">Edit in JOSM <img src="css/img/windowopen.png"></a>
+        <a href="#" onClick="openP2();">Edit in Potlatch2 <img src="css/img/windowopen.png"></a>
+        <a href="#" onClick="openiD();">Edit in iD <img src="css/img/windowopen.png"></a>
+        </li>
+    </ul>
+</div>
+
 <iframe height=0 width=0 name="josm_frame" class="hidden"></iframe> 
 <div id='layerswitcher' class='olControlLayerSwitcher'></div>
 <div id="map" style="width: 85%; height: 100%;"></div>
 </div>
 <div id="tagselector">
-	<b>User POIs</b>
+	User POIs
 	<div>
 		<textarea id="tagselector_input" cols="30" rows="20">
+Instructions:		
 &bull;To find breweries use:
 craft=brewery
 &bull;Where is grass?
@@ -56,9 +77,10 @@ tourism=yes
 &bull;Anything IN name:
 {name}amenity=school
 &bull;Something near to something else:
-key1=val(distance)key2=val</textarea>
-</textarea>
-		<br/>
+key1=val(distance)key2=val
+&bull;Press clear before you enter something!
+		</textarea>
+<br/>	
 		<button id="show_button">show</button> 
 		<button id="clear_button">clear</button> 
 		<button id="save_button">save</button> 
@@ -70,7 +92,7 @@ key1=val(distance)key2=val</textarea>
 	<table width="100%" border="0" cellspacing="0" cellpadding="6" height="100%">
 		<tr>
 			<td class="hostedby" style="border-bottom:1px solid #000000;border-right:1px solid #000000;">Hosted by<br><a href="http://oxilion.nl" target="_blank">oxillion.nl</a></td>
-			<td colspan="3" class="kaartnaam" style="border-bottom:1px solid #000000;border-right:1px solid #000000;" align="center">OPM - Taglocator <a href='https://wiki.openstreetmap.org/wiki/Taglocator' target='_blank'><img src='img/help.gif'></a> 1.2</td>
+			<td colspan="3" class="kaartnaam" style="border-bottom:1px solid #000000;border-right:1px solid #000000;" align="center">OPM - Taglocator <a href='https://wiki.openstreetmap.org/wiki/Taglocator' target='_blank'><img src='img/help.gif'></a> 1.27</td>
 			<td id="userpoilayer" class="dorment" style="border-bottom:1px solid #000000;" onclick="switchtab(this.id,tabtype.name);"align="center">User pois</td>
 		</tr>
 		<tr>

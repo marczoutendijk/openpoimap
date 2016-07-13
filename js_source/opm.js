@@ -2,10 +2,12 @@
 // OpenPoiMap Javascript library
 //*****************************************************************
 
-// Version 1.26
+// Version 1.27
 
 // This library contains 4 separate blocks of code that were previously (up to version 1.05) included as standalone js-files.
-//<!-- (mz) Laatste versie: 14-01-16, 10:40 -->
+//<!-- (mz) Laatste versie: 12-07-2016, 15:53 -->
+
+
 
 //*****************************************************************
 // FeaturePopup.js
@@ -380,6 +382,7 @@ FeaturePopup = OpenLayers.Class({
 	processContactTag: function(key, value) {
 		switch (key) {
 			case "website":
+			case "webcam":
 			case "url":
 				return this.makeLink(value, value, true);
 			case "image":
@@ -1140,6 +1143,7 @@ function icon2use (name,uDef,num) {
 			case "Chemist" : return "mapicons/drugstore.png";
 			case "Chocolate/Confectionery" : return "mapicons/candy.png";
 			case "Cinema" : return "mapicons/cinema.png";			
+			case "Clinic" : return "mapicons/firstaid.png";			
 			case "Clothes" : return "mapicons/clothers_female.png";
 			case "Coffee" : return "mapicons/coffee.png";
 			case "Construction" : return "mapicons/highwayconstruction.png";
@@ -1157,6 +1161,7 @@ function icon2use (name,uDef,num) {
 			case "Food court" : return "mapicons/letter_f.png";
 			case "fixme" : return "mapicons/letter_x.png";
 			case "Fire hose/extinguisher<hr>" : return "mapicons/fireexstinguisher.png";
+			case "Firestation" : return "mapicons/firemen.png";
 			case "Fuel" : return "mapicons/fillingstation.png";
 			case "Gallery" : return "mapicons/artgallery.png";
 			case "Garden centre" : return "mapicons/flowers-1.png";
@@ -1167,6 +1172,7 @@ function icon2use (name,uDef,num) {
 			case "Hairdresser" : return "mapicons/barber.png";
 			case "Heritage" : return "mapicons/worldheritagesite.png";			
 			case "Historic" : return "mapicons/star-3.png";			
+			case "Hospital" : return "mapicons/hospital-building.png";			
  			case "Hostel" : return "mapicons/hostel_0star.png";
  			case "Hotel" : return "mapicons/hotel_0star.png";
 			case "Ice cream" : return "mapicons/icecream.png";
@@ -1196,10 +1202,10 @@ function icon2use (name,uDef,num) {
 			case "Picnic" : return "mapicons/picnic-2.png";
 			case "Place of worship" : return "mapicons/church-2.png";
 			case "Police" : return "mapicons/police.png";
-			case "Post box" : return "mapicons/letter_p.png";
+			case "Letter box" : return "mapicons/postal2.png";
 			case "Post office" : return "mapicons/postal.png";
 			case "Pub" : return "mapicons/pub.png";
-			case "Public camera<hr>" : return "mapicons/video.png";			
+			case "Public camera<hr>" : return "mapicons/cctv.png";			
 			case "Recycling" : return "mapicons/recycle.png";
 			case "Restaurant" : return "mapicons/restaurant.png";
 			case "Sauna" : return "mapicons/sauna.png";
@@ -1220,7 +1226,6 @@ function icon2use (name,uDef,num) {
 			case "Toys" : return "mapicons/toys.png";
 			case "Travel agency<hr>" : return "mapicons/travel_agency.png";
 			case "University<hr>" : return "mapicons/university.png";			
-			case "Viewpoint" : return "mapicons/viewpoint.png";
 			case "Viewpoint" : return "mapicons/viewpoint.png";
 			case "Vineyard" : return "mapicons/vineyard.png";
 			case "Watermill" : return "mapicons/watermill-2.png";
@@ -1415,14 +1420,17 @@ var amenitydef = [
 	{url: "?data=(node[amenity=bicycle_parking](bbox);way[amenity=bicycle_parking](bbox);rel[amenity=bicycle_parking](bbox));(._;>;);out center;", naam: "Bicycle parking", zichtbaar: false},
 	{url: "?data=(node[amenity=bicycle_rental](bbox);way[amenity=bicycle_rental](bbox);rel[amenity=bicycle_rental](bbox));(._;>;);out center;", naam: "Bicycle rental", zichtbaar: false},
 	{url: "?data=(node[amenity=cinema](bbox);way[amenity=cinema](bbox);rel[amenity=cinema](bbox));(._;>;);out center;", naam: "Cinema", zichtbaar: false},
+	{url: "?data=(node[amenity=clinic](bbox);way[amenity=clinic](bbox);rel[amenity=clinic](bbox));(._;>;);out center;", naam: "Clinic", zichtbaar: false},
 	{url: "?data=(node[amenity=embassy](bbox);way[amenity=embassy](bbox);rel[amenity=embassy](bbox));(._;>;);out center;", naam: "Embassy", zichtbaar: false},
+	{url: "?data=(node[amenity=firestation](bbox);way[amenity=firestation](bbox);rel[amenity=firestation](bbox));(._;>;);out center;", naam: "Firestation", zichtbaar: false},
 	{url: "?data=(node[amenity=fuel](bbox);way[amenity=fuel](bbox);rel[amenity=fuel](bbox));(._;>;);out center;", naam: "Fuel", zichtbaar: false},
+	{url: "?data=(node[amenity=hospital](bbox);way[amenity=hospital](bbox);rel[amenity=hospital](bbox));(._;>;);out center;", naam: "Hospital", zichtbaar: false},
 	{url: "?data=(node[amenity=library](bbox);way[amenity=library](bbox);rel[amenity=library](bbox));(._;>;);out center;", naam: "Library", zichtbaar: false},
 	{url: "?data=(node[amenity=music_school](bbox);way[amenity=music_school](bbox);rel[amenity=music_school](bbox));(._;>;);out center;", naam: "Music school", zichtbaar: false},
 	{url: "?data=(node[amenity=parking](bbox);way[amenity=parking](bbox);rel[amenity=parking](bbox));(._;>;);out center;", naam: "Parking", zichtbaar: false},
 	{url: "?data=(node[amenity=pharmacy](bbox);way[amenity=pharmacy](bbox);rel[amenity=pharmacy](bbox));(._;>;);out center;", naam: "Pharmacy", zichtbaar: false},
 	{url: "?data=(node[amenity=police](bbox);way[amenity=police](bbox);rel[amenity=police](bbox));(._;>;);out center;", naam: "Police", zichtbaar: false},
-	{url: "?data=(node[amenity=post_box](bbox);node(w););out center;", naam: "Post box", zichtbaar: false},
+	{url: "?data=(node[amenity=post_box](bbox);node(w););out center;", naam: "Letter box", zichtbaar: false},
 	{url: "?data=(node[amenity=post_office](bbox);way[amenity=post_office](bbox);rel[amenity=post_office](bbox));(._;>;);out center;", naam: "Post office", zichtbaar: false},
 	{url: "?data=(node[amenity~'^school$|^college$'](bbox);way[amenity~'^school$|^college$'](bbox);rel[amenity~'^school$|^college$'](bbox));(._;>;);out center;", naam: "School/college", zichtbaar: false},
 	{url: "?data=(node[amenity=taxi](bbox);way[amenity=taxi](bbox);rel[amenity=taxi](bbox));(._;>;);out center;", naam: "Taxi", zichtbaar: false},
@@ -1579,7 +1587,7 @@ var variousdef = [
 	{url: "?data=(way[note](bbox));(._;>;);out center;", naam: "Note-Way", zichtbaar: false},
 	{url: "?data=(node[highway=construction](bbox);way[highway=construction](bbox));(._;>;);out center;", naam: "Construction", zichtbaar: false},
 	{url: "?data=(node[image](bbox);way[image](bbox));(._;>;);out center;", naam: "Image", zichtbaar: false},
-	{url: "?data=(node['surveillance:type'='camera'](bbox));(._;>;);out center;", naam: "Public camera<hr>", zichtbaar: false},
+	{url: "?data=(node['surveillance:type'~'camera|webcam'](bbox));(._;>;);out center;", naam: "Public camera<hr>", zichtbaar: false},
 	{url: "?data=(node[place=city](bbox));(._;>;);out center;", naam: "City", zichtbaar: false},
 	{url: "?data=(node[place=town](bbox));(._;>;);out center;", naam: "Town", zichtbaar: false},
 	{url: "?data=(node[place=village](bbox));(._;>;);out center;", naam: "Village", zichtbaar: false},
@@ -1660,7 +1668,7 @@ function makeUserLayer (userTags) {							// userTags bevat de "key=value" paren
 				
 //userstring: key=value(radius)key2=value2
 // To search something within a given distance from something else.
-// First search for key=value and store result in .poi then search around that point for key2=val2 and store result in .result
+// First search for key=value and store result. then search around that point for key2=val2 and store result in .result
 // Finally - to show both both key and key2 search again around result to show key.
 // See discussion on: http://forum.openstreetmap.org/viewtopic.php?id=28807&p=13				
 				case "searchAround" :	
@@ -1891,10 +1899,4 @@ function mcancelclosetime()
 	}
 }
 
-// function perma() 
-// {
-// // 	alert('Ja!');
-//     var centerLonLat = map.getCenter().transform(map.getProjectionObject(),new OpenLayers.Projection("EPSG:4326"));
-//  	window.history.replaceState("", "OpenPoiMap", "/~marczoutendijk/openpoimap/taglocatorhtml?map=amenity&zoom=" + map.getZoom + "&lat="+centerLonLat.lat + "&lon=" + centerLonLat.lon + "&layers=" + map.layers);
-// }
 
