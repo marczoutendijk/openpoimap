@@ -54,8 +54,8 @@ function popupLinks(lonlat, feature, show) {
 	// Link naar MtM	  
 	thelink = thelink + "<a href=\"http://mijndev.openstreetmap.nl/~allroads/mtm/?map=roads&zoom=" + map.getZoom() + "&lat=" + lonlat.lat + "&lon=" + lonlat.lon + "&layers=B000000FFFFFFFFFFFFTFF\" target=\"_blank\"><img src='img/osm.gif'>&nbsp;MtM</a>&nbsp;";
 	// Link naar Mapillary	  
-	thelink = thelink + "<a href=\"http://www.mapillary.com/map/im/bbox/" + (lonlat.lat - 0.005) + "/" + (lonlat.lat + 0.005) + "/" + (lonlat.lon - 0.005) + "/" + (lonlat.lon + 0.005) + "\" target=\"_blank\"><img src='img/mapillary.png'>&nbsp;Mapillary</a><p>";
-
+	thelink = thelink + "<a href=\"https://www.mapillary.com/app/?lat=" + lonlat.lat + "&lng=" + lonlat.lon + "&z="+ map.getZoom()  + "\" target=\"_blank\"><img src='img/mapillary.png'>&nbsp;Mapillary</a><p>";
+	
 	// Hoe wordt de te bewerken oppervlakte berekend voor JOSM?  
 	// var area = 0.01 // oorspronkelijke waarde
 	// mz: Gegevensset kleiner gemaakt voor josm
