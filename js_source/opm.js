@@ -1463,7 +1463,7 @@ var tourismdef = [
 	{url: "?data=(node[historic~'^monument$|^memorial$'](bbox);way[historic~'^monument$|^memorial$'](bbox);rel[historic~'^monument$|^memorial$'](bbox));(._;>;);out center;", naam: "Monument/memorial", zichtbaar: false},
 	{url: "?data=(node[natural=tree][monument=yes](bbox));(._;>;);out center;", naam: "Monumental Tree", zichtbaar: false},
 	{url: "?data=(node[tourism=museum](bbox);way[tourism=museum](bbox);rel[tourism=museum](bbox));(._;>;);out center;", naam: "Museum", zichtbaar: false},
-	{url: "?data=(node[tourism=picnic_site](bbox);way[tourism=picnic_site](bbox);rel[tourism=picnic_site](bbox));(._;>;);out center;", naam: "Picnic", zichtbaar: false},
+	{url: "?data=(node[tourism=picnic_site](bbox);way[tourism=picnic_site](bbox);rel[tourism=picnic_site](bbox);node[leisure=picnic_table](bbox));(._;>;);out center;", naam: "Picnic", zichtbaar: false},
 	{url: "?data=(node[historic=statue](bbox);node[landmark=statue](bbox);node[tourism=artwork][artwork_type=statue](bbox));(._;>;);out center;", naam: "Statue", zichtbaar: false},
 	{url: "?data=(node[tourism=theme_park](bbox);way[tourism=theme_park](bbox);rel[tourism=theme_park](bbox));(._;>;);out center;", naam: "Theme park", zichtbaar: false},
 	{url: "?data=(node[tourism=viewpoint](bbox);way[tourism=viewpoint](bbox);rel[tourism=viewpoint](bbox));(._;>;);out center;", naam: "Viewpoint", zichtbaar: false},
