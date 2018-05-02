@@ -1,8 +1,9 @@
-// Init for Taglocator 1.27
+// Init for Taglocator 1.29a
 // Taglocator is de testversie voor OPM.
-// <!-- (mz) Laatste versie: 12-07-2016, 11:38 -->
-// Mapquest requires a developer key as of 11-7-2016 - Switched it off for now
+<!-- (mz) Laatste versie: 02-05-2018, 17:04 -->
 
+// Mapquest requires a developer key as of 11-7-2016 - Switched it off for now
+// https replaces http for OSM
 
 // standaard positie/zoom		
 var lat = 47.74;
@@ -18,10 +19,6 @@ var tempCount = 0;
 var map;
 var COOKIE_KEEP = 365;			// Number of days to keep the cookies
 var QURL = "http://overpass-api.de/api/interpreter/"; //default
-// After discussion with Roland Olbricht he send me 2 other possible overpass servers
-// I can't get them to work though...
-// var QURL2 = "http://dev.overpass-api.de/api_drolbr/"; 
-// var QURL3 = "http://overpass.osm.rambler.ru/cgi/";
 var featurePopup;
 
 // Gebruikerswaarden per regel in array opslaan
@@ -74,6 +71,7 @@ window.onload = function () {
 			new OpenLayers.Control.Navigation(),
 			new OpenLayers.Control.PanZoomBar(),
 			plink,
+			new OpenLayers.Control.MousePosition(),
 			new OpenLayers.Control.Attribution()
 		],
 		maxExtent: new OpenLayers.Bounds(-20037508.34,-20037508.34,20037508.34,20037508.34),
@@ -149,7 +147,7 @@ window.onload = function () {
 					bounds);
 
 				url = OpenLayers.String.format(
-	'http://www.openstreetmap.org/?minlon=${left}&minlat=${bottom}&maxlon=${right}&maxlat=${top}',
+	'https://www.openstreetmap.org/?minlon=${left}&minlat=${bottom}&maxlon=${right}&maxlat=${top}',
 					bounds);
 					location.href=url;
 			}
@@ -209,33 +207,16 @@ document.getElementById('load_button').onclick = function () {
 	} // Begin weer opnieuw met het doorlopen van de keuzen
 };
 
-// ==== de baselayers ==
-//Mapquest requires developer key - I switched it off for now...
-// 	var mapquest = new OpenLayers.Layer.OSM(
-// 		"MapQuest",
-// 		"http://otile1.mqcdn.com/tiles/1.0.0/osm/${z}/${x}/${y}.png",
-// 		{'attribution': '© <a href="http://www.openstreetmap.org/copyright/en" target="_blank">OpenStreetMap</a> Contributors<br>Cartography © MapQuest<br>Overlay data licensed under ODbL'}
-// 	); 
 //Mapnik
 	layerMapnik = new OpenLayers.Layer.OSM.Mapnik(
 		"Mapnik",
-		{'attribution': '© <a href="http://www.openstreetmap.org/copyright/en" target="_blank">OpenStreetMap</a> Contributors<br>Cartography licensed as CC-BY-SA<br>Overlay data licensed under ODbL '}
+		{'attribution': '© <a href="https://www.openstreetmap.org/copyright/en" target="_blank">OpenStreetMap</a> Contributors<br>Cartography licensed as CC-BY-SA<br>Overlay data licensed under ODbL '}
 	);
-// HikeBike
-// 	var hikebike = new OpenLayers.Layer.XYZ(
-// 		'HikeBike',
-// 		['http://a.tiles.wmflabs.org/hikebike/${z}/${x}/${y}.png', 
-// 		'http://b.tiles.wmflabs.org/hikebike/${z}/${x}/${y}.png', 
-// 		'http://c.tiles.wmflabs.org/hikebike/${z}/${x}/${y}.png'],
-// 		{description: 'Colin Marquardt Hike & Bike Map',permaId: 'Kh',sphericalMercator: true}
-// 	);	
-
-
+//ArcGis
 		var arcgis = new OpenLayers.Layer.XYZ("ArcGIS World Topo","http://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/${z}/${y}/${x}",{'attribution': 'Cartography © <a href="http://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer" target="_blank">ArcGIS</a><br>Overlay data OpenStreetMap contributors, licensed under ODbL '}); 
 
 		var positron = new OpenLayers.Layer.XYZ("Positron (CartoDB)","http://s.basemaps.cartocdn.com/light_all/${z}/${x}/${y}.png",{'attribution': '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://cartodb.com/attributions">CartoDB</a>'});
 	
-//	map.addLayers([mapquest,hikebike,layerMapnik]);
 	map.addLayers([layerMapnik,arcgis,positron]);
 
 	// === layers, zoom and position

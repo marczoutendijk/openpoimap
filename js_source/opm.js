@@ -2,11 +2,12 @@
 // OpenPoiMap Javascript library
 //*****************************************************************
 
-// Version 1.27
+// Version 1.29a
 
 // This library contains 4 separate blocks of code that were previously (up to version 1.05) included as standalone js-files.
-//<!-- (mz) Laatste versie: 12-07-2016, 15:53 -->
+//<!-- (mz) Laatste versie: 18-03-2018, 13:56 -->
 
+// http gewijzigd in https bij openstreetmap.org
 
 
 //*****************************************************************
@@ -21,9 +22,7 @@ var DELIJN = "https://www.delijn.be/nl/haltes/halte/"; // De Lijn in Vlaanderen
 var MDB = "http://www.molendatabase.nl/nederland/molen.php?nummer="; // Molendatabase
 var DHM = "http://www.molens.nl/site/dbase/molen.php?mid="; // De Hollandse Molen
 
-// The Dutch Monument Register requires two links to get to the information you need.
-// First you go this one, and once on that page you have to click again to get to the relevant page for that monument
-var MONUREG = "http://monumentenregister.cultureelerfgoed.nl/php/main.php?cAction=search&sCompMonNr=";
+var MONUREG = "https://monumentenregister.cultureelerfgoed.nl/monuments/";
 
 // The links below are needed if you know both the OBJnr AND the MonNr.
 // Often they are the same, but sometimes they are different
@@ -32,7 +31,7 @@ var MONUREG = "http://monumentenregister.cultureelerfgoed.nl/php/main.php?cActio
 // var MON2 = "&oOrder=ASC&cLast=1&oField=OBJ_RIJKSNUMMER&sCompMonNr=";
 // var MON3 = "&sCompMonName=&sStatus=&sProvincie=&sGemeente=&sPlaats=&sStraat=&sHuisnummer=&sPostcode=&sFunctie=&sHoofdcategorie=&sSubcategorie=&sOmschrijving=&ID=0&oField=OBJ_RIJKSNUMMER";
 
-var WIKI = '<a target = "_blank" href="http://wiki.openstreetmap.org/wiki/Key:'; // base url to key wiki
+var WIKI = '<a target = "_blank" href="https://wiki.openstreetmap.org/wiki/Key:'; // base url to key wiki
 
 var buttonShow = false; // Keep the state of the hide/show button (in the popup)
 
@@ -46,7 +45,7 @@ function showMoreLessButton(show) {
 function popupLinks(lonlat, feature, show) {
 	var buttonClass = (show ? 'popupLinksShow' : 'popupLinksHide');
 	// Link naar OSM
-	var thelink = "<div id=\"tlPop\" class=\"" + buttonClass + "\"><b>View area with:</b><br><a href=\"http://www.openstreetmap.org?lat=" + lonlat.lat + "&lon=" + lonlat.lon + _ZOOM_ + "\" target=\"_blank\"><img src='img/osm.gif'>&nbsp;OSM</a>&nbsp";
+	var thelink = "<div id=\"tlPop\" class=\"" + buttonClass + "\"><b>View area with:</b><br><a href=\"https://www.openstreetmap.org?lat=" + lonlat.lat + "&lon=" + lonlat.lon + _ZOOM_ + "\" target=\"_blank\"><img src='img/osm.gif'>&nbsp;OSM</a>&nbsp";
 	// Link naar Google	  
 	thelink = thelink + "<a href=\"https://maps.google.nl/maps?ll=" + lonlat.lat + "," + lonlat.lon + "&t=h&z=15\" target=\"_blank\"><img src='img/google.gif'>&nbsp;Google</a>&nbsp;";
 	// Link naar Bing
@@ -54,7 +53,10 @@ function popupLinks(lonlat, feature, show) {
 	// Link naar MtM	  
 	thelink = thelink + "<a href=\"http://mijndev.openstreetmap.nl/~allroads/mtm/?map=roads&zoom=" + map.getZoom() + "&lat=" + lonlat.lat + "&lon=" + lonlat.lon + "&layers=B000000FFFFFFFFFFFFTFF\" target=\"_blank\"><img src='img/osm.gif'>&nbsp;MtM</a>&nbsp;";
 	// Link naar Mapillary	  
-	thelink = thelink + "<a href=\"http://www.mapillary.com/map/im/bbox/" + (lonlat.lat - 0.005) + "/" + (lonlat.lat + 0.005) + "/" + (lonlat.lon - 0.005) + "/" + (lonlat.lon + 0.005) + "\" target=\"_blank\"><img src='img/mapillary.png'>&nbsp;Mapillary</a><p>";
+	//	Mapillary changed linkformat in september 2016
+	thelink = thelink + "<a href=\"https://www.mapillary.com/app/?lat=" + lonlat.lat + "&lng=" + lonlat.lon + "&z="+ map.getZoom()  + "\" target=\"_blank\"><img src='img/mapillary.png'>&nbsp;Mapillary</a><p>";
+	
+
 
 	// Hoe wordt de te bewerken oppervlakte berekend voor JOSM?  
 	// var area = 0.01 // oorspronkelijke waarde
@@ -68,8 +70,8 @@ function popupLinks(lonlat, feature, show) {
 	var cright = cleft + (2 * area);
 	var fid = feature.fid.split("."); // type en ID van object
 	thelink = thelink + "<b>Edit area with:</b><br><a href=\"http://localhost:8111/load_and_zoom?top=" + ctop + "&bottom=" + cbottom + "&left=" + cleft + "&right=" + cright + "&select=" + fid[0] + fid[1] + "\" target=\"josm_frame\">JOSM</a>&nbsp;&diams;&nbsp;";
-	thelink = thelink + "<a href=\"http://www.openstreetmap.org/edit?editor=id&lat=" + lonlat.lat + "&lon=" + lonlat.lon + _ZOOM_ + "\" target=\"_blank\">ID editor</a>&nbsp;&diams;&nbsp;";
-	thelink = thelink + "<a href=\"http://www.openstreetmap.org/edit?editor=potlatch2&lat=" + lonlat.lat + "&lon=" + lonlat.lon + _ZOOM_ + "\" target=\"_blank\">Potlatch&nbsp;2</a>";
+	thelink = thelink + "<a href=\"https://www.openstreetmap.org/edit?editor=id&lat=" + lonlat.lat + "&lon=" + lonlat.lon + _ZOOM_ + "\" target=\"_blank\">ID editor</a>&nbsp;&diams;&nbsp;";
+	thelink = thelink + "<a href=\"https://www.openstreetmap.org/edit?editor=potlatch2&lat=" + lonlat.lat + "&lon=" + lonlat.lon + _ZOOM_ + "\" target=\"_blank\">Potlatch&nbsp;2</a>";
 	thelink = thelink + "</div>"; // id = tlPop
 	return thelink;
 }
@@ -250,7 +252,7 @@ FeaturePopup = OpenLayers.Class({
 			}
 		});
 		// process the open streetmap ID link and put in last line of table
-		var htmlOSM = '<a target = "_blank" href="http://www.openstreetmap.org/browse/' + type + "/" + id + '">' + type + " " + id + "</a>";
+		var htmlOSM = '<a target = "_blank" href="https://www.openstreetmap.org/browse/' + type + "/" + id + '">' + type + " " + id + "</a>";
 		htmlTableFoot += '<tr class="popupRowOSM"><td class="popupKey">' + 'OSM&nbsp;info' + '</td><td class="popupValue">' + htmlOSM + '</td></tr>';
 		htmlTableFoot += '</table>';
 		return htmlTableStart + htmlTableHead + html + htmlTableFoot;
@@ -351,8 +353,9 @@ FeaturePopup = OpenLayers.Class({
 		k = value.split(/[;,]/);
 		switch (key) {
 			// rce is the code used by the Dutch Monument Register
+			// The format of this link changed somewhere in 2016
 			case 'rce':
-				return this.makeLink(MONUREG + value, 'Monument register: ' + value, true);
+				return this.makeLink(MONUREG + value + '?MonumentId=' + value, 'Monument register: ' + value, true);
 				//return this.makeLink(MON1 + value + MON2 + value + MON3, 'Monument register: ' + value, true);
 				// The Flemish Public Transport Operator
 			case 'De_Lijn':
@@ -468,6 +471,8 @@ FeaturePopup = OpenLayers.Class({
 		if (postcode || city) html += "<br />\n";
 		return html;
 	},
+	
+
 
 	CLASS_NAME: "FeaturePopup"
 });
@@ -1091,6 +1096,20 @@ ZoomLimitedBBOXStrategy = OpenLayers.Class(OpenLayers.Strategy.BBOX,
 	CLASS_NAME : "ZoomLimitedBBOXStrategy"
 }
 );
+
+function getTrafficsign (name,uDef) {
+	if  (uDef == false)  { // geen gebruikers tags
+		switch (name) {
+			case  "traffic_sign=*" : return "mapicons/number_0.png";
+			break;
+			case  "city_limit" : return "mapicons/number_1.png";
+			break;
+			default: return "https://duinoord.xs4all.nl/OSM/JOSM/NL_traffic_signs/svgbuilder/show.svg.php?signs=" + "NL_" + name + ".svg";
+			break;
+		} 
+	}		
+	else return "mapicons/number_" + num + ".png";		// gebruikers tag
+}
 
 // For some icons on the map a different geometry is needed. Especially for triangular traffic signs
 // The next two functions deal with this - although only for one condition: "Construction"
@@ -1810,7 +1829,7 @@ function openP2()
 	{
         	var centerLonLat = map.getCenter().transform(map.getProjectionObject(),new OpenLayers.Projection("EPSG:4326"));
 
-        	window.open("http://www.openstreetmap.org/edit?editor=potlatch2&lat=" + centerLonLat.lat + "&lon=" + centerLonLat.lon + "&zoom="+map.getZoom());
+        	window.open("https://www.openstreetmap.org/edit?editor=potlatch2&lat=" + centerLonLat.lat + "&lon=" + centerLonLat.lon + "&zoom="+map.getZoom());
 	}
 	else
 	{
@@ -1824,7 +1843,7 @@ function openiD()
         {
                 var centerLonLat = map.getCenter().transform(map.getProjectionObject(),new OpenLayers.Projection("EPSG:4326"));
 
-                window.open("http://www.openstreetmap.org/edit?editor=id#map="+map.getZoom()+ "/" + centerLonLat.lat + "/" + centerLonLat.lon);
+                window.open("https://www.openstreetmap.org/edit?editor=id#map="+map.getZoom()+ "/" + centerLonLat.lat + "/" + centerLonLat.lon);
         }
         else
         {
