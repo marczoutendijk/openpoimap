@@ -11,4 +11,7 @@ I also removed te use of the compressed js-libraries for now.
 
 Update 1.29a: a number of cosmetical edits to varius parts of the sourcecode.
 
+Also after a change of the overpass query format, an extra ";" became necessary to fix the normal working.
+
+
 
