@@ -7,9 +7,9 @@ This tool is a user-friendly approach to the underlying database of OSM.<br>
 In addition to this, it is possible to define your own key:value pairs to search for.<br>
 I started working on this tool in november 2014.<br>
 Update 1.29 (1 may 2018) relates to the https use of OSM.
-I also removed te use of the compressed js-libraries for now.
+I also removed the use of the compressed js-libraries for now.
 
-Update 1.29a: a number of cosmetical edits to varius parts of the sourcecode.
+Update 1.29a: a number of cosmetical edits to various parts of the sourcecode.
 
 Also after a change of the overpass query format, an extra ";" became necessary to fix the normal working.
 
