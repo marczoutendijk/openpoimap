@@ -9,3 +9,6 @@ I started working on this tool in november 2014.<br>
 Update 1.29 (1 may 2018) relates to the https use of OSM.
 I also removed te use of the compressed js-libraries for now.
 
+Update 1.29a: a number of cosmetical edits to varius parts of the sourcecode.
+
+
