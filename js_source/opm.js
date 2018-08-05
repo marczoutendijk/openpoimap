@@ -1684,7 +1684,7 @@ function makeUserLayer (userTags) {							// userTags bevat de "key=value" paren
 					if ((label == "yes") || (label == "no")) {		// nuttig om bij situaties als "tourism=yes/no" of "amenity=yes/no" te kunnen zien waar het om gaat!
 						label = userTags[i];						// Terugzetten naar oospronkelijke ingave.
 					}
-					url = "?data=area[name="  +  name + "][type=boundary][boundary=administrative][admin_level~'[48]']->.a;(way(area.a)[" + keyValues +  "];node(area.a)[" + keyValues + "];rel(area.a)[" + keyValues + "]);(._;>;);out center;";
+					url = "?data=area[name="  +  name + "][type=boundary][boundary=administrative][admin_level~'[48]']->.a;(way(area.a)[" + keyValues +  "];node(area.a)[" + keyValues + "];rel(area.a)[" + keyValues + "];);(._;>;);out center;";
 					naam = label + ' [' + name + ']';				
 				break;
 				
@@ -1727,7 +1727,7 @@ function makeUserLayer (userTags) {							// userTags bevat de "key=value" paren
 					if ((label == "yes") || (label == "no")) {			// nuttig om bij situaties als "tourism=yes/no" of "amenity=yes/no" te kunnen zien waar het om gaat!
 						label = userTags[i];							// Terugzetten naar oospronkelijke ingave.
 					}
-					url = "?data=(node[" + keyValues + "](bbox);way[" + keyValues + "](bbox);rel[" + keyValues +  "](bbox));(._;>;);out center;";
+					url = "?data=(node[" + keyValues + "](bbox);way[" + keyValues + "](bbox);rel[" + keyValues +  "](bbox););(._;>;);out center;";
 					naam = label;
 			}
 			var uTag = new UserTagObj(url,naam);
