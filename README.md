@@ -13,5 +13,8 @@ Update 1.29a: a number of cosmetical edits to various parts of the sourcecode.
 
 Also after a change of the overpass query format, an extra ";" became necessary to fix the normal working.
 
+Update 1.29b: fixing userpois api semicolon issue
+
+
 
 
