@@ -1444,7 +1444,7 @@ var amenitydef = [
 	{url: "?data=(node[amenity=cinema](bbox);way[amenity=cinema](bbox);rel[amenity=cinema](bbox););(._;>;);out center;", naam: "Cinema", zichtbaar: false},
 	{url: "?data=(node[amenity=clinic](bbox);way[amenity=clinic](bbox);rel[amenity=clinic](bbox););(._;>;);out center;", naam: "Clinic", zichtbaar: false},
 	{url: "?data=(node[amenity=embassy](bbox);way[amenity=embassy](bbox);rel[amenity=embassy](bbox););(._;>;);out center;", naam: "Embassy", zichtbaar: false},
-	{url: "?data=(node[amenity=firestation](bbox);way[amenity=firestation](bbox);rel[amenity=firestation](bbox););(._;>;);out center;", naam: "Firestation", zichtbaar: false},
+	{url: "?data=(node[amenity=fire_station](bbox);way[amenity=fire_station](bbox);rel[amenity=fire_station](bbox););(._;>;);out center;", naam: "Firestation", zichtbaar: false},
 	{url: "?data=(node[amenity=fuel](bbox);way[amenity=fuel](bbox);rel[amenity=fuel](bbox););(._;>;);out center;", naam: "Fuel", zichtbaar: false},
 	{url: "?data=(node[amenity=hospital](bbox);way[amenity=hospital](bbox);rel[amenity=hospital](bbox););(._;>;);out center;", naam: "Hospital", zichtbaar: false},
 	{url: "?data=(node[amenity=library](bbox);way[amenity=library](bbox);rel[amenity=library](bbox););(._;>;);out center;", naam: "Library", zichtbaar: false},
@@ -1520,14 +1520,14 @@ var sportdef = [
 	{url: "?data=(way[sport=gymnastics](bbox);node[sport=gymnastics](bbox);rel[sport=gymnastics](bbox););(._;>;);out center;", naam: "Gymnastics", zichtbaar: false},
 	{url: "?data=(way[leisure=golf_course](bbox);way[sport=golf](bbox);node[leisure=golf_course](bbox);node[sport=golf](bbox);rel[leisure=golf_course](bbox);rel[sport=golf](bbox););(._;>;);out center;", naam: "Golf", zichtbaar: false},		
 	{url: "?data=(way[sport=hockey](bbox);node[sport=hockey](bbox);rel[sport=hockey](bbox);way[sport=field_hockey](bbox);node[sport=field_hockey](bbox);rel[sport=field_hockey](bbox););(._;>;);out center;", naam: "Hockey", zichtbaar: false},
-	{url: "?data=(way[sport=horse_racing](bbox);(way[sport=equestrian](bbox);node[sport=horse_racing](bbox);(node[sport=equestrian](bbox););(._;>;);out center;", naam: "Horse racing", zichtbaar: false},
-	{url: "?data=(way[sport=ice_hockey](bbox);node[sport=ice_hockey](bbox);rel[sport=ice_hockey](bbox);way[leisure=ice_rink](bbox));(node[leisure=ice_rink](bbox););(._;>;);out center;", naam: "Ice hockey", zichtbaar: false},
+	{url: "?data=(way[sport=horse_racing](bbox);way[sport=equestrian](bbox);node[sport=horse_racing](bbox);node[sport=equestrian](bbox););(._;>;);out center;", naam: "Horse racing", zichtbaar: false},
+	{url: "?data=(way[sport=ice_hockey](bbox);node[sport=ice_hockey](bbox);rel[sport=ice_hockey](bbox);way[leisure=ice_rink](bbox);node[leisure=ice_rink](bbox););(._;>;);out center;", naam: "Ice hockey", zichtbaar: false},
 	{url: "?data=(way[sport=soccer](bbox);node[sport=soccer](bbox);rel[sport=soccer](bbox););(._;>;);out center;", naam: "Soccer", zichtbaar: false},
 	{url: "?data=(way[leisure=sports_centre](bbox);node[leisure=sports_centre](bbox);rel[leisure=sports_centre](bbox););(._;>;);out center;", naam: "Sports centre", zichtbaar: false},		
 	{url: "?data=(way[sport=surfing](bbox);node[sport=surfing](bbox);rel[sport=surfing](bbox););(._;>;);out center;", naam: "Surfing", zichtbaar: false},
 	{url: "?data=(way[sport=swimming](bbox);node[sport=swimming](bbox);rel[sport=swimming](bbox););(._;>;);out center;", naam: "Swimming", zichtbaar: false},
 	{url: "?data=(way[sport=tennis](bbox);node[sport=tennis](bbox););(._;>;);out center;", naam: "Tennis", zichtbaar: false},
-	{url: "?data=(way[sport=volleybal](bbox);node[sport=volleybal](bbox););(._;>;);out center;", naam: "Volleyball", zichtbaar: false}
+	{url: "?data=(way[sport=volleyball](bbox);node[sport=volleyball](bbox););(._;>;);out center;", naam: "Volleyball", zichtbaar: false}
 ];
 var shopdef = [
 //Various shops (excluding food)			
