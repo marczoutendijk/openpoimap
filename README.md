@@ -15,6 +15,8 @@ Also after a change of the overpass query format, an extra ";" became necessary 
 
 Update 1.29b: fixing userpois api semicolon issue
 
+Update 1.29b+: fixing some typos in opm.js (thanks to Candid Dauth)
+
 
 
 
