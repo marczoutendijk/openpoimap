@@ -1,6 +1,6 @@
-// Init for Taglocator 1.29a
+// Init for Taglocator 1.29d
 // Taglocator is de testversie voor OPM.
-<!-- (mz) Laatste versie: 02-05-2018, 17:04 -->
+<!-- (mz) Laatste versie: 07-08-2024, 22:24 -->
 
 // Mapquest requires a developer key as of 11-7-2016 - Switched it off for now
 // https replaces http for OSM
@@ -18,7 +18,7 @@ var keus = 0;					// index in userChoices
 var tempCount = 0;
 var map;
 var COOKIE_KEEP = 365;			// Number of days to keep the cookies
-var QURL = "http://overpass-api.de/api/interpreter/"; //default
+var QURL = "https://overpass-api.de/api/interpreter/"; //default
 var featurePopup;
 
 // Gebruikerswaarden per regel in array opslaan
