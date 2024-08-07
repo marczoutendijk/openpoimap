@@ -18,7 +18,7 @@ var keus = 0;					// index in userChoices
 var tempCount = 0;
 var map;
 var COOKIE_KEEP = 365;			// Number of days to keep the cookies
-var QURL = "http://overpass-api.de/api/interpreter/"; //default
+var QURL = "https://overpass-api.de/api/interpreter/"; //default
 var featurePopup;
 
 // Gebruikerswaarden per regel in array opslaan
